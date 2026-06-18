@@ -350,7 +350,7 @@
 
 /* --- Brand Section --- */
 .brand-section {
-  background-color: #F9F9F7;
+  background-color: var(--color-surface); /* Pure white */
   border-top: 1px solid var(--color-border);
 }
 
@@ -417,7 +417,7 @@
 
 .brand-img {
   width: 100%;
-  max-width: 60%;
+  max-width: 75%;
   height: auto;
   display: block;
   position: relative;

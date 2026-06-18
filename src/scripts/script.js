@@ -1,5 +1,6 @@
 // --- Sticky Header Logic ---
 const header = document.getElementById('main-header');
+const waFab = document.getElementById('wa-fab');
 
 if (header) {
     const handleScroll = () => {
@@ -7,6 +8,14 @@ if (header) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+        
+        if (waFab) {
+            if (window.scrollY > (window.innerHeight * 0.6)) {
+                waFab.classList.add('visible');
+            } else {
+                waFab.classList.remove('visible');
+            }
         }
     };
     
@@ -17,19 +26,11 @@ if (header) {
 // --- Mobile Menu Logic ---
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = mobileMenuBtn ? mobileMenuBtn.querySelector('.menu-icon') : null;
 
 if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        
-        if (mobileMenu.classList.contains('open')) {
-            menuIcon.classList.remove('ph-list');
-            menuIcon.classList.add('ph-x');
-        } else {
-            menuIcon.classList.remove('ph-x');
-            menuIcon.classList.add('ph-list');
-        }
+    mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('open');
+        mobileMenuBtn?.classList.toggle('open');
     });
 
     // Close mobile menu when clicking a link
@@ -37,8 +38,7 @@ if (mobileMenuBtn && mobileMenu) {
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('open');
-            menuIcon.classList.remove('ph-x');
-            menuIcon.classList.add('ph-list');
+            mobileMenuBtn.classList.remove('open');
         });
     });
 }

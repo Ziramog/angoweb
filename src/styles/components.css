@@ -104,12 +104,12 @@ img {
   color: var(--color-primary);
   display: inline-flex;
   font-family: var(--font-mono);
-  font-size: 28px;
+  font-size: 18px; /* Reduced by 35% on mobile */
   font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 1;
   margin-bottom: 18px;
-  padding-left: 36px;
+  padding-left: 28px;
   position: relative;
   text-transform: uppercase;
 }
@@ -118,11 +118,26 @@ img {
 .section-kicker::before {
   background: var(--color-yellow);
   content: "";
-  height: 4px;
+  height: 3px;
   left: 0;
   position: absolute;
-  top: 12px;
-  width: 24px;
+  top: 8px;
+  width: 18px;
+}
+
+@media (min-width: 768px) {
+  .eyebrow,
+  .section-kicker {
+    font-size: 28px;
+    padding-left: 36px;
+  }
+
+  .eyebrow::before,
+  .section-kicker::before {
+    height: 4px;
+    top: 12px;
+    width: 24px;
+  }
 }
 
 .section-kicker.light {
@@ -142,4 +157,53 @@ img {
 
 [data-reveal][style*="--i"] {
   transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* WhatsApp FAB */
+.wa-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  z-index: 99;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s;
+}
+
+.wa-fab.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wa-fab:hover {
+  background-color: #128C7E;
+  transform: translateY(-4px) scale(1.05);
+}
+
+.wa-fab i {
+  font-size: 34px;
+}
+
+@media (min-width: 768px) {
+  .wa-fab {
+    bottom: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+  }
+  .wa-fab i {
+    font-size: 38px;
+  }
 }
