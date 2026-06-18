@@ -1,0 +1,224 @@
+/* Hero Section - Industrial Blueprint Layout */
+.hero-section {
+  position: relative;
+  background-color: var(--color-surface-soft); /* Fallback */
+  overflow: hidden;
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-16);
+  border-bottom: 2px solid var(--color-navy);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Background image on pseudo-element to allow shifting right without empty space */
+.hero-section::after {
+  background-image: url("/mobile hero.jpeg");
+  background-position: center;
+  background-size: cover;
+  content: ""; 
+  background-repeat: no-repeat;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding-top: 160px;
+    padding-bottom: var(--space-24);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: -210px; /* Extends 210px past the right edge to push image further right */
+    background-image: url('/fotohero.png');
+    background-position: right calc(50% + 50px); /* Moved down 50px total */
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+}
+
+/* Subtle Blueprint Grid Background overlaid on the left */
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(75, 85, 99, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 85, 99, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 2;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hero-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Left Content Area */
+.hero-content {
+  flex: 1;
+  max-width: 650px;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: var(--t-hero-size);
+  font-weight: var(--t-hero-weight);
+  line-height: var(--t-hero-lh);
+  letter-spacing: var(--t-hero-ls);
+  color: var(--color-dark);
+  margin-bottom: var(--space-6);
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-family: var(--font-ui);
+  font-size: var(--t-body-lg-size);
+  color: var(--color-ink-secondary);
+  margin-bottom: var(--space-8);
+  max-width: 500px;
+  font-weight: 500;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .hero-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Right Visual Area - Tags over background */
+.hero-visual {
+  flex: 1;
+  position: relative;
+  min-height: 400px; /* Space for absolute tags if on mobile */
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hero-visual {
+    min-height: auto;
+  }
+}
+
+
+
+
+/* Trust / Specs Band */
+.specs-band {
+  background-color: var(--color-navy);
+  padding: var(--space-4) 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.specs-band-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .specs-band-inner {
+    justify-content: space-between;
+  }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: var(--color-yellow);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  color: var(--color-surface);
+  font-size: var(--t-label-size);
+  letter-spacing: 0.05em;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.spec-item i {
+  color: var(--color-yellow);
+  font-size: 32px;
+}
+
+.spec-item div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.spec-item span {
+  font-family: var(--font-mono);
+  color: var(--color-surface);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.spec-item strong {
+  font-family: var(--font-heading);
+  color: var(--color-surface);
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.spec-divider {
+  width: 1px;
+  height: 40px;
+  background-color: rgba(255,255,255,0.2);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .spec-divider { display: block; }
+}

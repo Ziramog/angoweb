@@ -1,0 +1,116 @@
+.navbar {
+  background: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: box-shadow var(--transition-base), background-color var(--transition-base), border-color var(--transition-base);
+  width: 100%;
+  z-index: 50;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid rgba(6, 40, 70, 0.14) !important;
+  box-shadow: 0 16px 40px rgba(3, 26, 47, 0.08);
+}
+
+.navbar.scrolled .navbar-inner {
+  padding: 10px 0;
+}
+
+.navbar.scrolled .navbar-logo {
+  height: 46px;
+}
+
+.navbar-inner {
+  align-items: center;
+  display: flex;
+  padding: 15px 0;
+  justify-content: space-between;
+  transition: padding var(--transition-base);
+}
+
+.navbar-logo-container {
+  align-items: center;
+  display: flex;
+  min-width: 170px;
+}
+
+.navbar-logo {
+  height: 92px;
+  width: auto;
+  transition: height var(--transition-base);
+}
+
+.nav-links {
+  align-items: center;
+  display: none;
+  gap: 34px;
+}
+
+.nav-link {
+  color: var(--color-dark);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-stretch: 75%;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.btn-nav {
+  min-height: 46px;
+  padding: 0 20px;
+}
+
+.hamburger {
+  align-items: center;
+  background: var(--color-dark);
+  border: 0;
+  color: var(--color-surface);
+  cursor: pointer;
+  display: inline-flex;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
+}
+
+.hamburger i {
+  font-size: 24px;
+}
+
+.mobile-menu {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 24px 42px rgba(3, 26, 47, 0.12);
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  left: 0;
+  padding: 22px var(--container-px) 28px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+@media (min-width: 1080px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .hamburger,
+  .mobile-menu {
+    display: none !important;
+  }
+}

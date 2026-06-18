@@ -1,0 +1,31 @@
+---
+import '../styles/design-system.css';
+import '../styles/components.css';
+import '../styles/navbar.css';
+import '../styles/hero.css';
+import '../styles/sections.css';
+import '../styles/footer.css';
+import '../styles/styles.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <slot />
+    
+    <script>
+        import '../scripts/script.js';
+    </script>
+</body>
+</html>
