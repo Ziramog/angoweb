@@ -28,17 +28,33 @@ const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('open');
-        mobileMenuBtn?.classList.toggle('open');
+    mobileMenuBtn.addEventListener('click', () => {
+        const isOpening = !mobileMenu.classList.contains('active');
+
+        if (isOpening) {
+            mobileMenu.classList.add('active');
+            mobileMenuBtn.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.remove('active');
+            // Remove 'open' class from button after the CSS transition finishes
+            // so it stays white while the blue background shrinks.
+            setTimeout(() => {
+                mobileMenuBtn.classList.remove('open');
+            }, 500); 
+            document.body.style.overflow = '';
+        }
     });
 
     // Close mobile menu when clicking a link
-    const mobileLinks = mobileMenu.querySelectorAll('.nav-link, .btn');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            mobileMenuBtn.classList.remove('open');
+            mobileMenu.classList.remove('active');
+            setTimeout(() => {
+                mobileMenuBtn.classList.remove('open');
+            }, 500);
+            document.body.style.overflow = '';
         });
     });
 }
