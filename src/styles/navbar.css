@@ -40,18 +40,17 @@
 .navbar-logo {
   height: 92px;
   width: auto;
-  transition: height var(--transition-base);
+  padding-left: 24px; /* Added breathing room before scroll */
+  transition: height var(--transition-base), padding var(--transition-base);
 }
 
 @media (max-width: 1079px) {
   .navbar-inner {
-    justify-content: center;
-  }
-  .navbar.scrolled .navbar-inner {
     justify-content: flex-start;
   }
   .navbar-logo {
-    height: 82px; /* 10% reduced on mobile */
+    height: 46px;
+    padding-left: 10px;
   }
 }
 
@@ -59,12 +58,15 @@
   .navbar-inner {
     justify-content: space-between;
   }
+  .navbar-logo {
+    height: clamp(65px, 5.5vw, 92px);
+  }
 }
 
 .nav-links {
   align-items: center;
   display: none;
-  gap: 34px;
+  gap: clamp(16px, 2vw, 34px);
 }
 
 .nav-link {

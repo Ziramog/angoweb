@@ -1,0 +1,696 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Calculadora PTO | ANGO Metalúrgica">
+  <Navbar />
+
+  <section class="calculator-header" style="padding-top: 140px; padding-bottom: 40px; background-color: var(--color-surface-soft);">
+    <div class="container text-center">
+      <h1 class="section-title">Calculadora PTO</h1>
+      <p class="section-subtitle" style="margin: 0 auto;">Toma de Fuerza con Embrague · Selección de modelo según normas SAE</p>
+    </div>
+  </section>
+
+  <section class="calculator-section" style="padding-bottom: 80px; background-color: var(--color-surface-soft);">
+    <div class="container">
+      <div class="main-grid">
+
+        <!-- LEFT: INPUTS -->
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <i class="ph ph-gear" style="font-size: 1.5rem; color: var(--color-secondary);"></i>
+              <h2>Datos del Sistema</h2>
+            </div>
+            <div class="panel-body">
+
+              <!-- Potencia -->
+              <div class="field">
+                <label>Potencia del motor <span class="unit">(HP / CV)</span></label>
+                <div class="slider-wrap">
+                  <input type="range" id="sliderHP" min="5" max="600" value="100" step="5" oninput="syncHP(this.value)">
+                  <div class="slider-val" id="valHP">100</div>
+                </div>
+                <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
+                  <input type="number" id="inputHP" value="100" min="1" max="9999" step="1" placeholder="HP" style="max-width:110px;" oninput="syncHPInput(this.value)">
+                  <span style="font-size:.82rem; color:var(--color-ink-secondary);">HP (ingresar manualmente si supera el slider)</span>
+                </div>
+              </div>
+
+              <!-- RPM -->
+              <div class="field">
+                <label>Velocidad del motor <span class="unit">(RPM)</span></label>
+                <select id="selectRPM">
+                  <option value="1200">1.200 RPM</option>
+                  <option value="1600">1.600 RPM</option>
+                  <option value="1800">1.800 RPM</option>
+                  <option value="2000">2.000 RPM</option>
+                  <option value="2200">2.200 RPM</option>
+                  <option value="2400">2.400 RPM</option>
+                  <option value="2800" selected>2.800 RPM</option>
+                  <option value="3200">3.200 RPM</option>
+                </select>
+              </div>
+
+              <!-- Equipo -->
+              <div class="field">
+                <label>Tipo de equipo accionado</label>
+                <select id="selectEquipo" onchange="updateSF()">
+                  <option value="">— Seleccionar equipo —</option>
+                  <option value="bomba_centrifuga" data-sf="1.5">Bomba centrífuga (SF = 1.5)</option>
+                  <option value="tracto_agricola"  data-sf="2.0">Tracto agrícola (SF = 2.0)</option>
+                  <option value="bomba_alternativa" data-sf="3.0">Bomba alternativa (SF = 3.0)</option>
+                  <option value="bomba_fango"       data-sf="3.0">Bomba de fango o barro (SF = 3.0)</option>
+                  <option value="trituradora"       data-sf="3.0">Máquina trituradora de rocas (SF = 3.0)</option>
+                  <option value="compresor"         data-sf="4.0">Compresor alternativo (SF = 4.0)</option>
+                  <option value="ventilador"        data-sf="4.0">Ventilador (SF = 4.0)</option>
+                </select>
+                <div id="sfBadgeWrap" style="display:none; margin-top:8px;">
+                  Factor de servicio: <span class="sf-badge" id="sfBadge">—</span>
+                </div>
+              </div>
+
+              <!-- Tipo arranque -->
+              <div class="field">
+                <label>Tipo de carga en el arranque</label>
+                <select id="selectArranque">
+                  <option value="bajo">Baja carga de arranque</option>
+                  <option value="alto">Alta carga de arranque</option>
+                </select>
+                <div class="hint">En arranque con alta carga, se aplica margen de seguridad adicional del 20 %.</div>
+              </div>
+
+              <!-- Accionamiento -->
+              <div class="field">
+                <label>Forma de accionamiento</label>
+                <select id="selectAccionamiento">
+                  <option value="manual">Manual (palanca)</option>
+                  <option value="accionador">Por accionador (neumático / hidráulico)</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary calc-btn" id="btnCalc" onclick="calcular()">
+                Calcular embrague
+              </button>
+            </div>
+          </div>
+
+          <!-- Formula display -->
+          <div class="formula-panel" id="formulaBox" style="margin-top:20px; display:none;">
+            <h4>📐 Cálculo aplicado</h4>
+            <div class="formula-line">
+              <span class="formula-eq">Torque motor =</span>
+              <span class="formula-val">716.2 × <strong id="f-hp">—</strong> HP ÷ <strong id="f-rpm">—</strong> RPM</span>
+              <span class="formula-eq">= <strong id="f-torque-motor" style="color:var(--color-primary)">—</strong> kg·m</span>
+            </div>
+            <div class="formula-line">
+              <span class="formula-eq">Torque requerido =</span>
+              <span class="formula-val"><strong id="f-tm">—</strong> × SF <strong id="f-sf">—</strong>
+                <span id="f-arrExtra" style="display:none"> × 1.20 (alta carga)</span>
+              </span>
+              <span class="formula-eq">= <strong id="f-torque-req" style="color:var(--color-secondary)">—</strong> kg·m</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: RESULTS -->
+        <div class="result-col">
+
+          <!-- Empty state -->
+          <div class="panel result-empty" id="emptyState">
+            <i class="ph ph-wrench big-icon"></i>
+            <p>Ingresá los datos del sistema<br>y presioná <strong>Calcular embrague</strong> para obtener<br>la recomendación ideal.</p>
+          </div>
+
+          <!-- Result card -->
+          <div class="result-card" id="resultCard">
+            <div id="resultStatus" class="result-status ok">
+              <div class="status-dot"></div>
+              <div class="status-text">
+                <strong id="statusTitle">Embrague encontrado</strong>
+                <span id="statusSub">—</span>
+              </div>
+            </div>
+
+            <div class="rec-main">
+              <div class="rec-model" id="recModel">—</div>
+              <div class="rec-desc" id="recDesc">—</div>
+            </div>
+
+            <div class="specs-grid">
+              <div class="spec-cell">
+                <div class="spec-label">Torque requerido</div>
+                <div class="spec-val gold" id="specTorqReq">—</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Torque nominal del modelo</div>
+                <div class="spec-val" id="specTorqNom">—</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Diámetro de disco(s)</div>
+                <div class="spec-val" id="specDiam">—</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Cantidad de discos</div>
+                <div class="spec-val" id="specDiscos">—</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Carcaza SAE</div>
+                <div class="spec-val" id="specSAE">—</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Margen de seguridad</div>
+                <div class="spec-val" id="specMargen">—</div>
+              </div>
+            </div>
+
+            <div class="torque-bar-wrap">
+              <div class="torque-bar-label">
+                <span>Torque requerido</span>
+                <span id="barPctLabel">—</span>
+              </div>
+              <div class="torque-bar-track">
+                <div class="torque-bar-fill" id="torqueBarFill" style="width:0%"></div>
+              </div>
+            </div>
+
+            <div class="alt-panel" id="altPanel">
+              <h4>Modelos alternativos compatibles</h4>
+              <div class="alt-list" id="altList">—</div>
+            </div>
+
+            <div class="notes-panel" id="notesPanel">
+              <h4>Notas de aplicación</h4>
+              <ul id="notesList"></ul>
+            </div>
+          </div>
+
+          <!-- Dimensions mini-table -->
+          <div class="panel" id="dimPanel" style="display:none;">
+            <div class="panel-head">
+              <i class="ph ph-ruler" style="font-size: 1.5rem; color: var(--color-secondary);"></i>
+              <h2>Datos técnicos del modelo</h2>
+            </div>
+            <div class="panel-body" id="dimBody" style="font-size:.88rem; padding: 0;">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <style>
+    /* ── GRID LAYOUT ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── PANEL ── */
+    .panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(3, 26, 47, 0.05);
+    }
+    .panel-head {
+      background: var(--color-surface-soft);
+      border-bottom: 1px solid var(--color-border);
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .panel-head h2 {
+      font-family: var(--font-heading);
+      font-size: 18px; font-weight: 800;
+      letter-spacing: 0.02em; text-transform: uppercase;
+      color: var(--color-dark);
+      margin: 0;
+    }
+    .panel-body { padding: 24px; }
+
+    /* ── FORM ── */
+    .field { margin-bottom: 24px; }
+    .field label {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--color-ink); margin-bottom: 8px;
+    }
+    .field label .unit {
+      font-weight: 500; font-size: 11px;
+      color: var(--color-ink-secondary); text-transform: none; letter-spacing: 0;
+    }
+    .field input[type="number"], .field select {
+      width: 100%;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: 8px;
+      color: var(--color-dark);
+      font-family: var(--font-ui);
+      font-size: 15px;
+      padding: 12px 16px;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+    }
+    .field input[type="number"]:focus, .field select:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0, 92, 175, 0.15);
+    }
+    
+    .field .hint {
+      margin-top: 6px; font-size: 13px; color: var(--color-ink-secondary);
+    }
+
+    /* slider */
+    .slider-wrap { display: flex; align-items: center; gap: 16px; }
+    .slider-wrap input[type=range] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary) var(--pct,50%), var(--color-border) var(--pct,50%));
+      border: none; border-radius: 3px;
+      padding: 0;
+    }
+    .slider-wrap input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+      border: 3px solid var(--color-surface);
+    }
+    .slider-val {
+      min-width: 68px;
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 16px; font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    /* factor badge */
+    .sf-badge {
+      display: inline-block;
+      background: rgba(0, 161, 224, 0.1);
+      border: 1px solid var(--color-secondary);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 13px;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* ── CALC BUTTON ── */
+    .calc-btn {
+      width: 100%;
+      margin-top: 10px;
+      justify-content: center;
+    }
+
+    /* ── RESULTS ── */
+    .result-col { display: flex; flex-direction: column; gap: 24px; }
+
+    .result-empty {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 16px;
+      padding: 60px 24px;
+      color: var(--color-ink-secondary);
+      text-align: center;
+      border: 2px dashed var(--color-border);
+      background: transparent;
+      box-shadow: none;
+    }
+    .result-empty .big-icon { font-size: 64px; color: var(--color-border); }
+    .result-empty p { font-size: 15px; line-height: 1.6; }
+
+    /* main result card */
+    .result-card {
+      background: var(--color-navy);
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      display: none;
+      color: var(--color-surface);
+      box-shadow: 0 16px 40px rgba(3, 26, 47, 0.15);
+    }
+    .result-card.show { display: block; }
+
+    .result-status {
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .result-status.ok    { background: rgba(46,204,113,.12); border-bottom: 2px solid #2ecc71; }
+    .result-status.warn  { background: rgba(230,126,34,.12); border-bottom: 2px solid #e67e22; }
+    .result-status.none  { background: rgba(231,76,60,.1); border-bottom: 2px solid #e74c3c; }
+
+    .status-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .ok   .status-dot { background: #2ecc71; box-shadow: 0 0 12px rgba(46,204,113, 0.6); }
+    .warn .status-dot { background: #e67e22; box-shadow: 0 0 12px rgba(230,126,34, 0.6); }
+    .none .status-dot { background: #e74c3c; box-shadow: 0 0 12px rgba(231,76,60, 0.6); }
+
+    .status-text strong { display: block; font-size: 16px; font-weight: 700; font-family: var(--font-heading); }
+    .status-text span { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+    /* recommendation */
+    .rec-main {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .rec-model {
+      font-family: var(--font-heading);
+      font-size: 42px; font-weight: 900;
+      color: var(--color-yellow);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .rec-desc { margin-top: 8px; font-size: 15px; color: rgba(255,255,255,0.8); }
+
+    /* specs grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .spec-cell {
+      background: var(--color-navy);
+      padding: 16px 20px;
+    }
+    .spec-cell .spec-label {
+      font-family: var(--font-heading);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 6px;
+    }
+    .spec-cell .spec-val {
+      font-size: 18px; font-weight: 700;
+      color: var(--color-secondary);
+    }
+    .spec-cell .spec-val.gold { color: var(--color-yellow); }
+
+    /* torque comparison bar */
+    .torque-bar-wrap { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .torque-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px;
+    }
+    .torque-bar-track {
+      height: 12px; background: rgba(255,255,255,.1); border-radius: 6px; overflow: hidden;
+    }
+    .torque-bar-fill {
+      height: 100%; border-radius: 6px;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* alternatives */
+    .alt-panel { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .alt-panel h4 {
+      font-family: var(--font-heading);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 12px; margin-top:0;
+    }
+    .alt-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .alt-chip {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px; font-weight: 600;
+      color: var(--color-secondary);
+    }
+
+    /* notes */
+    .notes-panel { padding: 20px 24px; background: rgba(212,160,23,.1); }
+    .notes-panel h4 {
+      font-family: var(--font-heading);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--color-yellow); margin-bottom: 12px; margin-top:0;
+    }
+    .notes-panel ul { padding-left: 16px; margin: 0; }
+    .notes-panel li { font-size: 14px; color: rgba(255,255,255,0.9); margin-bottom: 6px; line-height: 1.5; }
+
+    /* ── FORMULA PANEL ── */
+    .formula-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .formula-panel h4 {
+      font-family: var(--font-heading);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--color-ink-secondary); margin-bottom: 12px; margin-top:0;
+    }
+    .formula-line {
+      display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .formula-eq { font-size: 14px; font-family: var(--font-mono); color: var(--color-ink); font-weight: 600; }
+    .formula-val { font-size: 14px; color: var(--color-ink-secondary); }
+    .formula-val strong { color: var(--color-dark); }
+  </style>
+
+  <script is:inline>
+    // ──────────────────────────────────────────────
+    //  BASE DE DATOS DE EMBRAGUES (ficha técnica RG)
+    // ──────────────────────────────────────────────
+    const embragues = [
+      { modelo: 'P 106', cap_kg_m: 20,  discos: 1, diam_mm: 165, diam_in: '6½"', carcaza_sae: '5-6',   rpm_max: 3700, peso_kg: null, notas: [] },
+      { modelo: 'P 108', cap_kg_m: 30,  discos: 1, diam_mm: 203, diam_in: '8"',  carcaza_sae: '4-5',   rpm_max: 3250, peso_kg: null, notas: [] },
+      { modelo: 'P 110', cap_kg_m: 65,  discos: 1, diam_mm: 254, diam_in: '10"', carcaza_sae: '4-5',   rpm_max: 3000, notas: [] },
+      { modelo: 'P 111', cap_kg_m: 100, discos: 1, diam_mm: 292, diam_in: '11"', carcaza_sae: '1-3-2', rpm_max: 2800, notas: [] },
+      { modelo: 'P 211', cap_kg_m: 170, discos: 2, diam_mm: 292, diam_in: '11"', carcaza_sae: '1-3-2', rpm_max: 2800, notas: ['2 discos para mayor capacidad con igual diámetro que P 111'] },
+      { modelo: 'P 114', cap_kg_m: 200, discos: 1, diam_mm: 355, diam_in: '14"', carcaza_sae: '0-1',   rpm_max: 2200, notas: [] },
+      { modelo: 'P 214', cap_kg_m: 260, discos: 2, diam_mm: 355, diam_in: '14"', carcaza_sae: '0-1',   rpm_max: 2200, notas: ['2 discos para mayor capacidad con igual diámetro que P 114'] },
+      { modelo: 'P 314', cap_kg_m: 340, discos: 3, diam_mm: 355, diam_in: '14"', carcaza_sae: '0-1',   rpm_max: 2200, notas: ['3 discos para máxima capacidad en carcaza SAE 0-1'] },
+      { modelo: 'P 218', cap_kg_m: 450, discos: 2, diam_mm: 457, diam_in: '18"', carcaza_sae: '0-00',  rpm_max: 1800, notas: ['Modelo de mayor capacidad disponible en la línea standard'] }
+    ];
+
+    const dimData = {
+      'P 106': { D:145, E:90,  F:35,  G:9.5, H:25,  J:100, K:216,  L:200  },
+      'P 108': { D:180, E:150, F:45,  G:12,  H:60,  J:115, K:263.5,L:244.35},
+      'P 110': { D:230, E:150, F:60,  G:16,  H:100, J:140, K:314.3,L:295.15},
+      'P 111': { D:230, E:165, F:60,  G:16,  H:100, J:140, K:352.4,L:333.25},
+      'P 211': { D:250, E:165, F:60,  G:16,  H:100, J:140, K:352.4,L:333.25},
+      'P 114': { D:330, E:215, F:80,  G:19,  H:115, J:190, K:466.7,L:438.15},
+      'P 214': { D:355, E:255, F:90,  G:22,  H:115, J:190, K:466.7,L:438.15},
+      'P 314': { D:385, E:255, F:100, G:25,  H:130, J:205, K:466.7,L:438.15},
+      'P 218': { D:555, E:255, F:100, G:25,  H:220, J:205, K:571.5,L:543.05}
+    };
+
+    function syncHP(v) {
+      document.getElementById('valHP').textContent = v;
+      document.getElementById('inputHP').value = v;
+      const s = document.getElementById('sliderHP');
+      const pct = ((v - s.min) / (s.max - s.min) * 100).toFixed(1);
+      s.style.setProperty('--pct', pct + '%');
+    }
+    function syncHPInput(v) {
+      const val = parseInt(v) || 0;
+      document.getElementById('valHP').textContent = val;
+      const s = document.getElementById('sliderHP');
+      const clamped = Math.min(Math.max(val, parseInt(s.min)), parseInt(s.max));
+      s.value = clamped;
+      const pct = ((clamped - s.min) / (s.max - s.min) * 100).toFixed(1);
+      s.style.setProperty('--pct', pct + '%');
+    }
+    
+    // Ensure functions are globally accessible since astro might scope scripts if not explicitly inline, but it is inline.
+    window.syncHP = syncHP;
+    window.syncHPInput = syncHPInput;
+    window.updateSF = function() {
+      const sel = document.getElementById('selectEquipo');
+      const opt = sel.options[sel.selectedIndex];
+      const sf  = opt.dataset.sf;
+      const wrap = document.getElementById('sfBadgeWrap');
+      if (sf) {
+        document.getElementById('sfBadge').textContent = 'SF = ' + sf;
+        wrap.style.display = 'block';
+      } else {
+        wrap.style.display = 'none';
+      }
+    };
+
+    window.calcular = function() {
+      const hp   = parseFloat(document.getElementById('inputHP').value)  || 0;
+      const rpm  = parseFloat(document.getElementById('selectRPM').value) || 0;
+      const equSel = document.getElementById('selectEquipo');
+      const equOpt = equSel.options[equSel.selectedIndex];
+      const sf   = parseFloat(equOpt.dataset.sf || 0);
+      const arranque = document.getElementById('selectArranque').value;
+      const accion   = document.getElementById('selectAccionamiento').value;
+
+      if (!hp || !rpm || !sf) {
+        alert('Completá todos los campos antes de calcular.');
+        return;
+      }
+
+      const torqueMotor = 716.2 * hp / rpm;
+      let torqueReq = torqueMotor * sf;
+      const altaArr = (arranque === 'alto');
+      if (altaArr) torqueReq *= 1.20;
+
+      document.getElementById('f-hp').textContent        = hp;
+      document.getElementById('f-rpm').textContent       = rpm;
+      document.getElementById('f-torque-motor').textContent = torqueMotor.toFixed(2);
+      document.getElementById('f-tm').textContent        = torqueMotor.toFixed(2);
+      document.getElementById('f-sf').textContent        = sf;
+      document.getElementById('f-torque-req').textContent = torqueReq.toFixed(2);
+      document.getElementById('f-arrExtra').style.display = altaArr ? 'inline' : 'none';
+      document.getElementById('formulaBox').style.display = 'block';
+
+      const aptos = embragues.filter(e => e.cap_kg_m >= torqueReq);
+      
+      document.getElementById('emptyState').style.display = 'none';
+      const card = document.getElementById('resultCard');
+      card.classList.add('show');
+
+      const statusEl = document.getElementById('resultStatus');
+      const statusTitle = document.getElementById('statusTitle');
+      const statusSub   = document.getElementById('statusSub');
+
+      if (aptos.length === 0) {
+        statusEl.className = 'result-status none';
+        statusTitle.textContent = 'Torque fuera de rango standard';
+        statusSub.textContent   = `Se requieren ${torqueReq.toFixed(1)} kg·m — consultar a Ingeniería`;
+        document.getElementById('recModel').textContent = '—';
+        document.getElementById('recDesc').textContent  = 'No existe modelo standard que cubra este requerimiento.';
+        clearSpecs();
+        document.getElementById('dimPanel').style.display = 'none';
+        document.getElementById('notesPanel').querySelector('#notesList').innerHTML =
+          '<li>El torque requerido supera la capacidad del modelo mayor (P 218 = 450 kg·m).</li>' +
+          '<li>Contactar al Departamento de Ingeniería para solución especial.</li>';
+        return;
+      }
+
+      const best = aptos[0];
+      const margen = ((best.cap_kg_m - torqueReq) / best.cap_kg_m * 100).toFixed(1);
+      const pct    = Math.min((torqueReq / best.cap_kg_m * 100), 100).toFixed(1);
+
+      const margenN = parseFloat(margen);
+      if (margenN > 30) {
+        statusEl.className = 'result-status ok';
+        statusTitle.textContent = 'Embrague seleccionado';
+        statusSub.textContent   = `Margen de seguridad amplio (${margen}% libre)`;
+      } else if (margenN > 10) {
+        statusEl.className = 'result-status ok';
+        statusTitle.textContent = 'Embrague seleccionado';
+        statusSub.textContent   = `Margen adecuado (${margen}% libre)`;
+      } else {
+        statusEl.className = 'result-status warn';
+        statusTitle.textContent = 'Embrague al límite';
+        statusSub.textContent   = `Margen ajustado (${margen}% libre) — considerar modelo superior`;
+      }
+
+      document.getElementById('recModel').textContent = best.modelo;
+      document.getElementById('recDesc').textContent  =
+        `${best.discos} disco${best.discos > 1 ? 's' : ''} de ${best.diam_in} (${best.diam_mm} mm) · Carcaza SAE ${best.carcaza_sae} · Accionamiento ${accion === 'manual' ? 'manual' : 'por accionador'}`;
+
+      document.getElementById('specTorqReq').textContent  = torqueReq.toFixed(2) + ' kg·m';
+      document.getElementById('specTorqNom').textContent  = best.cap_kg_m + ' kg·m';
+      document.getElementById('specDiam').textContent     = best.diam_in + ' (' + best.diam_mm + ' mm)';
+      document.getElementById('specDiscos').textContent   = best.discos + (best.discos > 1 ? ' discos' : ' disco');
+      document.getElementById('specSAE').textContent      = 'SAE N° ' + best.carcaza_sae;
+      document.getElementById('specMargen').textContent   = margen + '%';
+
+      const fill = document.getElementById('torqueBarFill');
+      const pctN = parseFloat(pct);
+      fill.style.width = pct + '%';
+      fill.style.background = pctN < 70
+        ? 'linear-gradient(90deg, #2ecc71, #27ae60)'
+        : pctN < 90
+        ? 'linear-gradient(90deg, #f0c040, #d4a017)'
+        : 'linear-gradient(90deg, #e67e22, #e74c3c)';
+      document.getElementById('barPctLabel').textContent = pct + '% de la capacidad nominal utilizada';
+
+      const altList = document.getElementById('altList');
+      altList.innerHTML = '';
+      const alts = aptos.slice(1, 4);
+      if (alts.length === 0) {
+        altList.innerHTML = '<span style="color:rgba(255,255,255,0.6); font-size:13px;">No hay alternativas de mayor capacidad en el catálogo.</span>';
+      } else {
+        alts.forEach(a => {
+          const ch = document.createElement('div');
+          ch.className = 'alt-chip';
+          ch.textContent = `${a.modelo} · ${a.cap_kg_m} kg·m · ${a.discos}d · ${a.diam_in}`;
+          altList.appendChild(ch);
+        });
+      }
+      document.getElementById('altPanel').style.display = 'block';
+
+      const ul = document.getElementById('notesList');
+      ul.innerHTML = '';
+      const notes = [...(best.notas || [])];
+      if (altaArr) notes.push('Se aplicó un factor de 1.20 por alta carga de arranque.');
+      if (accion === 'accionador') notes.push('El modelo debe incluir kit de accionador neumático o hidráulico.');
+      if (margenN < 15) notes.push('Margen ajustado: verificar con Ingeniería si hay frecuencia alta de acoplamiento.');
+      notes.push('Los embragues están montados en bolilleros a rodillos cónicos; evitar cargas axiales de magnitud considerable.');
+      if (best.rpm_max && rpm > best.rpm_max) notes.push(`Atención: las RPM ingresadas (${rpm}) superan el límite recomendado para este modelo (${best.rpm_max} RPM).`);
+      notes.forEach(n => {
+        const li = document.createElement('li');
+        li.textContent = n;
+        ul.appendChild(li);
+      });
+
+      const dim = dimData[best.modelo];
+      const dimPanel = document.getElementById('dimPanel');
+      const dimBody  = document.getElementById('dimBody');
+      if (dim) {
+        dimPanel.style.display = 'block';
+        dimBody.innerHTML = `
+          <table style="width:100%; border-collapse:collapse; font-size:14px; color: var(--color-ink);">
+            <thead>
+              <tr style="border-bottom:1px solid var(--color-border); background: var(--color-surface-soft);">
+                <th style="text-align:left; padding:10px 16px; font-weight:700; font-family: var(--font-heading); text-transform:uppercase; letter-spacing:0.05em; font-size: 11px; color: var(--color-ink-secondary);">Parámetro</th>
+                <th style="text-align:right; padding:10px 16px; font-weight:700; font-family: var(--font-heading); text-transform:uppercase; letter-spacing:0.05em; font-size: 11px; color: var(--color-ink-secondary);">Valor (mm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${Object.entries(dim).map(([k,v]) => `
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:10px 16px;">Cota <strong style="color:var(--color-primary);">${k}</strong></td>
+                  <td style="padding:10px 16px; text-align:right; font-weight:600;">${v}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+          <p style="margin-top:16px; padding: 0 16px 16px; font-size:12px; color:var(--color-ink-secondary);">Las cotas corresponden al plano de Dimensiones Generales.</p>
+        `;
+      } else {
+        dimPanel.style.display = 'none';
+      }
+    };
+
+    function clearSpecs() {
+      ['specTorqReq','specTorqNom','specDiam','specDiscos','specSAE','specMargen'].forEach(id => {
+        document.getElementById(id).textContent = '—';
+      });
+      document.getElementById('torqueBarFill').style.width = '0%';
+    }
+
+    // Initialize HP slider
+    document.addEventListener("DOMContentLoaded", () => {
+      syncHP(100);
+    });
+  </script>
+</Layout>
