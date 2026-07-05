@@ -51,7 +51,22 @@
                 </div>
                 <div class="form-group">
                     <label for="uso">03. Uso destinado que se le dar&aacute;</label>
-                    <input type="text" id="uso" placeholder="Ej: Bomba centr&iacute;fuga" required />
+                    <select id="uso" required>
+                        <option value="">&mdash; Seleccionar equipo &mdash;</option>
+                        <option value="Bomba centr&iacute;fuga">Bomba centr&iacute;fuga</option>
+                        <option value="Tracto agr&iacute;cola">Tracto agr&iacute;cola</option>
+                        <option value="Bomba alternativa">Bomba alternativa</option>
+                        <option value="Bomba de fango o barro">Bomba de fango o barro</option>
+                        <option value="M&aacute;quina trituradora de rocas">M&aacute;quina trituradora de rocas</option>
+                        <option value="Compresor alternativo">Compresor alternativo</option>
+                        <option value="Ventilador">Ventilador</option>
+                        <option value="Otro">Otro (Especificar en comentarios)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="comentarios">04. Comentarios adicionales (Opcional)</label>
+                    <textarea id="comentarios" placeholder="Detalles adicionales, marca del motor, etc." rows="2"></textarea>
                 </div>
 
                 <div class="selection-actions">
@@ -76,10 +91,14 @@
             const motor = document.getElementById("motor").value;
             const rpm = document.getElementById("rpm").value;
             const uso = document.getElementById("uso").value;
+            const comentarios = document.getElementById("comentarios").value;
             
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             
-            const mensaje = `Hola, necesito asesoramiento para una toma de fuerza.\n\nMis datos son:\n- Motor y potencia: ${motor}\n- RPM de trabajo: ${rpm}\n- Uso destinado: ${uso}`;
+            let mensaje = `Hola, necesito asesoramiento para una toma de fuerza.\n\nMis datos son:\n- Motor y potencia: ${motor}\n- RPM de trabajo: ${rpm}\n- Uso destinado: ${uso}`;
+            if (comentarios.trim() !== '') {
+                mensaje += `\n- Comentarios: ${comentarios}`;
+            }
             
             if (isMobile) {
                 // WhatsApp
