@@ -204,47 +204,49 @@
   max-width: 690px;
 }
 
-.selection-list {
+.selection-form {
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
   margin-bottom: 40px;
 }
 
-.selection-list div {
-  align-items: center;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 48px 1fr;
-  min-height: 80px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-  cursor: default;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
 }
 
-.selection-list div:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-yellow);
-}
-
-.selection-list strong {
+.form-group label {
   color: var(--color-yellow);
-  font-family: var(--font-mono);
-  font-size: 26px;
-  opacity: 0.8;
-}
-
-.selection-list span {
-  color: rgba(255, 255, 255, 0.95);
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.3;
   text-transform: uppercase;
+}
+
+.form-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-yellow);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(248, 194, 23, 0.2);
 }
 
 .selection-cta {
@@ -335,12 +337,12 @@
     display: block;
   }
 
-  .selection-list {
+  .selection-form {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .selection-list div {
-    padding: 24px;
+  .selection-actions {
+    grid-column: 1 / -1;
   }
 
   .selection-cta {
@@ -370,12 +372,12 @@
     gap: 40px;
   }
 
-  .selection-list {
+  .selection-form {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .selection-list div {
-    padding: 28px;
+  .selection-actions {
+    grid-column: 1 / -1;
   }
 
   .models-content-grid {

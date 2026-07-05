@@ -40,18 +40,59 @@
             <h2 class="selection-title" data-reveal style="--i: 1">&iexcl;Calculemos tu toma de fuerza!</h2>
             <p class="selection-copy" data-reveal style="--i: 2">Para definir la toma de fuerza correcta, necesitamos que nos env&iacute;es estos 3 datos fundamentales:</p>
 
-            <div class="selection-list" data-reveal style="--i: 3">
-                <div><strong>01</strong><span>Motor y potencia<br>(HP / CV)</span></div>
-                <div><strong>02</strong><span>RPM de trabajo<br>(VAC / MAX)</span></div>
-                <div><strong>03</strong><span>Uso destinado<br>que se le dar&aacute;</span></div>
-            </div>
-
-            <div class="selection-actions" data-reveal style="--i: 4">
-                <a href="#contacto" class="btn btn-gold selection-cta"><i class="ph ph-paper-plane-tilt"></i> Enviar datos</a>
-                <div style="text-align: center; margin-top: 15px;">
-                    <a href="/calculadora" class="selection-alt-link" style="color: rgba(255, 255, 255, 0.7); font-size: 14px; text-decoration: underline;">o usar calculadora</a>
+            <form id="tomaFuerzaForm" class="selection-form" data-reveal style="--i: 3">
+                <div class="form-group">
+                    <label for="motor">01. Motor y potencia (HP / CV)</label>
+                    <input type="text" id="motor" placeholder="Ej: Scania 450 HP" required />
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="rpm">02. RPM de trabajo (VAC / MAX)</label>
+                    <input type="number" id="rpm" placeholder="Ej: 1800" required />
+                </div>
+                <div class="form-group">
+                    <label for="uso">03. Uso destinado que se le dar&aacute;</label>
+                    <input type="text" id="uso" placeholder="Ej: Bomba centr&iacute;fuga" required />
+                </div>
+
+                <div class="selection-actions">
+                    <button type="submit" class="btn btn-gold selection-cta"><i class="ph ph-paper-plane-tilt"></i> Enviar datos</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="/calculadora" class="selection-alt-link" style="color: rgba(255, 255, 255, 0.7); font-size: 14px; text-decoration: underline;">o usar calculadora</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("tomaFuerzaForm");
+        if (!form) return;
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const motor = document.getElementById("motor").value;
+            const rpm = document.getElementById("rpm").value;
+            const uso = document.getElementById("uso").value;
+            
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            const mensaje = `Hola, necesito asesoramiento para una toma de fuerza.\n\nMis datos son:\n- Motor y potencia: ${motor}\n- RPM de trabajo: ${rpm}\n- Uso destinado: ${uso}`;
+            
+            if (isMobile) {
+                // WhatsApp
+                const telefono = "5491112345678"; 
+                const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+                window.open(url, '_blank');
+            } else {
+                // Email
+                const email = "info@angometalurgica.com.ar";
+                const subject = "Consulta Técnica: Selección de Toma de Fuerza";
+                const body = encodeURIComponent(mensaje);
+                window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            }
+        });
+    });
+</script>
