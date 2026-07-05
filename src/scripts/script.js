@@ -3,6 +3,7 @@ const header = document.getElementById('main-header');
 const waFab = document.getElementById('wa-fab');
 
 if (header) {
+    let isScrolling = false;
     const handleScroll = () => {
         if (window.scrollY > (window.innerHeight * 0.1)) {
             header.classList.add('scrolled');
@@ -17,9 +18,15 @@ if (header) {
                 waFab.classList.remove('visible');
             }
         }
+        isScrolling = false;
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(handleScroll);
+            isScrolling = true;
+        }
+    }, { passive: true });
     handleScroll(); // Check state immediately on load
 }
 
@@ -34,9 +41,11 @@ if (mobileMenuBtn && mobileMenu) {
         if (isOpening) {
             mobileMenu.classList.add('active');
             mobileMenuBtn.classList.add('open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
         } else {
             mobileMenu.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
             // Remove 'open' class from button after the CSS transition finishes
             // so it stays white while the blue background shrinks.
             setTimeout(() => {
@@ -51,6 +60,7 @@ if (mobileMenuBtn && mobileMenu) {
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
             setTimeout(() => {
                 mobileMenuBtn.classList.remove('open');
             }, 500);

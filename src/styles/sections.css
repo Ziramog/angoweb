@@ -107,6 +107,46 @@
   object-fit: cover;
   width: 100%;
   filter: grayscale(100%) contrast(1.1);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.app-module:hover .app-photo {
+  transform: scale(1.05);
+  filter: grayscale(0%) contrast(1);
+}
+
+.app-hover-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  text-align: left;
+  padding: 0 20px;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.app-hover-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-hover-content li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.app-hover-content i {
+  color: var(--color-primary);
+}
+
+.app-module:hover .app-hover-content {
+  max-height: 200px;
+  opacity: 1;
+  padding: 0 20px 20px;
 }
 
 .selection-section {
