@@ -371,7 +371,7 @@
   }
 
   .selection-list {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .selection-list div {
@@ -381,11 +381,11 @@
     padding-bottom: 24px;
   }
 
-  .selection-list div:nth-child(n+6) {
+  .selection-list div:nth-child(n+4) {
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
 
-  .selection-list div:not(:nth-child(5n+1)) {
+  .selection-list div:not(:nth-child(3n+1)) {
     border-left: 1px solid rgba(255, 255, 255, 0.14);
     padding-left: 14px;
   }
