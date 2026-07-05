@@ -110,7 +110,8 @@
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.app-module:hover .app-photo {
+.app-module:hover .app-photo,
+.app-module.active .app-photo {
   transform: scale(1.05);
   filter: grayscale(0%) contrast(1);
 }
@@ -143,7 +144,8 @@
   color: var(--color-primary);
 }
 
-.app-module:hover .app-hover-content {
+.app-module:hover .app-hover-content,
+.app-module.active .app-hover-content {
   max-height: 800px;
   opacity: 1;
   padding: 0 20px 20px;

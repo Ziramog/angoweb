@@ -143,3 +143,14 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modules = document.querySelectorAll('.app-module.has-hover-list');
+        modules.forEach(mod => {
+            mod.addEventListener('click', () => {
+                mod.classList.toggle('active');
+            });
+        });
+    });
+</script>
