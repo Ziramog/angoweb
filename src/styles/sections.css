@@ -243,6 +243,10 @@
   width: 100%;
 }
 
+.selection-alt-link:hover {
+  color: var(--color-yellow) !important;
+}
+
 .models-section {
   background: var(--color-surface-soft);
 }
