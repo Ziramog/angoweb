@@ -13,16 +13,14 @@
             </div>
             
             <div class="models-download-box" id="catalogo" data-reveal style="--i: 3">
-                <div class="download-cover">
-                    <img src="/portada_pdf.png" alt="Portada Ficha Técnica">
+                <div class="download-icon">
+                    <i class="ph-fill ph-file-pdf"></i>
                 </div>
-                <div class="download-content">
-                    <h3>Ficha T&eacute;cnica</h3>
-                    <p>Descargue el documento completo con especificaciones, tabla de modelos, medidas y capacidades de torque.</p>
-                    <a href="/FICHA-TECNICA-PTO-RG.pdf" target="_blank" class="btn btn-gold" download>
-                        <i class="ph-bold ph-download-simple"></i> Descargar PDF
-                    </a>
-                </div>
+                <h3>Ficha T&eacute;cnica</h3>
+                <p>Descargue el documento completo con especificaciones, tabla de modelos, medidas y capacidades de torque.</p>
+                <a href="/FICHA-TECNICA-PTO-RG.pdf" target="_blank" class="btn btn-primary" download>
+                    <i class="ph-bold ph-download-simple"></i> Descargar PDF
+                </a>
             </div>
         </div>
     </div>
@@ -32,76 +30,53 @@
     .models-download-box {
         display: flex;
         flex-direction: column;
-        background: linear-gradient(135deg, rgba(4, 29, 51, 0.9) 0%, rgba(2, 17, 32, 0.95) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    
-    .download-cover {
-        background: #020d18;
-        padding: 30px;
-        display: flex;
         align-items: center;
         justify-content: center;
-    }
-    
-    .download-cover img {
-        max-width: 140px;
-        border-radius: 4px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-        transition: transform 0.3s ease;
-    }
-    
-    .models-download-box:hover .download-cover img {
-        transform: translateY(-5px);
-    }
-    
-    .download-content {
-        padding: 30px;
         text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid var(--color-border);
+        border-top: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 40px;
+        min-height: 300px;
     }
     
-    .download-content h3 {
-        color: #fff;
+    .download-icon {
+        background: rgba(0, 87, 184, 0.08); /* Fondo claro con color primario */
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+    }
+    
+    .download-icon i {
+        font-size: 40px;
+        color: var(--color-primary);
+    }
+    
+    .models-download-box h3 {
+        color: var(--color-dark);
         font-family: var(--font-heading);
-        font-size: 24px;
+        font-size: 28px;
         margin-bottom: 12px;
         text-transform: uppercase;
         font-stretch: 75%;
     }
     
-    .download-content p {
-        color: rgba(255, 255, 255, 0.85);
-        margin-bottom: 24px;
+    .models-download-box p {
+        color: #334155;
+        margin-bottom: 32px;
+        max-width: 400px;
         line-height: 1.6;
-        font-size: 15px;
+        font-size: 16px;
     }
     
-    .download-content .btn {
+    .models-download-box .btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-    }
-    
-    @media (min-width: 600px) {
-        .models-download-box {
-            flex-direction: row;
-        }
-        .download-cover {
-            flex: 0 0 40%;
-            padding: 30px 20px;
-        }
-        .download-content {
-            flex: 1;
-            text-align: left;
-            align-items: flex-start;
-            padding: 40px;
-        }
     }
 </style>
