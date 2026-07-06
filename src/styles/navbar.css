@@ -207,9 +207,9 @@
 @media (min-width: 1080px) {
   .nav-links {
     display: flex;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    justify-content: flex-end;
+    flex-grow: 1;
+    padding-right: 24px;
   }
 
   .hamburger,
