@@ -188,11 +188,19 @@
 }
 
 .specs-band-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
   align-items: center;
-  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .specs-band-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
 }
 
 @media (min-width: 1024px) {
