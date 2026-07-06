@@ -1,0 +1,150 @@
+---
+---
+<section class="spares-section" id="repuestos">
+    <div class="container">
+        <div class="spares-header">
+            <div class="section-kicker dark" data-reveal>Soporte y Mantenimiento</div>
+            <h2 class="section-title" data-reveal style="--i: 1">Repuestos y Reacondicionamiento</h2>
+            <p class="section-subtitle" data-reveal style="--i: 2">Alargamos la vida &uacute;til de sus equipos con repuestos originales y servicio t&eacute;cnico especializado para embragues RG, Urvig y Micron.</p>
+        </div>
+
+        <div class="spares-grid">
+            <!-- Card 1: Repuestos RG -->
+            <div class="spares-card" data-reveal style="--i: 3">
+                <div class="spares-icon">
+                    <i class="ph-fill ph-gear"></i>
+                </div>
+                <h3>Repuestos L&iacute;nea RG</h3>
+                <p>Contamos con toda la l&iacute;nea de repuestos originales para embragues RG. Garantizamos disponibilidad, calce perfecto y durabilidad prolongada para sus equipos en operaci&oacute;n.</p>
+            </div>
+
+            <!-- Card 2: Reacondicionamiento -->
+            <div class="spares-card" data-reveal style="--i: 4">
+                <div class="spares-icon">
+                    <i class="ph-fill ph-wrench"></i>
+                </div>
+                <h3>Reacondicionamiento a Nuevo</h3>
+                <p>Traiga su equipo desgastado. Nuestro equipo de t&eacute;cnicos expertos desarma, eval&uacute;a y reacondiciona sus embragues viejos para dejarlos funcionando como nuevos, con garant&iacute;a.</p>
+            </div>
+
+            <!-- Card 3: Multimarca -->
+            <div class="spares-card" data-reveal style="--i: 5">
+                <div class="spares-icon">
+                    <i class="ph-fill ph-arrows-merge"></i>
+                </div>
+                <h3>Repuestos Urvig y Micron</h3>
+                <p>Adem&aacute;s de nuestra l&iacute;nea propia, ofrecemos una amplia gama de repuestos compatibles con embragues de las marcas Urvig y Micron, asegurando que su industria nunca se detenga.</p>
+            </div>
+        </div>
+
+        <div class="spares-cta" data-reveal style="--i: 6">
+            <a href="https://wa.me/543513157202?text=Hola,%20quisiera%20consultar%20por%20repuestos%20o%20reparaci%C3%B3n%20de%20embragues." target="_blank" class="btn btn-primary">
+                <i class="ph-bold ph-whatsapp-logo"></i> Consultar disponibilidad
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .spares-section {
+        background-color: #F8FAFC;
+        padding: 80px 0;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .spares-header {
+        text-align: center;
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .spares-header .section-subtitle {
+        margin: 16px auto 0;
+    }
+
+    .spares-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    .spares-card {
+        background: #fff;
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 40px 30px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .spares-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--color-primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+
+    .spares-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+
+    .spares-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .spares-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(0, 87, 184, 0.08);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+
+    .spares-icon i {
+        font-size: 32px;
+        color: var(--color-primary);
+    }
+
+    .spares-card h3 {
+        color: var(--color-dark);
+        font-family: var(--font-heading);
+        font-size: 20px;
+        margin-bottom: 16px;
+        font-stretch: 75%;
+        text-transform: uppercase;
+    }
+
+    .spares-card p {
+        color: #475569;
+        line-height: 1.6;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .spares-cta {
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        .spares-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+    }
+</style>
