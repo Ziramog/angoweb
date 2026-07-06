@@ -4,7 +4,10 @@
     <div class="container">
         <div class="spares-header">
             <div class="section-kicker dark" data-reveal>Soporte y Mantenimiento</div>
-            <h2 class="section-title" data-reveal style="--i: 1">Repuestos y Reacondicionamiento</h2>
+            <h2 class="section-title" data-reveal style="--i: 1">
+                <span class="desktop-title">Repuestos y Reacondicionamiento</span>
+                <span class="mobile-title">Repuestos</span>
+            </h2>
             <p class="section-subtitle" data-reveal style="--i: 2">Alargamos la vida &uacute;til de sus equipos con repuestos originales y servicio t&eacute;cnico especializado para embragues RG, Urvig y Micron.</p>
         </div>
 
@@ -63,6 +66,15 @@
 
     .spares-header .section-subtitle {
         margin: 16px auto 0;
+    }
+
+    .mobile-title {
+        display: none;
+    }
+
+    @media (max-width: 767px) {
+        .desktop-title { display: none; }
+        .mobile-title { display: inline; }
     }
 
     .spares-grid {
