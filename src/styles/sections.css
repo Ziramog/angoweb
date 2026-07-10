@@ -415,7 +415,7 @@
   }
 
   .models-content-grid {
-    grid-template-columns: 42% 58%;
+    grid-template-columns: 65% 35%;
     gap: 40px;
   }
 
