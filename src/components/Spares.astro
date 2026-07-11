@@ -22,7 +22,7 @@
                     <h3>Repuestos L&iacute;nea RG</h3>
                     <p>Piezas originales fabricadas bajo m&aacute;xima exigencia. Garantizamos calce perfecto y durabilidad prolongada para mantener su producci&oacute;n sin interrupciones.</p>
                     <div class="card-action">
-                        <a href="#contacto" class="btn btn-outline">Consultar Stock</a>
+                        <a href="#contacto" class="btn btn-outline">Consultar stock</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <h3>Reacondicionamiento</h3>
                     <p>No descarte su embrague desgastado. Nuestros t&eacute;cnicos expertos lo desarman, eval&uacute;an y restauran dej&aacute;ndolo con rendimiento y apariencia de 0km.</p>
                     <div class="card-action">
-                        <a href="#contacto" class="btn btn-outline">Solicitar Presupuesto</a>
+                        <a href="#contacto" class="btn btn-outline">Solicitar presupuesto</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                     <h3>Repuestos Urvig y Micron</h3>
                     <p>Soluciones multimarca. Disponemos de un amplio stock de repuestos compatibles de alt&iacute;sima precisi&oacute;n para sistemas Urvig y Micron, con entrega r&aacute;pida.</p>
                     <div class="card-action">
-                        <a href="#contacto" class="btn btn-outline">Ver Compatibilidad</a>
+                        <a href="#contacto" class="btn btn-outline">Consultar precios</a>
                     </div>
                 </div>
             </div>
@@ -266,19 +266,31 @@
 
     .card-action {
         margin-top: auto;
+        display: flex;
+        justify-content: center;
+        padding-top: 12px;
     }
 
     .card-action .btn {
-        width: 100%;
-        display: block;
-        text-align: center;
-        border-color: var(--color-border);
-        color: var(--color-dark);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+        background: transparent;
+        transition: all 0.3s ease;
     }
     
     .card-action .btn:hover {
         background-color: var(--color-primary);
-        border-color: var(--color-primary);
         color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 87, 184, 0.2);
     }
 </style>
