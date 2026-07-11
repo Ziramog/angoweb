@@ -437,6 +437,30 @@
   align-items: center;
 }
 
+@media (min-width: 992px) {
+  .brand-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+}
+
+.brand-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-side-image {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+  transition: transform 0.5s ease;
+}
+
+.brand-side-image:hover {
+  transform: scale(1.05);
+}
+
 .brand-traits-container {
   display: flex;
   flex-direction: row;
@@ -450,19 +474,6 @@
   .brand-traits-container {
     gap: 48px;
     justify-content: flex-start;
-  }
-}
-
-.brand-logos-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: center;
-}
-
-@media (min-width: 768px) {
-  .brand-logos-wrapper {
-    gap: 24px;
   }
 }
 
