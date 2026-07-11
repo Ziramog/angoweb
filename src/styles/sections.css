@@ -453,6 +453,19 @@
   }
 }
 
+.brand-logos-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .brand-logos-wrapper {
+    gap: 24px;
+  }
+}
+
 .brand-inline-logo {
   width: 45%;
   max-width: 140px;
