@@ -427,6 +427,10 @@
 /* --- Brand Section --- */
 .brand-section {
   background-color: var(--color-surface); /* Pure white */
+  background-image: url('/fondo-section-marca.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-top: 1px solid var(--color-border);
 }
 
@@ -442,23 +446,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 60px;
   }
-}
-
-.brand-image-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.brand-side-image {
-  max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
-  transition: transform 0.5s ease;
-}
-
-.brand-side-image:hover {
-  transform: scale(1.05);
 }
 
 .brand-traits-container {
