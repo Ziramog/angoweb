@@ -7,49 +7,58 @@
         <p class="section-subtitle" data-reveal>Aseguramos la m&aacute;xima operatividad de sus equipos con repuestos originales de alta precisi&oacute;n y un servicio experto enfocado en su productividad.</p>
     </div>
 
-    <!-- Parallax Carousel Container -->
+    <!-- Carousel Container -->
     <div class="spares-carousel-container" data-reveal>
         <div class="spares-carousel">
             
             <!-- Card 1 -->
-            <div class="parallax-card">
-                <!-- Fondo temporal (placeholder) -->
-                <div class="parallax-bg" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);"></div>
-                <div class="parallax-overlay"></div>
-                <div class="parallax-content">
+            <div class="product-card">
+                <div class="product-card-image">
+                    <!-- Fondo temporal (placeholder) -->
+                    <div class="product-image-bg" style="background: linear-gradient(135deg, #e2e8f0, #cbd5e1);"></div>
+                </div>
+                <div class="product-card-content">
                     <div class="card-kicker">01. Originalidad</div>
                     <h3>Repuestos L&iacute;nea RG</h3>
                     <p>Piezas originales fabricadas bajo m&aacute;xima exigencia. Garantizamos calce perfecto y durabilidad prolongada para mantener su producci&oacute;n sin interrupciones.</p>
-                    <a href="#contacto" class="btn btn-gold">Consultar Stock</a>
+                    <div class="card-action">
+                        <a href="#contacto" class="btn btn-outline">Consultar Stock</a>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 2 -->
-            <div class="parallax-card">
-                <!-- Fondo temporal (placeholder) -->
-                <div class="parallax-bg" style="background: linear-gradient(135deg, #141e30, #243b55);"></div>
-                <div class="parallax-overlay"></div>
-                <div class="parallax-content">
+            <div class="product-card">
+                <div class="product-card-image">
+                    <!-- Fondo temporal (placeholder) -->
+                    <div class="product-image-bg" style="background: linear-gradient(135deg, #f1f5f9, #e2e8f0);"></div>
+                </div>
+                <div class="product-card-content">
                     <div class="card-kicker">02. Ahorro y Garant&iacute;a</div>
                     <h3>Reacondicionamiento</h3>
                     <p>No descarte su embrague desgastado. Nuestros t&eacute;cnicos expertos lo desarman, eval&uacute;an y restauran dej&aacute;ndolo con rendimiento y apariencia de 0km.</p>
-                    <a href="#contacto" class="btn btn-gold">Solicitar Presupuesto</a>
+                    <div class="card-action">
+                        <a href="#contacto" class="btn btn-outline">Solicitar Presupuesto</a>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 3 (Urvig con 3 imagenes rotativas) -->
-            <div class="parallax-card">
-                <div class="urvig-crossfade">
-                    <div class="crossfade-bg" style="background-image: url('/platoconcono_urvig.jpeg');"></div>
-                    <div class="crossfade-bg" style="background-image: url('/platodesplazable_urvig.jpeg');"></div>
-                    <div class="crossfade-bg" style="background-image: url('/portacollar_urvig.jpeg');"></div>
+            <div class="product-card">
+                <div class="product-card-image">
+                    <div class="urvig-crossfade">
+                        <div class="crossfade-bg" style="background-image: url('/platoconcono_urvig.jpeg');"></div>
+                        <div class="crossfade-bg" style="background-image: url('/platodesplazable_urvig.jpeg');"></div>
+                        <div class="crossfade-bg" style="background-image: url('/portacollar_urvig.jpeg');"></div>
+                    </div>
                 </div>
-                <div class="parallax-overlay"></div>
-                <div class="parallax-content">
+                <div class="product-card-content">
                     <div class="card-kicker">03. Compatibilidad Total</div>
                     <h3>Repuestos Urvig y Micron</h3>
                     <p>Soluciones multimarca. Disponemos de un amplio stock de repuestos compatibles de alt&iacute;sima precisi&oacute;n para sistemas Urvig y Micron, con entrega r&aacute;pida.</p>
-                    <a href="#contacto" class="btn btn-gold">Ver Compatibilidad</a>
+                    <div class="card-action">
+                        <a href="#contacto" class="btn btn-outline">Ver Compatibilidad</a>
+                    </div>
                 </div>
             </div>
 
@@ -117,28 +126,27 @@
         border-radius: 4px;
     }
 
-    /* Parallax Card */
-    .parallax-card {
+    /* Product Card */
+    .product-card {
         flex: 0 0 85vw; /* full screen minus peeking edge on mobile */
-        height: 480px;
-        position: relative;
+        background: #ffffff;
         border-radius: 16px;
         overflow: hidden;
         scroll-snap-align: center;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
         display: flex;
-        align-items: flex-end;
-        cursor: grab;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    .parallax-card:active {
-        cursor: grabbing;
+
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 45px rgba(0,0,0,0.3);
     }
 
     @media (min-width: 768px) {
-        .parallax-card {
+        .product-card {
             flex: 0 0 380px;
-            height: 560px;
             scroll-snap-align: start;
         }
         .spares-carousel {
@@ -158,22 +166,27 @@
         }
     }
 
-    /* Fixed zoom issue: removed background-attachment: fixed */
-    .parallax-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
+    /* Image Area */
+    .product-card-image {
+        width: 100%;
+        height: 260px;
+        background-color: #f1f5f9; /* Soft background for product shots */
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .product-image-bg {
         width: 100%;
         height: 100%;
-        background-size: cover;
+        background-size: contain; /* Image is fully visible, not cropped */
         background-position: center;
-        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background-repeat: no-repeat;
+        transition: transform 0.5s ease;
     }
-    
-    @media (min-width: 1024px) {
-        .parallax-card:hover .parallax-bg {
-            transform: scale(1.05); /* Premium zoom hover */
-        }
+
+    .product-card:hover .product-image-bg {
+        transform: scale(1.05); /* Slight zoom on hover for dynamism */
     }
 
     /* Urvig Crossfade */
@@ -189,14 +202,15 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        background-size: cover;
+        background-size: contain; /* Image fully visible */
         background-position: center;
+        background-repeat: no-repeat;
         opacity: 0;
         animation: crossfadeAnim 12s infinite;
-        transition: transform 0.8s ease;
+        transition: transform 0.5s ease;
     }
 
-    .parallax-card:hover .crossfade-bg {
+    .product-card:hover .crossfade-bg {
         transform: scale(1.05);
     }
 
@@ -212,70 +226,59 @@
         100% { opacity: 0; }
     }
 
-    .parallax-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(3, 26, 47, 0.98) 0%, rgba(3, 26, 47, 0.6) 50%, rgba(3, 26, 47, 0.1) 100%);
-        z-index: 1;
-        transition: background 0.5s ease;
-    }
-
-    .parallax-card:hover .parallax-overlay {
-        background: linear-gradient(to top, rgba(3, 26, 47, 0.98) 0%, rgba(3, 26, 47, 0.8) 60%, rgba(3, 26, 47, 0.3) 100%);
-    }
-
-    .parallax-content {
-        position: relative;
-        z-index: 2;
-        padding: 40px 30px;
-        width: 100%;
-        transform: translateY(15px);
-        transition: transform 0.5s ease;
-    }
-    
-    .parallax-card:hover .parallax-content {
-        transform: translateY(0);
+    /* Text Area */
+    .product-card-content {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        background: #ffffff;
     }
 
     .card-kicker {
-        color: var(--color-yellow);
+        color: var(--color-primary);
         font-family: var(--font-mono);
         font-size: 13px;
         font-weight: 700;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.05em;
         margin-bottom: 12px;
         text-transform: uppercase;
     }
 
-    .parallax-content h3 {
-        color: #fff;
+    .product-card-content h3 {
+        color: var(--color-dark);
         font-family: var(--font-heading);
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 800;
         margin-bottom: 16px;
-        line-height: 1.15;
+        line-height: 1.2;
         text-transform: uppercase;
         font-stretch: 75%;
     }
 
-    .parallax-content p {
-        color: rgba(255,255,255,0.75);
+    .product-card-content p {
+        color: #475569;
         font-size: 15px;
         line-height: 1.6;
         margin-bottom: 28px;
-        transition: color 0.3s ease;
+        flex-grow: 1; /* Pushes button to bottom */
+    }
+
+    .card-action {
+        margin-top: auto;
+    }
+
+    .card-action .btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+        border-color: var(--color-border);
+        color: var(--color-dark);
     }
     
-    .parallax-card:hover .parallax-content p {
-        color: rgba(255,255,255,0.95);
-    }
-
-    .parallax-content .btn {
-        width: 100%;
-        opacity: 0.85;
-    }
-
-    .parallax-card:hover .parallax-content .btn {
-        opacity: 1;
+    .card-action .btn:hover {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        color: #fff;
     }
 </style>
