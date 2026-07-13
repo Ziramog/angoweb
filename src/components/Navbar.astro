@@ -1,6 +1,10 @@
 ---
+export interface Props {
+    forceScrolled?: boolean;
+}
+const { forceScrolled = false } = Astro.props;
 ---
-<header class="navbar" id="main-header">
+<header class={`navbar ${forceScrolled ? 'scrolled' : ''}`} id="main-header" data-force-scrolled={forceScrolled ? "true" : undefined}>
     <div class="container navbar-inner">
         <a href="#" class="navbar-logo-container" aria-label="ANGO Metalurgica">
             <img class="navbar-logo" src="/angologo512.png" alt="ANGO Metalurgica">

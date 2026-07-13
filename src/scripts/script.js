@@ -5,7 +5,9 @@ const waFab = document.getElementById('wa-fab');
 if (header) {
     let isScrolling = false;
     const handleScroll = () => {
-        if (window.scrollY > (window.innerHeight * 0.1)) {
+        if (header.hasAttribute('data-force-scrolled')) {
+            header.classList.add('scrolled');
+        } else if (window.scrollY > (window.innerHeight * 0.1)) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
