@@ -1,30 +1,62 @@
 ---
 ---
-<section class="models-section" id="modelos">
-    <div class="container">
-        <div class="models-content-grid">
-            <div class="models-image-wrapper" data-reveal style="--i: 1">
-                <img src="/embrague-corte-final.png" alt="Corte transversal embrague ANGO" class="models-img" style="max-width: 60%; margin: 0 auto; display: block;">
-            </div>
-            
-            <div class="models-info-wrapper">
-                <div class="models-text-header">
-                    <span class="eyebrow" data-reveal style="--i: 1" style="display: block; margin-bottom: 12px;">Embragues Industriales y Tomas de Fuerza (PTO)</span>
-                    <h2 class="section-title" data-reveal style="--i: 2">Modelos y Capacidades</h2>
-                    <p class="section-subtitle" data-reveal style="--i: 3">Explore nuestro cat&aacute;logo t&eacute;cnico de l&iacute;nea est&aacute;ndar. Como fabricantes, desarrollamos soluciones a medida. Para requisitos especiales en transmisi&oacute;n de potencia, consulte a nuestro equipo de ingenier&iacute;a.</p>
-                </div>
+<section class="models-section models-showcase" id="modelos">
+    <div class="models-grid-overlay" aria-hidden="true"></div>
 
-                <div class="models-download-info" id="catalogo" data-reveal style="--i: 4">
-                    <div class="download-icon">
+    <div class="container models-showcase-grid">
+        <div class="models-visual" data-reveal style="--i: 1">
+            <div class="models-visual-frame">
+                <span class="models-axis models-axis-x" aria-hidden="true"></span>
+                <span class="models-axis models-axis-y" aria-hidden="true"></span>
+                <span class="models-figure-index" aria-hidden="true">FIG. 01 / CORTE TÉCNICO</span>
+
+                <img
+                    src="/embrague-corte-final.png"
+                    alt="Corte transversal de embrague industrial ANGO"
+                    class="models-product-image"
+                    loading="lazy"
+                    decoding="async"
+                >
+
+                <div class="models-callout models-callout-sae">
+                    <span>CARCAZAS</span>
+                    <strong>SAE 6–00</strong>
+                </div>
+                <div class="models-callout models-callout-discs">
+                    <span>CONFIGURACIÓN</span>
+                    <strong>1, 2 Y 3 DISCOS</strong>
+                </div>
+                <div class="models-callout models-callout-torque">
+                    <span>TORQUE MÁXIMO</span>
+                    <strong>12.000 Nm</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="models-content">
+            <div class="models-heading" data-reveal style="--i: 2">
+                <span class="section-kicker">Línea de productos</span>
+                <p class="models-category">Embragues industriales y tomas de fuerza (PTO)</p>
+                <h2 class="section-title">Modelos y Capacidades</h2>
+                <p class="section-subtitle">Explore nuestro catálogo técnico de línea estándar. Como fabricantes, desarrollamos soluciones a medida. Para requisitos especiales en transmisión de potencia, consulte a nuestro equipo de ingeniería.</p>
+            </div>
+
+            <div class="models-document" id="catalogo" data-reveal style="--i: 3">
+                <div class="models-document-code" aria-hidden="true">
+                    <span>DOC.</span>
+                    <strong>RG/01</strong>
+                </div>
+                <div class="models-document-body">
+                    <div class="models-document-label">
                         <i class="ph-fill ph-file-pdf"></i>
+                        <span>Documentación técnica</span>
                     </div>
-                    <div class="download-text-content">
-                        <h3>Ficha T&eacute;cnica en PDF</h3>
-                        <p>Descargue el documento completo con especificaciones t&eacute;cnicas, tabla de modelos, medidas precisas y capacidades de torque para nuestras tomas de fuerza y embragues.</p>
-                        <a href="/Catalogo_Tecnico_RG_ANGO.pdf" target="_blank" class="btn btn-primary" download>
-                            <i class="ph-bold ph-download-simple"></i> Descargar PDF
-                        </a>
-                    </div>
+                    <h3>Catálogo Técnico RG</h3>
+                    <p>Especificaciones, tabla de modelos, medidas y capacidades de torque para tomas de fuerza y embragues.</p>
+                    <a href="/Catalogo_Tecnico_RG_ANGO.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" download>
+                        <i class="ph-bold ph-download-simple"></i>
+                        Descargar PDF
+                    </a>
                 </div>
             </div>
         </div>
@@ -32,74 +64,375 @@
 </section>
 
 <style>
-    .models-info-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .models-showcase {
+        background:
+            linear-gradient(180deg, rgba(3, 26, 47, 0.035), transparent 22%),
+            var(--color-surface-soft);
+        border-top: 1px solid rgba(6, 40, 70, 0.18);
+        overflow: hidden;
+        position: relative;
     }
 
-    .models-text-header {
-        margin-bottom: 32px;
+    .models-grid-overlay {
+        background-image:
+            linear-gradient(rgba(6, 40, 70, 0.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(6, 40, 70, 0.045) 1px, transparent 1px);
+        background-size: 28px 28px;
+        inset: 0;
+        mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.18) 72%, transparent);
+        opacity: 0.9;
+        pointer-events: none;
+        position: absolute;
     }
 
-    .models-download-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        margin-top: 10px;
-        padding-top: 32px;
-        border-top: 1px solid var(--color-border);
+    .models-showcase-grid {
+        display: grid;
+        gap: 44px;
+        position: relative;
+        z-index: 1;
     }
-    
-    .download-icon {
-        background: rgba(0, 87, 184, 0.08); /* Fondo claro con color primario */
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        display: flex;
+
+    .models-visual-frame {
         align-items: center;
+        aspect-ratio: 1 / 0.9;
+        border: 1px solid rgba(6, 40, 70, 0.26);
+        display: flex;
         justify-content: center;
-        margin-bottom: 20px;
+        min-height: 430px;
+        overflow: hidden;
+        position: relative;
     }
-    
-    .download-icon i {
-        font-size: 26px;
-        color: var(--color-primary);
+
+    .models-visual-frame::before,
+    .models-visual-frame::after {
+        content: "";
+        pointer-events: none;
+        position: absolute;
     }
-    
-    .models-download-info h3 {
+
+    .models-visual-frame::before {
+        border-left: 16px solid var(--color-yellow);
+        border-top: 16px solid var(--color-yellow);
+        height: 58px;
+        left: -1px;
+        top: -1px;
+        width: 58px;
+    }
+
+    .models-visual-frame::after {
+        border-bottom: 1px solid rgba(6, 40, 70, 0.22);
+        border-right: 1px solid rgba(6, 40, 70, 0.22);
+        bottom: 18px;
+        height: 52px;
+        right: 18px;
+        width: 52px;
+    }
+
+    .models-axis {
+        background: rgba(0, 87, 184, 0.12);
+        pointer-events: none;
+        position: absolute;
+    }
+
+    .models-axis-x {
+        height: 1px;
+        left: 5%;
+        right: 5%;
+        top: 50%;
+    }
+
+    .models-axis-y {
+        bottom: 5%;
+        left: 50%;
+        top: 5%;
+        width: 1px;
+    }
+
+    .models-figure-index {
+        color: var(--color-ink-secondary);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        left: 26px;
+        letter-spacing: 0.08em;
+        position: absolute;
+        top: 24px;
+    }
+
+    .models-product-image {
+        filter: drop-shadow(0 30px 28px rgba(3, 26, 47, 0.2));
+        height: auto;
+        max-width: min(72%, 600px);
+        position: relative;
+        transform: translate(-2%, 4%);
+        z-index: 2;
+    }
+
+    .models-callout {
+        background: rgba(255, 255, 255, 0.94);
+        border-left: 3px solid var(--color-primary);
+        box-shadow: 0 10px 24px rgba(3, 26, 47, 0.1);
+        display: grid;
+        gap: 3px;
+        min-width: 132px;
+        padding: 10px 12px;
+        position: absolute;
+        z-index: 3;
+    }
+
+    .models-callout span {
+        color: var(--color-ink-secondary);
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+    }
+
+    .models-callout strong {
         color: var(--color-dark);
         font-family: var(--font-heading);
-        font-size: 18px;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        font-stretch: 75%;
-    }
-    
-    .models-download-info p {
-        color: #334155;
-        margin-bottom: 24px;
-        line-height: 1.6;
-        font-size: 15px;
-    }
-    
-    .models-download-info .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 24px;
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: 900;
     }
 
-    @media (min-width: 640px) {
-        .models-download-info {
-            flex-direction: row;
-            gap: 24px;
+    .models-callout-sae {
+        right: 5%;
+        top: 16%;
+    }
+
+    .models-callout-discs {
+        left: 4%;
+        top: 43%;
+    }
+
+    .models-callout-torque {
+        bottom: 10%;
+        right: 8%;
+    }
+
+    .models-content {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+    }
+
+    .models-heading .section-kicker {
+        margin-bottom: 14px;
+    }
+
+    .models-category {
+        color: var(--color-primary);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 18px;
+        max-width: 560px;
+        text-transform: uppercase;
+    }
+
+    .models-heading .section-title {
+        margin-bottom: 24px;
+    }
+
+    .models-heading .section-subtitle {
+        max-width: 620px;
+    }
+
+    .models-document {
+        background: var(--color-dark);
+        border-top: 4px solid var(--color-yellow);
+        color: var(--color-surface);
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        overflow: hidden;
+    }
+
+    .models-document-code {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.055);
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 24px 12px;
+    }
+
+    .models-document-code span {
+        color: rgba(255, 255, 255, 0.48);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+    }
+
+    .models-document-code strong {
+        color: var(--color-yellow);
+        font-family: var(--font-mono);
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .models-document-body {
+        padding: 26px;
+    }
+
+    .models-document-label {
+        align-items: center;
+        color: var(--color-yellow);
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        gap: 8px;
+        letter-spacing: 0.06em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .models-document-label i {
+        font-size: 18px;
+    }
+
+    .models-document h3 {
+        font-family: var(--font-heading);
+        font-size: 22px;
+        font-weight: 900;
+        line-height: 1.15;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .models-document p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+        max-width: 480px;
+    }
+
+    .models-document .btn {
+        min-height: 48px;
+    }
+
+    @media (min-width: 1060px) {
+        .models-showcase-grid {
+            align-items: center;
+            gap: clamp(52px, 6vw, 100px);
+            grid-template-columns: minmax(0, 1.1fr) minmax(390px, 0.9fr);
         }
-        .download-icon {
-            margin-bottom: 0;
-            flex-shrink: 0;
+    }
+
+    @media (max-width: 720px) {
+        .models-showcase-grid {
+            gap: 34px;
+        }
+
+        .models-content {
+            display: contents;
+        }
+
+        .models-heading {
+            grid-row: 1;
+        }
+
+        .models-visual {
+            grid-row: 2;
+        }
+
+        .models-document {
+            grid-row: 3;
+        }
+
+        .models-visual-frame {
+            aspect-ratio: auto;
+            min-height: 400px;
+        }
+
+        .models-product-image {
+            max-width: 82%;
+            transform: translateY(3%);
+        }
+
+        .models-callout {
+            min-width: 116px;
+            padding: 8px 10px;
+        }
+
+        .models-callout-discs {
+            left: 3%;
+            top: 48%;
+        }
+
+        .models-callout-torque {
+            bottom: 7%;
+        }
+
+        .models-document {
+            grid-template-columns: 68px 1fr;
+        }
+
+        .models-document-code {
+            padding-inline: 8px;
+        }
+
+        .models-document-code strong {
+            font-size: 14px;
+        }
+
+        .models-document-body {
+            padding: 24px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .models-visual-frame {
+            min-height: 350px;
+        }
+
+        .models-callout {
+            min-width: 104px;
+        }
+
+        .models-callout span {
+            font-size: 8px;
+        }
+
+        .models-callout strong {
+            font-size: 11px;
+        }
+
+        .models-callout-sae {
+            right: 3%;
+            top: 18%;
+        }
+
+        .models-callout-discs {
+            left: 2%;
+            top: 52%;
+        }
+
+        .models-callout-torque {
+            bottom: 5%;
+            right: 72px;
+        }
+
+        .models-document {
+            display: block;
+        }
+
+        .models-document-code {
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-right: 0;
+            flex-direction: row;
+            gap: 8px;
+            justify-content: flex-start;
+            padding: 12px 20px;
+        }
+
+        .models-document-code strong {
+            margin-top: 0;
         }
     }
 </style>

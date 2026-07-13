@@ -1,34 +1,433 @@
 ---
 ---
-<section class="section brand-section" id="marca">
+<section class="section brand-section brand-guarantee" id="marca">
+    <div class="brand-background-grid" aria-hidden="true"></div>
+
     <div class="container">
-        <div class="brand-grid">
-            <div class="brand-content">
-                <div class="section-kicker" data-reveal>Nuestra Garant&iacute;a</div>
-                <h2 class="section-title" data-reveal style="--i: 1">Marca Registrada</h2>
-                <p class="section-subtitle" data-reveal style="--i: 2"><strong>RG</strong> es nuestra marca registrada que contin&uacute;a siendo una insignia de calidad para las industrias y para nuestra propia empresa.</p>
-                
-                <div class="brand-traits-container" data-reveal style="--i: 3">
-                    <img src="/render-rg-2.png" alt="Marca Registrada RG" class="brand-inline-logo">
-                    <div class="brand-traits">
-                        <div class="trait-item">
-                            <i class="ph-fill ph-shield-check"></i>
-                            <span>Resistencia</span>
+        <div class="brand-guarantee-shell">
+            <div class="brand-guarantee-content">
+                <div data-reveal>
+                    <span class="section-kicker brand-kicker">Nuestra garantía</span>
+                    <p class="brand-overline">Sello de fabricación RG</p>
+                    <h2 class="section-title brand-title">Marca Registrada</h2>
+                    <p class="brand-copy"><strong>RG</strong> es nuestra marca registrada y el respaldo de cada solución que fabricamos: ingeniería aplicada, repuestos y soporte técnico para servicio industrial exigente.</p>
+                </div>
+
+                <div class="brand-proof" data-reveal style="--i: 1">
+                    <div class="brand-seal">
+                        <span class="brand-seal-label">SELLO DE ORIGEN</span>
+                        <img src="/render-rg-2.png" alt="Marca registrada RG" class="brand-seal-image" loading="lazy" decoding="async">
+                        <span class="brand-seal-code">RG / INDUSTRIA ARGENTINA</span>
+                    </div>
+
+                    <div class="brand-traits" aria-label="Valores de la marca RG">
+                        <div class="brand-trait">
+                            <span class="brand-trait-number">01</span>
+                            <i class="ph-bold ph-shield-check"></i>
+                            <div>
+                                <strong>Resistencia</strong>
+                                <span>Construcción para servicio industrial.</span>
+                            </div>
                         </div>
-                        <div class="trait-item">
-                            <i class="ph-fill ph-handshake"></i>
-                            <span>Confianza</span>
+                        <div class="brand-trait">
+                            <span class="brand-trait-number">02</span>
+                            <i class="ph-bold ph-handshake"></i>
+                            <div>
+                                <strong>Confianza</strong>
+                                <span>Respaldo directo de fábrica.</span>
+                            </div>
                         </div>
-                        <div class="trait-item">
-                            <i class="ph-fill ph-lock-key"></i>
-                            <span>Seguridad</span>
+                        <div class="brand-trait">
+                            <span class="brand-trait-number">03</span>
+                            <i class="ph-bold ph-lock-key"></i>
+                            <div>
+                                <strong>Seguridad</strong>
+                                <span>Precisión en cada componente.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="brand-image-wrapper" data-reveal style="--i: 4">
-                <img src="/embraguenegro-sinfondo-Photoroom.png" alt="Embrague RG" class="brand-side-image">
+
+            <div class="brand-product-stage" data-reveal style="--i: 2">
+                <span class="brand-stage-index">ANGO / RG — 1965–2026</span>
+                <div class="brand-product-halo" aria-hidden="true"></div>
+                <img src="/embraguenegro-sinfondo-Photoroom.png" alt="Embrague industrial RG" class="brand-product-image" loading="lazy" decoding="async">
+                <div class="brand-stage-caption">
+                    <span>Fabricación nacional</span>
+                    <strong>Ingeniería que transmite potencia</strong>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .brand-guarantee {
+        background:
+            linear-gradient(180deg, #ffffff 0%, var(--color-surface-soft) 100%);
+        border-top: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .brand-background-grid {
+        background-image:
+            linear-gradient(rgba(6, 40, 70, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(6, 40, 70, 0.04) 1px, transparent 1px);
+        background-size: 32px 32px;
+        inset: 0;
+        mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+        pointer-events: none;
+        position: absolute;
+    }
+
+    .brand-guarantee-shell {
+        background:
+            radial-gradient(circle at 76% 44%, rgba(0, 87, 184, 0.28), transparent 27%),
+            linear-gradient(115deg, var(--color-dark) 0%, var(--color-navy) 100%);
+        border-top: 5px solid var(--color-yellow);
+        color: var(--color-surface);
+        display: grid;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .brand-guarantee-shell::before {
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        content: "";
+        inset: 18px;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    .brand-guarantee-content {
+        padding: clamp(42px, 6vw, 88px);
+        position: relative;
+        z-index: 2;
+    }
+
+    .brand-kicker {
+        color: var(--color-yellow);
+        margin-bottom: 16px;
+    }
+
+    .brand-overline {
+        color: #69a9ef;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+    }
+
+    .brand-title {
+        color: var(--color-surface);
+        margin-bottom: 22px;
+    }
+
+    .brand-title::after {
+        color: var(--color-yellow);
+    }
+
+    .brand-copy {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 17px;
+        line-height: 1.7;
+        max-width: 660px;
+    }
+
+    .brand-copy strong {
+        color: var(--color-surface);
+    }
+
+    .brand-proof {
+        align-items: stretch;
+        display: grid;
+        gap: 26px;
+        margin-top: 42px;
+    }
+
+    .brand-seal {
+        align-items: center;
+        background: var(--color-surface);
+        color: var(--color-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 230px;
+        padding: 24px;
+        position: relative;
+    }
+
+    .brand-seal::before,
+    .brand-seal::after {
+        content: "";
+        position: absolute;
+    }
+
+    .brand-seal::before {
+        border-left: 12px solid var(--color-primary);
+        border-top: 12px solid var(--color-primary);
+        height: 32px;
+        left: 0;
+        top: 0;
+        width: 32px;
+    }
+
+    .brand-seal::after {
+        background: var(--color-yellow);
+        bottom: 0;
+        height: 4px;
+        left: 0;
+        right: 0;
+    }
+
+    .brand-seal-label,
+    .brand-seal-code {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        position: absolute;
+    }
+
+    .brand-seal-label {
+        left: 18px;
+        top: 16px;
+    }
+
+    .brand-seal-code {
+        bottom: 14px;
+        color: var(--color-ink-secondary);
+        right: 18px;
+    }
+
+    .brand-seal-image {
+        height: auto;
+        max-width: 190px;
+        width: 70%;
+    }
+
+    .brand-traits {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        display: grid;
+    }
+
+    .brand-trait {
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 28px 34px 1fr;
+        min-height: 76px;
+        padding: 14px 4px;
+    }
+
+    .brand-trait:last-child {
+        border-bottom: 0;
+    }
+
+    .brand-trait-number {
+        color: var(--color-yellow);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .brand-trait i {
+        color: #69a9ef;
+        font-size: 27px;
+    }
+
+    .brand-trait div {
+        display: grid;
+        gap: 3px;
+    }
+
+    .brand-trait strong {
+        font-family: var(--font-heading);
+        font-size: 15px;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .brand-trait div span {
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 12px;
+    }
+
+    .brand-product-stage {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        min-height: 560px;
+        overflow: hidden;
+        padding: 72px 42px 110px;
+        position: relative;
+    }
+
+    .brand-product-stage::before {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
+        background-size: 26px 26px;
+        content: "";
+        inset: 0;
+        mask-image: radial-gradient(circle at center, #000, transparent 72%);
+        position: absolute;
+    }
+
+    .brand-stage-index {
+        color: rgba(255, 255, 255, 0.42);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        position: absolute;
+        right: 28px;
+        top: 28px;
+    }
+
+    .brand-product-halo {
+        border: 1px solid rgba(105, 169, 239, 0.36);
+        border-radius: 50%;
+        height: min(34vw, 480px);
+        max-height: 480px;
+        max-width: 480px;
+        position: absolute;
+        width: min(34vw, 480px);
+    }
+
+    .brand-product-halo::before,
+    .brand-product-halo::after {
+        border: 1px solid rgba(105, 169, 239, 0.16);
+        border-radius: 50%;
+        content: "";
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .brand-product-halo::before {
+        height: 74%;
+        width: 74%;
+    }
+
+    .brand-product-halo::after {
+        height: 122%;
+        width: 122%;
+    }
+
+    .brand-product-image {
+        filter: drop-shadow(0 36px 32px rgba(0, 0, 0, 0.46));
+        height: auto;
+        max-width: none;
+        position: relative;
+        transform: translateX(-20%) rotate(-3deg);
+        width: 135%;
+        z-index: 2;
+    }
+
+    .brand-stage-caption {
+        border-left: 3px solid var(--color-yellow);
+        bottom: 36px;
+        display: grid;
+        gap: 3px;
+        left: 42px;
+        padding-left: 14px;
+        position: absolute;
+        z-index: 3;
+    }
+
+    .brand-stage-caption span {
+        color: #69a9ef;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+    }
+
+    .brand-stage-caption strong {
+        color: var(--color-surface);
+        font-family: var(--font-heading);
+        font-size: 15px;
+        text-transform: uppercase;
+    }
+
+    @media (min-width: 720px) {
+        .brand-proof {
+            grid-template-columns: minmax(180px, 0.72fr) minmax(280px, 1.28fr);
+        }
+    }
+
+    @media (min-width: 1080px) {
+        .brand-guarantee-shell {
+            grid-template-columns: minmax(0, 1.08fr) minmax(440px, 0.92fr);
+        }
+
+        .brand-product-stage {
+            border-left: 1px solid rgba(255, 255, 255, 0.11);
+            min-height: 100%;
+        }
+    }
+
+    @media (max-width: 719px) {
+        .brand-guarantee-content {
+            padding: 42px 24px;
+        }
+
+        .brand-proof {
+            margin-top: 32px;
+        }
+
+        .brand-product-stage {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            min-height: 440px;
+            padding: 62px 24px 96px;
+        }
+
+        .brand-product-halo {
+            height: 72vw;
+            width: 72vw;
+        }
+
+        .brand-product-image {
+            max-width: none;
+            transform: translateX(-20%) rotate(-3deg);
+            width: 145%;
+        }
+
+        .brand-stage-caption {
+            bottom: 28px;
+            left: 24px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .brand-guarantee-shell::before {
+            inset: 10px;
+        }
+
+        .brand-seal {
+            min-height: 210px;
+        }
+
+        .brand-trait {
+            gap: 10px;
+            grid-template-columns: 24px 30px 1fr;
+        }
+
+        .brand-trait div span {
+            font-size: 11px;
+        }
+
+        .brand-product-stage {
+            min-height: 390px;
+        }
+    }
+</style>
