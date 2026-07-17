@@ -5,6 +5,12 @@
   padding: 42px 0 48px;
 }
 
+@media (max-width: 799px) {
+  .footer {
+    padding-bottom: 96px; /* Prevent overlap with FAB */
+  }
+}
+
 .footer-grid {
   display: grid;
   gap: 34px;
