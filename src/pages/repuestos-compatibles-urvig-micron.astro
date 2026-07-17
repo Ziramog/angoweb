@@ -78,11 +78,6 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                     </a>
                 </div>
 
-                <ul class="compat-proof-list" aria-label="Ventajas del servicio" data-reveal style="--i: 3">
-                    <li><i class="ph-bold ph-check"></i> Para tomas de fuerza industriales</li>
-                    <li><i class="ph-bold ph-check"></i> Fabricación nacional</li>
-                    <li><i class="ph-bold ph-check"></i> Envíos a todo el país</li>
-                </ul>
             </div>
         </section>
 
@@ -504,26 +499,6 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         margin-bottom: 24px;
     }
 
-    .compat-proof-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px 24px;
-        list-style: none;
-    }
-
-    .compat-proof-list li {
-        align-items: center;
-        color: var(--color-dark);
-        display: flex;
-        font-family: var(--font-mono);
-        font-size: 12px;
-        font-weight: 700;
-        gap: 7px;
-        text-transform: uppercase;
-    }
-
-    .compat-proof-list i { color: var(--color-primary); }
-
     .compat-hero-visual {
         background: #fff;
         border: 1px solid rgba(6, 40, 70, 0.24);
@@ -572,21 +547,23 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 
     .compat-band-grid {
         display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
         padding-bottom: 22px;
         padding-top: 22px;
     }
 
     .compat-band-grid div {
         align-items: center;
-        border-bottom: 1px solid rgba(255,255,255,.12);
         display: flex;
-        gap: 13px;
-        padding: 15px 0;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 0;
+        text-align: center;
     }
 
-    .compat-band-grid div:last-child { border-bottom: 0; }
     .compat-band-grid span { color: var(--color-yellow); font-family: var(--font-mono); font-size: 11px; }
-    .compat-band-grid strong { color: #fff; font-size: 12px; text-transform: uppercase; }
+    .compat-band-grid strong { color: #fff; font-size: 11px; text-transform: uppercase; line-height: 1.3; }
 
     .compat-section-heading {
         display: grid;
@@ -919,19 +896,15 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             grid-template-columns: minmax(0, 1.02fr) minmax(430px, .98fr);
             grid-template-areas: 
                 "copy visual"
-                "actions visual"
-                "proof visual";
+                "actions visual";
             align-content: center;
             gap: 0 48px;
         }
         .compat-hero-copy { grid-area: copy; align-self: end; }
-        .compat-hero-actions { grid-area: actions; margin-bottom: 30px; }
-        .compat-proof-list { grid-area: proof; align-self: start; }
+        .compat-hero-actions { grid-area: actions; margin-bottom: 30px; align-self: start; }
         .compat-hero-visual { grid-area: visual; }
-        .compat-proof-list { flex-wrap: nowrap; gap: 10px; }
-        .compat-proof-list li { font-size: 10px; white-space: nowrap; }
-        .compat-band-grid { grid-template-columns: repeat(2, 1fr); }
-        .compat-band-grid div { border-bottom: 0; border-right: 1px solid rgba(255,255,255,.12); justify-content: center; padding: 8px 20px; }
+        .compat-band-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+        .compat-band-grid div { flex-direction: row; border-right: 1px solid rgba(255,255,255,.12); justify-content: center; padding: 8px 20px; gap: 14px; text-align: left; }
         .compat-band-grid div:last-child { border-right: 0; }
         .compat-section-heading { align-items: end; grid-template-columns: .9fr 1.1fr; }
         .compat-line-grid { grid-template-columns: repeat(2, 1fr); }
@@ -963,20 +936,13 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         .compat-lead { font-size: 15px; line-height: 1.5; margin-bottom: 22px; }
         .compat-hero-actions { display: grid; gap: 8px; margin-top: 22px; }
         .compat-hero-actions .btn { font-size: 12px; min-height: 50px; padding: 12px 14px; width: 100%; }
-        .compat-proof-list {
-            display: grid;
-            gap: 8px 14px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-top: 18px;
-        }
-        .compat-proof-list li { font-size: 10px; line-height: 1.3; }
-        .compat-proof-list li:first-child { grid-column: 1 / -1; }
         .compat-hero-visual { min-height: 280px; }
         .compat-hero-image-wrap { inset: 36px 14px 40px; }
         .compat-figure-label { left: 20px; top: 18px; }
-        .compat-band-grid { padding-bottom: 12px; padding-top: 12px; }
-        .compat-band-grid div { padding: 10px 0; }
-        .compat-band-grid strong { font-size: 11px; }
+        .compat-band-grid { padding-bottom: 12px; padding-top: 12px; gap: 8px; }
+        .compat-band-grid div { padding: 10px; border-right: 1px solid rgba(255,255,255,.08); }
+        .compat-band-grid div:last-child { border-right: 0; }
+        .compat-band-grid strong { font-size: 10px; }
         .compat-card-image { min-height: 250px; }
         .compat-catalog-shell { background: transparent; border: 0; box-shadow: none; overflow: visible; }
         .compat-catalog-meta { flex-wrap: wrap; font-size: 8px; gap: 5px 12px; padding: 11px 14px; }
