@@ -141,7 +141,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                                             data-micron-code={part.micronCode}
                                             aria-label={`Consultar ${part.description}, código Urvig ${part.urvigCode}`}
                                         >
-                                            Consultar este repuesto
+                                            Consultar
                                             <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                                         </a>
                                     </td>
@@ -253,7 +253,12 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         rel="noopener noreferrer"
         aria-hidden="true"
         tabindex="-1"
-    ><i class="ph-fill ph-whatsapp-logo"></i> Solicitar cotización por WhatsApp</a>
+    ><i class="ph-fill ph-whatsapp-logo"></i> Consultar por WhatsApp</a>
+
+    <dialog id="photo-modal" class="compat-photo-modal">
+        <button id="photo-modal-close" class="modal-close" aria-label="Cerrar"><i class="ph-bold ph-x"></i></button>
+        <img id="photo-modal-img" src="" alt="Ampliación de repuesto">
+    </dialog>
 
     <Footer />
 </Layout>
@@ -374,6 +379,29 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                 rotatingImage.style.opacity = '1';
             }, 300);
         }, 2000);
+    }
+
+    const modal = document.getElementById('photo-modal') as HTMLDialogElement;
+    const modalImg = document.getElementById('photo-modal-img') as HTMLImageElement;
+    const modalClose = document.getElementById('photo-modal-close');
+
+    if (modal && modalImg && modalClose) {
+        document.querySelectorAll('.part-photo-wrap').forEach(wrap => {
+            const htmlWrap = wrap as HTMLElement;
+            htmlWrap.style.cursor = 'pointer';
+            htmlWrap.addEventListener('click', () => {
+                const img = htmlWrap.querySelector('img');
+                if (img) {
+                    modalImg.src = img.src;
+                    modal.showModal();
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', () => modal.close());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.close();
+        });
     }
 </script>
 
@@ -665,6 +693,41 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     .compat-part-link:hover { color: var(--color-dark); }
     .compat-part-link i { flex: 0 0 auto; }
 
+    .compat-photo-modal {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        max-height: 90vh;
+        max-width: 90vw;
+        padding: 0;
+    }
+    .compat-photo-modal::backdrop {
+        backdrop-filter: blur(4px);
+        background: rgba(0, 3, 10, 0.8);
+    }
+    .compat-photo-modal img {
+        display: block;
+        max-height: 80vh;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    .modal-close {
+        align-items: center;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        cursor: pointer;
+        display: flex;
+        height: 36px;
+        justify-content: center;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 36px;
+        z-index: 10;
+    }
+
     .compat-quote {
         background:
             radial-gradient(circle at 15% 25%, rgba(0,87,184,.2), transparent 28%),
@@ -854,7 +917,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                 "photo title title"
                 "photo urvig micron"
                 "action action action";
-            grid-template-columns: 74px 1fr 1fr;
+            grid-template-columns: 120px 1fr 1fr;
             margin-top: 12px;
             padding: 14px;
             width: 100%;
