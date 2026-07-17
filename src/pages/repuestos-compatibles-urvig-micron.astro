@@ -9,21 +9,21 @@ const canonical = 'https://www.angometalurgica.com.ar/repuestos-compatibles-urvi
 const whatsappBase = 'https://wa.me/5493571699006';
 
 const compatibleParts = [
-    { urvigCode: 'TAE47A', micronCode: '104134428', description: 'Corona dentada' },
-    { urvigCode: 'TAE203B', micronCode: '104334016', description: 'Eje principal toma de fuerza' },
-    { urvigCode: 'TAA13A', micronCode: '24300209', description: 'Tuerca de eje principal' },
-    { urvigCode: 'TAA10A', micronCode: '103934011', description: 'Conjunto collar de bronce' },
-    { urvigCode: 'TAE45A', micronCode: '104134007', description: 'Plato con cubo' },
-    { urvigCode: 'TAAD3A', micronCode: '104134005', description: 'Plato liso desplazable' },
-    { urvigCode: 'TAE46A', micronCode: '104134026', description: 'Plato liso separador' },
-    { urvigCode: 'TBA06A', micronCode: '104134010', description: 'Horquilla de accionamiento' },
-    { urvigCode: 'TAA09A', micronCode: '104134013', description: 'Buje accionamiento leva — pata araña' },
-    { urvigCode: 'TAA12A', micronCode: '104334118', description: 'Leva aprieta disco' },
-    { urvigCode: 'TAA11A', micronCode: '102324120', description: 'Brazo de articulación' },
-    { urvigCode: 'TAE44A', micronCode: '98342044506', description: 'Resorte de plato' },
-    { urvigCode: 'TAA14B', micronCode: '104334119', description: 'Perno de leva sin cabeza' },
-    { urvigCode: 'TAA15B', micronCode: '104334021', description: 'Perno brazo de articulación sin cabeza' }
-] as const;
+    { urvigCode: 'TAE47A', micronCode: '104134428', description: 'Corona dentada', image: '/corona.png' },
+    { urvigCode: 'TAE203B', micronCode: '104334016', description: 'Eje principal toma de fuerza', image: '/ejes.png' },
+    { urvigCode: 'TAA13A', micronCode: '24300209', description: 'Tuerca de eje principal', image: null },
+    { urvigCode: 'TAA10A', micronCode: '103934011', description: 'Conjunto collar de bronce', image: '/collardebronce.png' },
+    { urvigCode: 'TAE45A', micronCode: '104134007', description: 'Plato con cubo', image: '/platoconcono_urvig.jpeg' },
+    { urvigCode: 'TAAD3A', micronCode: '104134005', description: 'Plato liso desplazable', image: '/platodesplazable_urvig.jpeg' },
+    { urvigCode: 'TAE46A', micronCode: '104134026', description: 'Plato liso separador', image: null },
+    { urvigCode: 'TBA06A', micronCode: '104134010', description: 'Horquilla de accionamiento', image: null },
+    { urvigCode: 'TAA09A', micronCode: '104134013', description: 'Buje accionamiento leva — pata araña', image: '/portacollar_urvig.jpeg' },
+    { urvigCode: 'TAA12A', micronCode: '104334118', description: 'Leva aprieta disco', image: null },
+    { urvigCode: 'TAA11A', micronCode: '102324120', description: 'Brazo de articulación', image: null },
+    { urvigCode: 'TAE44A', micronCode: '98342044506', description: 'Resorte de plato', image: null },
+    { urvigCode: 'TAA14B', micronCode: '104334119', description: 'Perno de leva sin cabeza', image: null },
+    { urvigCode: 'TAA15B', micronCode: '104334021', description: 'Perno brazo de articulación sin cabeza', image: null }
+];
 
 const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     const message = [
@@ -117,7 +117,13 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                             {compatibleParts.map((part) => (
                                 <tr>
                                     <td class="compat-part-photo">
-                                        <div class="photo-placeholder"><i class="ph-bold ph-camera" aria-hidden="true"></i></div>
+                                        {part.image ? (
+                                            <div class="part-photo-wrap">
+                                                <img src={part.image} alt={part.description} loading="lazy" decoding="async" />
+                                            </div>
+                                        ) : (
+                                            <div class="photo-placeholder"><i class="ph-bold ph-camera" aria-hidden="true"></i></div>
+                                        )}
                                     </td>
                                     <td data-label="Repuesto" class="compat-part-name">{part.description}</td>
                                     <td data-label="Código Urvig" class="compat-part-urvig"><code class="compat-code compat-code-primary">{part.urvigCode}</code></td>
@@ -600,6 +606,25 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         height: 60px;
         justify-content: center;
         width: 60px;
+    }
+
+    .part-photo-wrap {
+        align-items: center;
+        background: #fff;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        display: flex;
+        height: 60px;
+        justify-content: center;
+        overflow: hidden;
+        width: 60px;
+    }
+
+    .part-photo-wrap img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+        padding: 4px;
     }
 
     .compat-code {
