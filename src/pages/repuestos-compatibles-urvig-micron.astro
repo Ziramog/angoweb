@@ -95,6 +95,10 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                     <span class="section-kicker">Catálogo técnico</span>
                     <h2 class="section-title">Repuestos compatibles disponibles</h2>
                     <p class="section-subtitle">Consultá por código Urvig, equivalencia Micron o descripción del componente. Confirmamos compatibilidad y disponibilidad según equipo, modelo y aplicación.</p>
+                    <div class="compat-availability-badge">
+                        <i class="ph-bold ph-check-circle" aria-hidden="true"></i>
+                        <span><strong>Disponible para modelos:</strong> tomas de fuerza monodisco y doble disco en versiones de 11" 1/2 y 14".</span>
+                    </div>
                 </div>
 
                 <div class="compat-catalog-shell" data-reveal style="--i: 1">
@@ -239,8 +243,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 
         <section class="compat-disclaimer">
             <div class="container">
-                <p><strong>Aclaración de compatibilidad:</strong> Los nombres y códigos Urvig y Micron se utilizan únicamente para identificar compatibilidad. ANGO fabrica y comercializa soluciones compatibles. Confirmamos compatibilidad y disponibilidad según equipo, modelo y aplicación.</p>
-                <p style="margin-top: 10px;"><strong>Disponibilidad extendida:</strong> Tenemos disponibles repuestos para tomas de fuerza monodisco y doble disco en versiones de 11" 1/2 y 14".</p>
+                <p><strong>Aclaración de compatibilidad:</strong> Los nombres y códigos Urvig y Micron se utilizan únicamente para identificar compatibilidad. ANGO fabrica y comercializa soluciones compatibles. La equivalencia debe verificarse según equipo, modelo y aplicación.</p>
             </div>
         </section>
     </main>
@@ -564,6 +567,25 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     .compat-catalog { background: var(--color-surface-soft); }
     .compat-catalog-heading { margin-bottom: 40px; max-width: 920px; }
     .compat-catalog-heading .section-title { margin-bottom: 20px; }
+
+    .compat-availability-badge {
+        align-items: center;
+        background: rgba(0, 87, 184, 0.08);
+        border: 1px solid rgba(0, 87, 184, 0.15);
+        border-radius: 6px;
+        color: var(--color-dark);
+        display: inline-flex;
+        font-size: 14px;
+        gap: 12px;
+        margin-top: 24px;
+        padding: 14px 20px;
+        text-align: left;
+    }
+    .compat-availability-badge i {
+        color: var(--color-primary);
+        flex: 0 0 auto;
+        font-size: 22px;
+    }
 
     .compat-catalog-shell {
         background: #fff;
@@ -898,6 +920,15 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             min-height: auto;
             padding-bottom: 32px;
             padding-top: 28px;
+        }
+        .compat-availability-badge {
+            align-items: flex-start;
+            font-size: 13px;
+            padding: 12px 14px;
+        }
+        .compat-availability-badge i {
+            font-size: 20px;
+            margin-top: 1px;
         }
         .compat-hero-copy h1 {
             font-size: clamp(28px, 8.5vw, 36px);
