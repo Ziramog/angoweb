@@ -54,7 +54,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                 </div>
 
                 <div class="compat-hero-visual" data-reveal style="--i: 1">
-                    <span class="compat-figure-label">FIG. 01 / REPUESTO COMPATIBLE</span>
+                    <span class="compat-figure-label">FIG. <span id="hero-rotating-number">01</span> / REPUESTO COMPATIBLE URVIG / MICRON</span>
                     <div class="compat-hero-image-wrap">
                         <img id="hero-rotating-image" src="/platoconcono_urvig.jpeg" alt="Repuesto compatible nacional para toma de fuerza industrial" class="compat-hero-image" width="900" height="900" decoding="async">
                     </div>
@@ -385,6 +385,10 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             setTimeout(() => {
                 rotatingImage.src = heroImages[currentImageIndex];
                 rotatingImage.style.opacity = '1';
+                const rotatingNumber = document.getElementById('hero-rotating-number');
+                if (rotatingNumber) {
+                    rotatingNumber.textContent = String(currentImageIndex + 1).padStart(2, '0');
+                }
             }, 300);
         }, 2000);
     }
