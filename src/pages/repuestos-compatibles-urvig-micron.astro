@@ -700,11 +700,12 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         left: 50%;
         margin: 0;
         max-height: 85vh;
-        max-width: 90vw;
+        max-width: 600px;
         overflow: visible;
         padding: 0;
         top: 50%;
         transform: translate(-50%, -50%);
+        width: 90vw;
     }
     .compat-photo-modal::backdrop {
         backdrop-filter: blur(4px);
@@ -716,6 +717,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         max-height: 80vh;
         max-width: 100%;
         object-fit: contain;
+        width: 100%;
     }
     .modal-close {
         align-items: center;
