@@ -694,18 +694,20 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     .compat-part-link i { flex: 0 0 auto; }
 
     .compat-photo-modal {
+        background: transparent;
         border: none;
-        border-radius: 8px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        max-height: 90vh;
+        box-shadow: none;
+        max-height: 85vh;
         max-width: 90vw;
+        overflow: visible;
         padding: 0;
     }
     .compat-photo-modal::backdrop {
         backdrop-filter: blur(4px);
-        background: rgba(0, 3, 10, 0.8);
+        background: rgba(0, 3, 10, 0.85);
     }
     .compat-photo-modal img {
+        background: #fff;
         display: block;
         max-height: 80vh;
         max-width: 100%;
@@ -713,18 +715,18 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     }
     .modal-close {
         align-items: center;
-        background: #fff;
+        background: transparent;
         border: none;
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        color: #fff;
         cursor: pointer;
         display: flex;
-        height: 36px;
+        font-size: 28px;
+        height: 40px;
         justify-content: center;
         position: absolute;
-        right: 10px;
-        top: 10px;
-        width: 36px;
+        right: -10px;
+        top: -45px;
+        width: 40px;
         z-index: 10;
     }
 
