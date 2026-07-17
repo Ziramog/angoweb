@@ -7,6 +7,36 @@ const title = 'Repuestos compatibles para Urvig y Micron | ANGO Metalúrgica';
 const description = 'Repuestos compatibles para equipos Urvig y Micron. Fabricación nacional, asesoramiento técnico y verificación de compatibilidad por modelo o foto.';
 const canonical = 'https://www.angometalurgica.com.ar/repuestos-compatibles-urvig-micron';
 const whatsappBase = 'https://wa.me/5493571699006';
+
+const compatibleParts = [
+    { urvigCode: 'TAE47A', micronCode: '104134428', description: 'Corona dentada' },
+    { urvigCode: 'TAE203B', micronCode: '104334016', description: 'Eje principal toma de fuerza' },
+    { urvigCode: 'TAA13A', micronCode: '24300209', description: 'Tuerca de eje principal' },
+    { urvigCode: 'TAA10A', micronCode: '103934011', description: 'Conjunto collar de bronce' },
+    { urvigCode: 'TAE45A', micronCode: '104134007', description: 'Plato con cubo' },
+    { urvigCode: 'TAAD3A', micronCode: '104134005', description: 'Plato liso desplazable' },
+    { urvigCode: 'TAE46A', micronCode: '104134026', description: 'Plato liso separador' },
+    { urvigCode: 'TBA06A', micronCode: '104134010', description: 'Horquilla de accionamiento' },
+    { urvigCode: 'TAA09A', micronCode: '104134013', description: 'Buje accionamiento leva — pata araña' },
+    { urvigCode: 'TAA12A', micronCode: '104334118', description: 'Leva aprieta disco' },
+    { urvigCode: 'TAA11A', micronCode: '102324120', description: 'Brazo de articulación' },
+    { urvigCode: 'TAE44A', micronCode: '98342044506', description: 'Resorte de plato' },
+    { urvigCode: 'TAA14B', micronCode: '104334119', description: 'Perno de leva sin cabeza' },
+    { urvigCode: 'TAA15B', micronCode: '104334021', description: 'Perno brazo de articulación sin cabeza' }
+] as const;
+
+const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
+    const message = [
+        'Hola ANGO, quiero consultar disponibilidad de este repuesto compatible.',
+        '',
+        `Repuesto: ${part.description}`,
+        `Código Urvig: ${part.urvigCode}`,
+        `Equivalente Micron: ${part.micronCode}`,
+        'Cantidad:'
+    ].join('\n');
+
+    return `${whatsappBase}?text=${encodeURIComponent(message)}`;
+};
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -132,27 +162,57 @@ const whatsappBase = 'https://wa.me/5493571699006';
             </div>
         </section>
 
-        <section class="compat-parts section">
+        <section class="compat-catalog section" id="catalogo-repuestos">
             <div class="container">
-                <div class="compat-parts-heading" data-reveal>
-                    <span class="section-kicker">Revisión técnica</span>
-                    <h2 class="section-title">Consultá por tu repuesto</h2>
-                    <p class="section-subtitle">Podemos revisar componentes, conjuntos y piezas de desgaste. La compatibilidad se confirma antes de cotizar.</p>
+                <div class="compat-catalog-heading" data-reveal>
+                    <span class="section-kicker">Catálogo técnico</span>
+                    <h2 class="section-title">Repuestos compatibles disponibles</h2>
+                    <p class="section-subtitle">Consultá por código Urvig, equivalencia Micron o descripción del componente. Confirmamos compatibilidad y disponibilidad según equipo, modelo y aplicación.</p>
                 </div>
 
-                <div class="compat-parts-grid">
-                    <figure data-reveal style="--i: 1">
-                        <img src="/platoconcono_urvig.jpeg" alt="Plato industrial para consulta de compatibilidad" loading="lazy" decoding="async">
-                        <figcaption><span>01</span> Platos y conjuntos</figcaption>
-                    </figure>
-                    <figure data-reveal style="--i: 2">
-                        <img src="/platodesplazable_urvig.jpeg" alt="Plato desplazable para consulta técnica" loading="lazy" decoding="async">
-                        <figcaption><span>02</span> Componentes móviles</figcaption>
-                    </figure>
-                    <figure data-reveal style="--i: 3">
-                        <img src="/portacollar_urvig.jpeg" alt="Portacollar para verificación por modelo" loading="lazy" decoding="async">
-                        <figcaption><span>03</span> Portacollar y accionamiento</figcaption>
-                    </figure>
+                <div class="compat-catalog-shell" data-reveal style="--i: 1">
+                    <div class="compat-catalog-meta" aria-hidden="true">
+                        <span>ANGO / COMPATIBILIDAD INDUSTRIAL</span>
+                        <span>{compatibleParts.length.toString().padStart(2, '0')} REFERENCIAS</span>
+                    </div>
+
+                    <table class="compat-catalog-table">
+                        <caption class="sr-only">Listado de repuestos compatibles con códigos Urvig y equivalencias Micron</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Código Urvig</th>
+                                <th scope="col">Equiv. Micron</th>
+                                <th scope="col">Repuesto</th>
+                                <th scope="col"><span class="sr-only">Acción</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {compatibleParts.map((part) => (
+                                <tr>
+                                    <td data-label="Código Urvig"><code class="compat-code compat-code-primary">{part.urvigCode}</code></td>
+                                    <td data-label="Equiv. Micron"><code class="compat-code">{part.micronCode}</code></td>
+                                    <td data-label="Repuesto" class="compat-part-name">{part.description}</td>
+                                    <td class="compat-part-action">
+                                        <a
+                                            class="compat-part-link"
+                                            href={getPartWhatsAppUrl(part)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            data-event="part_consulted"
+                                            data-location="parts_catalog"
+                                            data-part={part.description}
+                                            data-urvig-code={part.urvigCode}
+                                            data-micron-code={part.micronCode}
+                                            aria-label={`Consultar ${part.description}, código Urvig ${part.urvigCode}`}
+                                        >
+                                            Consultar este repuesto
+                                            <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -183,6 +243,10 @@ const whatsappBase = 'https://wa.me/5493571699006';
                             <option value="Micron">Micron</option>
                             <option value="Otro">Otro</option>
                         </select>
+                    </div>
+                    <div class="compat-field">
+                        <label for="part-code">Código Urvig o Micron <span>(opcional)</span></label>
+                        <input id="part-code" name="partCode" type="text" placeholder="Ej: código Urvig o Micron">
                     </div>
                     <div class="compat-field">
                         <label for="model">Modelo o placa</label>
@@ -229,7 +293,7 @@ const whatsappBase = 'https://wa.me/5493571699006';
                         href={`${whatsappBase}?text=${encodeURIComponent('Hola ANGO, quiero consultar compatibilidad y disponibilidad de un repuesto.')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                    ><i class="ph-bold ph-whatsapp-logo"></i> Pedir precio por WhatsApp</a>
+                    ><i class="ph-bold ph-whatsapp-logo"></i> Consultar repuesto y disponibilidad</a>
                     <a id="cta-phone" class="btn btn-outline js-track-phone" data-event="phone_clicked" href="tel:+5493571699006"><i class="ph-bold ph-phone"></i> Llamar a ANGO</a>
                     <a id="cta-email" class="compat-email js-track-email" data-event="email_clicked" href="mailto:contacto@angometalurgica.com.ar">contacto@angometalurgica.com.ar</a>
                 </div>
@@ -238,7 +302,7 @@ const whatsappBase = 'https://wa.me/5493571699006';
 
         <section class="compat-disclaimer">
             <div class="container">
-                <p><strong>Aclaración de compatibilidad:</strong> Los nombres Urvig y Micron se utilizan únicamente para identificar compatibilidad. ANGO fabrica y comercializa soluciones compatibles; no se presenta como representante oficial salvo indicación expresa.</p>
+                <p><strong>Aclaración de compatibilidad:</strong> Los nombres y códigos Urvig y Micron se utilizan únicamente para identificar compatibilidad. ANGO fabrica y comercializa soluciones compatibles. La equivalencia debe verificarse según equipo, modelo y aplicación.</p>
             </div>
         </section>
     </main>
@@ -268,6 +332,9 @@ const whatsappBase = 'https://wa.me/5493571699006';
                 detail: {
                     event: element.dataset.event,
                     location: element.dataset.location ?? 'not_set',
+                    part: element.dataset.part ?? null,
+                    urvig_code: element.dataset.urvigCode ?? null,
+                    micron_code: element.dataset.micronCode ?? null,
                     utm_source: utmSource,
                     utm_campaign: utmCampaign
                 }
@@ -276,6 +343,25 @@ const whatsappBase = 'https://wa.me/5493571699006';
     });
 
     const form = document.querySelector<HTMLFormElement>('#compatibility-form');
+    const mobileCta = document.querySelector<HTMLElement>('#cta-whatsapp-mobile');
+    const suppressionSections = document.querySelectorAll<HTMLElement>('#catalogo-repuestos, #cotizar');
+
+    if (mobileCta && suppressionSections.length > 0) {
+        const visibleSections = new Set<Element>();
+        const ctaObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    visibleSections.add(entry.target);
+                } else {
+                    visibleSections.delete(entry.target);
+                }
+            });
+
+            mobileCta.classList.toggle('is-suppressed', visibleSections.size > 0);
+        }, { threshold: 0.01 });
+
+        suppressionSections.forEach((section) => ctaObserver.observe(section));
+    }
 
     form?.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -285,6 +371,7 @@ const whatsappBase = 'https://wa.me/5493571699006';
             'Hola ANGO, necesito cotizar un repuesto compatible.',
             '',
             `Marca: ${data.get('brand') ?? ''}`,
+            `Código de repuesto: ${data.get('partCode') || 'No informado'}`,
             `Modelo o placa: ${data.get('model') ?? ''}`,
             `Cantidad: ${data.get('quantity') ?? ''}`,
             `Localidad / provincia: ${data.get('location') ?? ''}`,
@@ -588,29 +675,114 @@ const whatsappBase = 'https://wa.me/5493571699006';
         text-transform: uppercase;
     }
 
-    .compat-parts { background: var(--color-surface-soft); }
-    .compat-parts-heading { margin-bottom: 40px; max-width: 850px; }
-    .compat-parts-heading .section-title { margin-bottom: 20px; }
-    .compat-parts-grid { display: grid; gap: 18px; }
+    .sr-only {
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
 
-    .compat-parts-grid figure {
+    .compat-catalog { background: var(--color-surface-soft); }
+    .compat-catalog-heading { margin-bottom: 40px; max-width: 920px; }
+    .compat-catalog-heading .section-title { margin-bottom: 20px; }
+
+    .compat-catalog-shell {
         background: #fff;
         border: 1px solid var(--color-border);
-        margin: 0;
+        border-top: 4px solid var(--color-yellow);
+        box-shadow: 0 24px 55px rgba(3, 26, 47, .08);
         overflow: hidden;
     }
 
-    .compat-parts-grid img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+    .compat-catalog-meta {
+        align-items: center;
+        background: var(--color-dark);
+        color: rgba(255, 255, 255, .66);
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        justify-content: space-between;
+        letter-spacing: .08em;
+        padding: 14px 20px;
+    }
 
-    .compat-parts-grid figcaption {
-        color: var(--color-dark);
-        font-size: 13px;
-        font-weight: 900;
-        padding: 18px;
+    .compat-catalog-meta span:last-child { color: var(--color-yellow); }
+
+    .compat-catalog-table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .compat-catalog-table th {
+        background: #0b2f4f;
+        color: rgba(255, 255, 255, .78);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .07em;
+        padding: 14px 18px;
+        text-align: left;
         text-transform: uppercase;
     }
 
-    .compat-parts-grid figcaption span { color: var(--color-primary); font-family: var(--font-mono); margin-right: 10px; }
+    .compat-catalog-table th:nth-child(1) { width: 16%; }
+    .compat-catalog-table th:nth-child(2) { width: 18%; }
+    .compat-catalog-table th:nth-child(3) { width: 36%; }
+    .compat-catalog-table th:nth-child(4) { width: 30%; }
+
+    .compat-catalog-table td {
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-dark);
+        padding: 16px 18px;
+        transition: background-color .2s ease;
+        vertical-align: middle;
+    }
+
+    .compat-catalog-table tr:last-child td { border-bottom: 0; }
+    .compat-catalog-table tbody tr:hover td { background: rgba(0, 87, 184, .045); }
+
+    .compat-code {
+        background: transparent;
+        color: #334155;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+        padding: 0;
+    }
+
+    .compat-code-primary {
+        color: var(--color-primary);
+        font-size: 14px;
+    }
+
+    .compat-part-name {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .compat-part-action { text-align: right; }
+
+    .compat-part-link {
+        align-items: center;
+        color: var(--color-primary);
+        display: inline-flex;
+        font-size: 11px;
+        font-weight: 900;
+        gap: 7px;
+        justify-content: flex-end;
+        letter-spacing: .02em;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .compat-part-link:hover { color: var(--color-dark); }
+    .compat-part-link i { flex: 0 0 auto; }
 
     .compat-quote {
         background:
@@ -670,6 +842,11 @@ const whatsappBase = 'https://wa.me/5493571699006';
         text-transform: uppercase;
     }
 
+    .compat-field label span {
+        color: rgba(255, 255, 255, .42);
+        font-weight: 500;
+    }
+
     .compat-field input,
     .compat-field select,
     .compat-field textarea {
@@ -715,8 +892,11 @@ const whatsappBase = 'https://wa.me/5493571699006';
         right: 0;
         text-decoration: none;
         text-transform: uppercase;
+        transition: transform .25s ease;
         z-index: 120;
     }
+
+    .compat-mobile-cta.is-suppressed { transform: translateY(105%); }
 
     .compat-mobile-cta i { font-size: 22px; }
 
@@ -729,7 +909,6 @@ const whatsappBase = 'https://wa.me/5493571699006';
         .compat-section-heading { align-items: end; grid-template-columns: .9fr 1.1fr; }
         .compat-line-grid { grid-template-columns: repeat(2, 1fr); }
         .compat-line-card { grid-template-rows: 320px 1fr; }
-        .compat-parts-grid { grid-template-columns: repeat(3, 1fr); }
         .compat-form { grid-template-columns: repeat(2, 1fr); }
         .compat-field-wide, .compat-submit, .compat-form-note { grid-column: 1 / -1; }
         .compat-contact-grid { grid-template-columns: 1.1fr .9fr; }
@@ -752,11 +931,57 @@ const whatsappBase = 'https://wa.me/5493571699006';
         .compat-callout-model { right: 1%; top: 24%; }
         .compat-callout-photo { bottom: 18%; left: 1%; }
         .compat-card-image { min-height: 250px; }
+        .compat-catalog-shell { background: transparent; border: 0; box-shadow: none; overflow: visible; }
+        .compat-catalog-meta { padding: 13px 16px; }
+        .compat-catalog-table,
+        .compat-catalog-table tbody,
+        .compat-catalog-table tr,
+        .compat-catalog-table td { display: block; width: 100%; }
+        .compat-catalog-table thead { display: none; }
+        .compat-catalog-table tr {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-primary);
+            margin-top: 14px;
+            padding: 18px;
+        }
+        .compat-catalog-table td {
+            border: 0;
+            padding: 8px 0;
+            text-align: left;
+        }
+        .compat-catalog-table td[data-label]::before {
+            color: #64748b;
+            content: attr(data-label);
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .compat-part-name {
+            border-bottom: 1px solid var(--color-border) !important;
+            font-size: 15px;
+            margin-bottom: 8px;
+            padding-bottom: 15px !important;
+        }
+        .compat-part-name::before { color: var(--color-primary) !important; }
+        .compat-part-action { padding-top: 14px !important; }
+        .compat-part-link {
+            border: 1px solid var(--color-primary);
+            justify-content: center;
+            min-height: 46px;
+            padding: 11px 14px;
+            width: 100%;
+        }
         .compat-quote { padding: 68px 0; }
         .compat-contact-actions .btn { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .compat-card-image img { transition: none; }
+        .compat-card-image img,
+        .compat-mobile-cta { transition: none; }
     }
 </style>
