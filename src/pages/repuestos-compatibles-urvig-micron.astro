@@ -168,14 +168,13 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                 <div class="compat-quote-copy" data-reveal>
                     <span class="section-kicker light">Cotización técnica</span>
                     <h2>Qué necesitamos para cotizar</h2>
-                    <p>Completá los datos disponibles. Si no conocés el modelo, abrí WhatsApp después de enviar el formulario y adjuntá una foto.</p>
+                    <p>Completá los datos disponibles. Una vez que hablemos por WhatsApp vas a poder adjuntarnos fotos del repuesto o equipo.</p>
 
                     <ol class="compat-data-list">
                         <li><span>01</span> ¿Qué necesitás?</li>
                         <li><span>02</span> Marca del equipo</li>
                         <li><span>03</span> Modelo de embrague</li>
                         <li><span>04</span> Localidad y provincia</li>
-                        <li><span>05</span> Foto <small>(la adjuntás directamente en el chat de WhatsApp)</small></li>
                     </ol>
                 </div>
 
@@ -221,7 +220,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         <i class="ph-bold ph-whatsapp-logo"></i>
                         Enviar consulta por WhatsApp
                     </button>
-                    <p class="compat-form-note">Al continuar se abrirá WhatsApp con los datos cargados. Podrás adjuntar la foto antes de enviar.</p>
+                    <p class="compat-form-note">Al continuar se abrirá WhatsApp con los datos cargados.</p>
                 </form>
             </div>
         </section>
@@ -352,9 +351,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             `Marca: ${data.get('brand') ?? ''}`,
             `Modelo de embrague: ${data.get('model') ?? ''}`,
             `Localidad / provincia: ${data.get('location') ?? ''}`,
-            `Detalle: ${data.get('details') || 'Sin detalle adicional'}`,
-            '',
-            'Voy a adjuntar una foto para revisar compatibilidad.'
+            `Detalle: ${data.get('details') || 'Sin detalle adicional'}`
         ];
 
         if (utmSource || utmCampaign) {
