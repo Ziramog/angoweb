@@ -190,12 +190,34 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         </select>
                     </div>
                     <div class="compat-field">
-                        <label for="part-code">Código Urvig o Micron <span>(opcional)</span></label>
-                        <input id="part-code" name="partCode" type="text" placeholder="Ej: código Urvig o Micron">
+                        <label for="model">Modelo de embrague</label>
+                        <select id="model" name="model" required>
+                            <option value="">Seleccionar modelo...</option>
+                            <option value="11&quot; 1/2 Monodisco">11" 1/2 Monodisco</option>
+                            <option value="11&quot; 1/2 Doble Disco">11" 1/2 Doble Disco</option>
+                            <option value="14&quot; Doble Disco">14" Doble Disco</option>
+                            <option value="14&quot; Triple Disco">14" Triple Disco</option>
+                            <option value="No estoy seguro">No estoy seguro</option>
+                        </select>
                     </div>
                     <div class="compat-field">
-                        <label for="model">Modelo o placa</label>
-                        <input id="model" name="model" type="text" placeholder="Ej: modelo, serie o no lo conozco" required>
+                        <label for="part-code">Repuesto/s <span>(podés seleccionar varios)</span></label>
+                        <select id="part-code" name="partCode" multiple size="6" required>
+                            <option value="Tapa porta perno (TAE02)">Tapa porta perno (TAE02)</option>
+                            <option value="Aro estriado (TAE04)">Aro estriado (TAE04)</option>
+                            <option value="Tuerca central de ajuste (TAE05)">Tuerca central de ajuste (TAE05)</option>
+                            <option value="Tornillo allen para tuerca central (TAE05/1)">Tornillo allen para tuerca central (TAE05/1)</option>
+                            <option value="Rodamiento (TAA06)">Rodamiento (TAA06)</option>
+                            <option value="Maza centro disco (TAE07)">Maza centro disco (TAE07)</option>
+                            <option value="Plaqueta de regulación (TAE08)">Plaqueta de regulación (TAE08)</option>
+                            <option value="Buje accionamiento leva (TAA09A)">Buje accionamiento leva (TAA09A)</option>
+                            <option value="Leva aprieta disco (TAA12A)">Leva aprieta disco (TAA12A)</option>
+                            <option value="Brazo de articulación (TAA11A)">Brazo de articulación (TAA11A)</option>
+                            <option value="Resorte de plato (TAE44A)">Resorte de plato (TAE44A)</option>
+                            <option value="Perno de leva (TAA14B)">Perno de leva (TAA14B)</option>
+                            <option value="Perno brazo articulación (TAA15B)">Perno brazo articulación (TAA15B)</option>
+                            <option value="Juego de ferodos (TAA18A)">Juego de ferodos (TAA18A)</option>
+                        </select>
                     </div>
                     <div class="compat-field">
                         <label for="quantity">Cantidad</label>
@@ -345,8 +367,8 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             'Hola ANGO, necesito cotizar un repuesto compatible.',
             '',
             `Marca: ${data.get('brand') ?? ''}`,
-            `Código de repuesto: ${data.get('partCode') || 'No informado'}`,
-            `Modelo o placa: ${data.get('model') ?? ''}`,
+            `Modelo de embrague: ${data.get('model') ?? ''}`,
+            `Repuesto/s: ${data.getAll('partCode').join(', ') || 'No informado'}`,
             `Cantidad: ${data.get('quantity') ?? ''}`,
             `Localidad / provincia: ${data.get('location') ?? ''}`,
             `Contacto: ${data.get('contact') ?? ''}`,
