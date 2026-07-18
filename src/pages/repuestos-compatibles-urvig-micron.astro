@@ -171,11 +171,11 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                     <p>Completá los datos disponibles. Si no conocés el modelo, abrí WhatsApp después de enviar el formulario y adjuntá una foto.</p>
 
                     <ol class="compat-data-list">
-                        <li><span>01</span> Marca del equipo</li>
-                        <li><span>02</span> Modelo o placa</li>
-                        <li><span>03</span> Foto del repuesto o embrague</li>
-                        <li><span>04</span> Cantidad necesaria</li>
-                        <li><span>05</span> Localidad y provincia</li>
+                        <li><span>01</span> ¿Qué necesitás?</li>
+                        <li><span>02</span> Marca del equipo</li>
+                        <li><span>03</span> Modelo de embrague</li>
+                        <li><span>04</span> Localidad y provincia</li>
+                        <li><span>05</span> Foto para WhatsApp</li>
                     </ol>
                 </div>
 
@@ -212,10 +212,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         <label for="location">Localidad / provincia</label>
                         <input id="location" name="location" type="text" placeholder="Ej: Río Cuarto, Córdoba" required>
                     </div>
-                    <div class="compat-field compat-field-wide">
-                        <label for="contact">Teléfono o WhatsApp</label>
-                        <input id="contact" name="contact" type="tel" placeholder="Código de área + número" required>
-                    </div>
+
                     <div class="compat-field compat-field-wide">
                         <label for="details">Detalle adicional</label>
                         <textarea id="details" name="details" rows="3" placeholder="Aplicación, medidas o descripción del repuesto"></textarea>
@@ -355,7 +352,6 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             `Marca: ${data.get('brand') ?? ''}`,
             `Modelo de embrague: ${data.get('model') ?? ''}`,
             `Localidad / provincia: ${data.get('location') ?? ''}`,
-            `Contacto: ${data.get('contact') ?? ''}`,
             `Detalle: ${data.get('details') || 'Sin detalle adicional'}`,
             '',
             'Voy a adjuntar una foto para revisar compatibilidad.'
