@@ -84,9 +84,9 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 
         <section class="compat-band" aria-label="Beneficios">
             <div class="container compat-band-grid">
-                <div><i class="ph-fill ph-truck" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Envíos a todo el país</strong></div>
-                <div><i class="ph-fill ph-shield-check" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Calidad garantizada</strong></div>
-                <div><i class="ph-fill ph-clock" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Entrega inmediata</strong></div>
+                <div><i class="ph-fill ph-truck"></i><strong>Envíos a todo el país</strong></div>
+                <div><i class="ph-fill ph-shield-check"></i><strong>Calidad garantizada</strong></div>
+                <div><i class="ph-fill ph-clock"></i><strong>Entrega inmediata</strong></div>
             </div>
         </section>
 
@@ -544,30 +544,46 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 
     .compat-band-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding-bottom: 24px;
-        padding-top: 24px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding-bottom: 32px;
+        padding-top: 32px;
     }
 
     .compat-band-grid div {
         align-items: center;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
         gap: 8px;
-        padding: 16px 12px;
+        padding: 16px 6px;
         text-align: center;
+        transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     }
 
-    .compat-band-grid div:last-child {
-        grid-column: 1 / -1;
+    .compat-band-grid div:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+        border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .compat-band-grid span { color: var(--color-yellow); font-family: var(--font-mono); font-size: 11px; }
-    .compat-band-grid strong { color: #fff; font-size: 11px; text-transform: uppercase; line-height: 1.3; }
+    .compat-band-grid i {
+        color: var(--color-yellow);
+        font-size: 26px;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        margin-bottom: 4px;
+    }
+
+    .compat-band-grid strong { 
+        color: #fff; 
+        font-size: 10px; 
+        text-transform: uppercase; 
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+    }
 
 
     .sr-only {
@@ -915,9 +931,10 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         .compat-hero-copy { grid-area: copy; align-self: end; }
         .compat-hero-actions { grid-area: actions; margin-bottom: 30px; align-self: start; }
         .compat-hero-visual { grid-area: visual; }
-        .compat-band-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .compat-band-grid div { flex-direction: row; justify-content: center; padding: 20px 24px; gap: 14px; text-align: left; }
-        .compat-band-grid div:last-child { grid-column: auto; }
+        .compat-band-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; padding-bottom: 40px; padding-top: 40px; }
+        .compat-band-grid div { flex-direction: row; justify-content: center; padding: 24px 20px; gap: 16px; text-align: left; }
+        .compat-band-grid i { font-size: 32px; margin-bottom: 0; }
+        .compat-band-grid strong { font-size: 13px; line-height: 1.4; }
         .compat-form { grid-template-columns: repeat(2, 1fr); }
         .compat-field-wide, .compat-submit, .compat-form-note { grid-column: 1 / -1; }
         .compat-contact-grid { grid-template-columns: 1.1fr .9fr; }
