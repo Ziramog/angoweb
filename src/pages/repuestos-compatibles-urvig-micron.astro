@@ -86,6 +86,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             <div class="container compat-band-grid">
                 <div><i class="ph-fill ph-truck" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Envíos a todo el país</strong></div>
                 <div><i class="ph-fill ph-shield-check" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Calidad garantizada</strong></div>
+                <div><i class="ph-fill ph-clock" style="color: var(--color-yellow); font-size: 24px;"></i><strong>Entrega inmediata</strong></div>
             </div>
         </section>
 
@@ -545,17 +546,24 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-        padding-bottom: 22px;
-        padding-top: 22px;
+        padding-bottom: 24px;
+        padding-top: 24px;
     }
 
     .compat-band-grid div {
         align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
         gap: 8px;
-        padding: 10px 0;
+        padding: 16px 12px;
         text-align: center;
+    }
+
+    .compat-band-grid div:last-child {
+        grid-column: 1 / -1;
     }
 
     .compat-band-grid span { color: var(--color-yellow); font-family: var(--font-mono); font-size: 11px; }
@@ -907,9 +915,9 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         .compat-hero-copy { grid-area: copy; align-self: end; }
         .compat-hero-actions { grid-area: actions; margin-bottom: 30px; align-self: start; }
         .compat-hero-visual { grid-area: visual; }
-        .compat-band-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
-        .compat-band-grid div { flex-direction: row; border-right: 1px solid rgba(255,255,255,.12); justify-content: center; padding: 8px 20px; gap: 14px; text-align: left; }
-        .compat-band-grid div:last-child { border-right: 0; }
+        .compat-band-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .compat-band-grid div { flex-direction: row; justify-content: center; padding: 20px 24px; gap: 14px; text-align: left; }
+        .compat-band-grid div:last-child { grid-column: auto; }
         .compat-form { grid-template-columns: repeat(2, 1fr); }
         .compat-field-wide, .compat-submit, .compat-form-note { grid-column: 1 / -1; }
         .compat-contact-grid { grid-template-columns: 1.1fr .9fr; }
