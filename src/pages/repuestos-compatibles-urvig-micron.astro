@@ -199,13 +199,26 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                             <option value="No estoy seguro">No estoy seguro</option>
                         </select>
                     </div>
-                    <div class="compat-field">
-                        <label for="interest">¿Qué necesitás?</label>
-                        <select id="interest" name="interest" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="Servicio de reacondicionamiento">Servicio de reacondicionamiento</option>
-                            <option value="Comprar repuestos">Comprar repuestos</option>
-                        </select>
+                    <div class="compat-field compat-field-wide">
+                        <label>¿Qué necesitás?</label>
+                        <div class="interest-cards">
+                            <label class="interest-card">
+                                <input type="radio" name="interest" value="Servicio de reacondicionamiento" required>
+                                <span class="card-content">
+                                    <i class="ph-bold ph-wrench"></i>
+                                    <strong>Servicio de reacondicionamiento</strong>
+                                    <span>Reparación de embrague completo</span>
+                                </span>
+                            </label>
+                            <label class="interest-card">
+                                <input type="radio" name="interest" value="Comprar repuestos" required>
+                                <span class="card-content">
+                                    <i class="ph-bold ph-package"></i>
+                                    <strong>Comprar repuestos</strong>
+                                    <span>Piezas sueltas para recambio</span>
+                                </span>
+                            </label>
+                        </div>
                     </div>
                     <div class="compat-field">
                         <label for="location">Localidad / provincia</label>
@@ -900,6 +913,75 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
     .compat-field select option { background: var(--color-dark); }
     .compat-field input::placeholder, .compat-field textarea::placeholder { color: rgba(255,255,255,.35); }
     .compat-field input:focus, .compat-field select:focus, .compat-field textarea:focus { border-color: var(--color-yellow); outline: 2px solid rgba(199,154,45,.2); }
+    
+    .interest-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 4px;
+    }
+
+    .interest-card {
+        cursor: pointer;
+        position: relative;
+    }
+
+    .interest-card input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .interest-card .card-content {
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.16);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 16px;
+        text-align: left;
+        transition: all 0.2s ease;
+        height: 100%;
+    }
+
+    .interest-card input[type="radio"]:checked + .card-content {
+        background: rgba(199,154,45,.15);
+        border-color: var(--color-yellow);
+        box-shadow: inset 0 0 0 1px var(--color-yellow);
+    }
+
+    .interest-card input[type="radio"]:focus-visible + .card-content {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+    }
+
+    .interest-card i {
+        color: var(--color-yellow);
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+
+    .interest-card strong {
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .interest-card .card-content span {
+        color: rgba(255,255,255,.6);
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.4;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+    
+    @media (max-width: 600px) {
+        .interest-cards { grid-template-columns: 1fr; }
+    }
+
     .compat-submit { width: 100%; }
     .compat-form-note { color: rgba(255,255,255,.48); font-size: 11px; line-height: 1.5; }
 
