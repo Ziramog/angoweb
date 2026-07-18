@@ -20,7 +20,7 @@ const compatibleParts = [
     { urvigCode: 'TAA09A', micronCode: '104134013', description: 'Buje accionamiento leva — pata araña', image: '/portacollar_urvig.jpeg' },
     { urvigCode: 'TAA12A', micronCode: '104334118', description: 'Leva aprieta disco', image: null },
     { urvigCode: 'TAA11A', micronCode: '102324120', description: 'Brazo de articulación', image: null },
-    { urvigCode: 'TAE44A', micronCode: '98342044506', description: 'Resorte de plato', image: null },
+    { urvigCode: 'TAE44A', micronCode: '98342044506', description: 'Resorte de plato', image: '/resorte_plato.png' },
     { urvigCode: 'TAA14B', micronCode: '104334119', description: 'Perno de leva sin cabeza', image: null },
     { urvigCode: 'TAA15B', micronCode: '104334021', description: 'Perno brazo de articulación sin cabeza', image: null },
     { urvigCode: 'TAA18A', micronCode: 'N/A', description: 'Juego de ferodos', image: '/ferodos2.png' }
@@ -377,7 +377,8 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         '/platoconcono_urvig.jpeg',
         '/platodesplazable_urvig.jpeg',
         '/portacollar_urvig.jpeg',
-        '/ferodos2.png'
+        '/ferodos2.png',
+        '/resorte_plato.png'
     ];
     const rotatingImage = document.getElementById('hero-rotating-image') as HTMLImageElement;
     if (rotatingImage) {
