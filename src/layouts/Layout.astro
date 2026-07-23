@@ -18,6 +18,8 @@ const {
   description = 'Tomas de fuerza con embrague para transmisión de potencia industrial.',
   canonical
 } = Astro.props;
+
+const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || 'G-JX8JKF9ELH';
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -31,16 +33,26 @@ const {
     <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
     {canonical && <meta property="og:url" content={canonical} />}
+    {ga4MeasurementId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>}
+    {ga4MeasurementId && (
+        <script is:inline define:vars={{ ga4MeasurementId }}>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function gtag(){window.dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', ga4MeasurementId);
+        </script>
+    )}
     <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
     <slot />
     
-    <a href="https://wa.me/5493571699006" class="wa-fab" id="wa-fab" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/5493571699006" class="wa-fab" id="wa-fab" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener noreferrer" data-event="whatsapp_clicked" data-location="global_fab" data-product-line="auto">
         <i class="ph-fill ph-whatsapp-logo"></i>
     </a>
     
     <script>
+        import '../scripts/analytics.js';
         import '../scripts/script.js';
     </script>
 </body>

@@ -65,6 +65,11 @@
   color: var(--color-yellow);
 }
 
+.footer p a {
+  display: inline;
+  margin-bottom: 0;
+}
+
 .footer p i {
   color: var(--color-yellow);
   margin-right: 8px;

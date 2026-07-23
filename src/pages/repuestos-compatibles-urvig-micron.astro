@@ -66,6 +66,8 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         class="btn btn-primary js-track-whatsapp"
                         data-event="whatsapp_clicked"
                         data-location="hero"
+                        data-product-line="urvig_micron"
+                        data-ad-group-intent="urvig_micron"
                         href={`${whatsappBase}?text=${encodeURIComponent('Hola ANGO, necesito solicitar cotización de un repuesto compatible para una toma de fuerza Urvig/Micron. Puedo enviar modelo, medidas o foto.')}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -73,7 +75,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         <i class="ph-bold ph-whatsapp-logo"></i>
                         Solicitar cotización
                     </a>
-                    <a class="btn btn-outline" href="#cotizar">
+                    <a id="cta-quote-form-start" class="btn btn-outline" href="#cotizar" data-event="quote_form_started" data-location="hero_secondary" data-product-line="urvig_micron" data-ad-group-intent="urvig_micron">
                         <i class="ph-bold ph-camera"></i>
                         Enviar modelo o foto
                     </a>
@@ -145,6 +147,8 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                                             rel="noopener noreferrer"
                                             data-event="part_consulted"
                                             data-location="parts_catalog"
+                                            data-product-line="urvig_micron"
+                                            data-ad-group-intent="urvig_micron"
                                             data-part={part.description}
                                             data-urvig-code={part.urvigCode}
                                             data-micron-code={part.micronCode}
@@ -178,7 +182,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                     </ol>
                 </div>
 
-                <form class="compat-form" id="compatibility-form" data-reveal style="--i: 1">
+                <form class="compat-form" id="compatibility-form" data-reveal data-product-line="urvig_micron" style="--i: 1">
                     <div class="compat-field">
                         <label for="brand">Marca del equipo</label>
                         <select id="brand" name="brand" required>
@@ -229,7 +233,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         <label for="details">Detalle adicional</label>
                         <textarea id="details" name="details" rows="3" placeholder="Aplicación, medidas o descripción del repuesto"></textarea>
                     </div>
-                    <button id="lead-form-submit" data-event="lead_form_submitted" class="btn btn-gold compat-submit" type="submit">
+                    <button id="lead-form-submit" data-track-click="false" class="btn btn-gold compat-submit" type="submit">
                         <i class="ph-bold ph-whatsapp-logo"></i>
                         Enviar consulta por WhatsApp
                     </button>
@@ -251,12 +255,14 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
                         class="btn btn-primary js-track-whatsapp"
                         data-event="whatsapp_clicked"
                         data-location="final"
+                        data-product-line="urvig_micron"
+                        data-ad-group-intent="urvig_micron"
                         href={`${whatsappBase}?text=${encodeURIComponent('Hola ANGO, quiero solicitar cotización y disponibilidad de un repuesto compatible para una toma de fuerza industrial.')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     ><i class="ph-bold ph-whatsapp-logo"></i> Consultar repuesto y disponibilidad</a>
-                    <a id="cta-phone" class="btn btn-outline js-track-phone" data-event="phone_clicked" href="tel:+5493571699006"><i class="ph-bold ph-phone"></i> Llamar a ANGO</a>
-                    <a id="cta-email" class="compat-email js-track-email" data-event="email_clicked" href="mailto:contacto@angometalurgica.com.ar">contacto@angometalurgica.com.ar</a>
+                    <a id="cta-phone" class="btn btn-outline js-track-phone" data-event="phone_clicked" data-location="final_phone" data-product-line="urvig_micron" href="tel:+5493571699006"><i class="ph-bold ph-phone"></i> Llamar a ANGO</a>
+                    <a id="cta-email" class="compat-email js-track-email" data-event="email_clicked" data-location="final_email" data-product-line="urvig_micron" href="mailto:contacto@angometalurgica.com.ar">contacto@angometalurgica.com.ar</a>
                 </div>
             </div>
         </section>
@@ -273,6 +279,8 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         class="compat-mobile-cta js-track-whatsapp"
         data-event="whatsapp_clicked"
         data-location="mobile_sticky"
+        data-product-line="urvig_micron"
+        data-ad-group-intent="urvig_micron"
         href={`${whatsappBase}?text=${encodeURIComponent('Hola ANGO, necesito solicitar cotización de un repuesto compatible para una toma de fuerza Urvig/Micron.')}`}
         target="_blank"
         rel="noopener noreferrer"
@@ -289,26 +297,9 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 </Layout>
 
 <script>
-    const conversionElements = document.querySelectorAll<HTMLElement>('[data-event]');
     const searchParams = new URLSearchParams(window.location.search);
     const utmSource = searchParams.get('utm_source');
     const utmCampaign = searchParams.get('utm_campaign');
-
-    conversionElements.forEach((element) => {
-        element.addEventListener('click', () => {
-            window.dispatchEvent(new CustomEvent('ango:conversion-intent', {
-                detail: {
-                    event: element.dataset.event,
-                    location: element.dataset.location ?? 'not_set',
-                    part: element.dataset.part ?? null,
-                    urvig_code: element.dataset.urvigCode ?? null,
-                    micron_code: element.dataset.micronCode ?? null,
-                    utm_source: utmSource,
-                    utm_campaign: utmCampaign
-                }
-            }));
-        });
-    });
 
     const form = document.querySelector<HTMLFormElement>('#compatibility-form');
     const mobileCta = document.querySelector<HTMLElement>('#cta-whatsapp-mobile');
@@ -353,6 +344,22 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
         updateMobileCta();
     }
 
+    if (form) {
+        let compatibilityFormStarted = false;
+        const trackCompatibilityFormStarted = () => {
+            if (compatibilityFormStarted) return;
+            compatibilityFormStarted = true;
+            window.angoTrackEvent?.('quote_form_started', {
+                form_name: 'urvig_micron_quote',
+                product_line: 'urvig_micron',
+                cta_location: 'compatibility_form'
+            });
+        };
+
+        form.addEventListener('input', trackCompatibilityFormStarted, { once: true });
+        form.addEventListener('change', trackCompatibilityFormStarted, { once: true });
+    }
+
     form?.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -371,14 +378,19 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             messageLines.push('', `Origen: ${utmSource ?? 'directo'} / ${utmCampaign ?? 'sin campaña'}`);
         }
 
-        window.dispatchEvent(new CustomEvent('ango:conversion-intent', {
-            detail: {
-                event: 'lead_form_submitted',
-                location: 'compatibility_form',
-                utm_source: utmSource,
-                utm_campaign: utmCampaign
-            }
-        }));
+        window.angoTrackEvent?.('lead_form_submitted', {
+            form_name: 'urvig_micron_quote',
+            product_line: 'urvig_micron',
+            cta_location: 'compatibility_form',
+            brand: String(data.get('brand') ?? ''),
+            model: String(data.get('model') ?? ''),
+            interest: String(data.get('interest') ?? '')
+        });
+        window.angoTrackEvent?.('whatsapp_clicked', {
+            form_name: 'urvig_micron_quote',
+            product_line: 'urvig_micron',
+            cta_location: 'compatibility_form_submit'
+        });
 
         window.open(`https://wa.me/5493571699006?text=${encodeURIComponent(messageLines.join('\n'))}`, '_blank', 'noopener,noreferrer');
     });

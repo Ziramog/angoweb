@@ -92,7 +92,7 @@ import Footer from '../components/Footer.astro';
                 </select>
               </div>
 
-              <button class="btn btn-primary calc-btn" id="btnCalc" onclick="calcular()">
+              <button class="btn btn-primary calc-btn" id="btnCalc" onclick="calcular()" data-track-click="false">
                 Calcular embrague
               </button>
             </div>
@@ -549,11 +549,27 @@ import Footer from '../components/Footer.astro';
       }
     };
 
+    let calculatorStarted = false;
+    function trackCalculatorStarted() {
+      if (calculatorStarted) return;
+      calculatorStarted = true;
+      window.angoTrackEvent?.('calculator_started', {
+        product_line: 'rg_pto',
+        cta_location: 'calculator_inputs'
+      });
+    }
+    ['sliderHP', 'inputHP', 'selectRPM', 'selectEquipo', 'selectArranque', 'selectAccionamiento'].forEach((id) => {
+      const control = document.getElementById(id);
+      control?.addEventListener('input', trackCalculatorStarted, { once: true });
+      control?.addEventListener('change', trackCalculatorStarted, { once: true });
+    });
+
     window.calcular = function() {
       const hp   = parseFloat(document.getElementById('inputHP').value)  || 0;
       const rpm  = parseFloat(document.getElementById('selectRPM').value) || 0;
       const equSel = document.getElementById('selectEquipo');
       const equOpt = equSel.options[equSel.selectedIndex];
+      const equipmentType = equOpt.value || equOpt.textContent?.trim() || 'unknown';
       const sf   = parseFloat(equOpt.dataset.sf || 0);
       const arranque = document.getElementById('selectArranque').value;
       const accion   = document.getElementById('selectAccionamiento').value;
@@ -588,6 +604,14 @@ import Footer from '../components/Footer.astro';
       const statusSub   = document.getElementById('statusSub');
 
       if (aptos.length === 0) {
+        window.angoTrackEvent?.('calculator_submitted', {
+          product_line: 'rg_pto',
+          cta_location: 'calculator_result',
+          hp,
+          rpm,
+          equipment_type: equipmentType,
+          status: 'no_standard_model'
+        });
         statusEl.className = 'result-status none';
         statusTitle.textContent = 'Torque fuera de rango standard';
         statusSub.textContent   = `Se requieren ${torqueReq.toFixed(1)} kg·m — consultar a Ingeniería`;
@@ -602,6 +626,15 @@ import Footer from '../components/Footer.astro';
       }
 
       const best = aptos[0];
+      window.angoTrackEvent?.('calculator_submitted', {
+        product_line: 'rg_pto',
+        cta_location: 'calculator_result',
+        hp,
+        rpm,
+        equipment_type: equipmentType,
+        selected_model: best.modelo,
+        status: 'standard_model_found'
+      });
       const margen = ((best.cap_kg_m - torqueReq) / best.cap_kg_m * 100).toFixed(1);
       const pct    = Math.min((torqueReq / best.cap_kg_m * 100), 100).toFixed(1);
 

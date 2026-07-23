@@ -40,7 +40,7 @@
             <h2 class="selection-title" data-reveal style="--i: 1">&iexcl;Calculemos tu toma de fuerza!</h2>
             <p class="selection-copy" data-reveal style="--i: 2">Para definir la toma de fuerza correcta, necesitamos que nos env&iacute;es estos 3 datos fundamentales:</p>
 
-            <form id="tomaFuerzaForm" class="selection-form" data-reveal style="--i: 3">
+            <form id="tomaFuerzaForm" class="selection-form" data-reveal data-product-line="rg_pto" style="--i: 3">
                 <div class="form-group">
                     <label for="motor">01. Motor y potencia (HP / CV)</label>
                     <input type="text" id="motor" placeholder="Ej: Scania 450 HP" required />
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="selection-actions">
-                    <button type="submit" class="btn btn-gold selection-cta"><i class="ph ph-paper-plane-tilt"></i> Enviar datos</button>
+                    <button id="rg-quote-submit" type="submit" class="btn btn-gold selection-cta" data-track-click="false"><i class="ph ph-paper-plane-tilt"></i> Enviar datos</button>
                     <div style="text-align: center; margin-top: 15px;">
                         <a href="/calculadora" class="selection-alt-link" style="color: rgba(255, 255, 255, 0.7); font-size: 14px; text-decoration: underline;">o usar calculadora</a>
                     </div>
@@ -84,6 +84,20 @@
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("tomaFuerzaForm");
         if (!form) return;
+
+        let quoteFormStarted = false;
+        const trackQuoteFormStarted = () => {
+            if (quoteFormStarted) return;
+            quoteFormStarted = true;
+            window.angoTrackEvent?.('quote_form_started', {
+                form_name: 'rg_pto_quote',
+                product_line: 'rg_pto',
+                cta_location: 'home_rg_quote_form'
+            });
+        };
+
+        form.addEventListener('input', trackQuoteFormStarted, { once: true });
+        form.addEventListener('change', trackQuoteFormStarted, { once: true });
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -100,16 +114,34 @@
                 mensaje += `\n- Comentarios: ${comentarios}`;
             }
             
+            window.angoTrackEvent?.('lead_form_submitted', {
+                form_name: 'rg_pto_quote',
+                product_line: 'rg_pto',
+                cta_location: 'home_rg_quote_form',
+                conversion_destination: isMobile ? 'whatsapp' : 'email',
+                equipment_use: uso
+            });
+
             if (isMobile) {
                 // WhatsApp
                 const telefono = "5493571699006";
                 const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+                window.angoTrackEvent?.('whatsapp_clicked', {
+                    form_name: 'rg_pto_quote',
+                    product_line: 'rg_pto',
+                    cta_location: 'home_rg_quote_form_submit'
+                });
                 window.open(url, '_blank');
             } else {
                 // Email
                 const email = "contacto@angometalurgica.com.ar";
                 const subject = "Consulta Técnica: Selección de Toma de Fuerza";
                 const body = encodeURIComponent(mensaje);
+                window.angoTrackEvent?.('email_clicked', {
+                    form_name: 'rg_pto_quote',
+                    product_line: 'rg_pto',
+                    cta_location: 'home_rg_quote_form_submit'
+                });
                 window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
             }
         });
