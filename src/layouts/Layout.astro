@@ -20,6 +20,8 @@ const {
 } = Astro.props;
 
 const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || 'G-JX8JKF9ELH';
+const googleAdsId = import.meta.env.PUBLIC_GOOGLE_ADS_ID || 'AW-18347194194';
+const googleTagId = ga4MeasurementId || googleAdsId;
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -33,13 +35,14 @@ const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || 'G-JX8JKF9
     <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
     {canonical && <meta property="og:url" content={canonical} />}
-    {ga4MeasurementId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>}
-    {ga4MeasurementId && (
-        <script is:inline define:vars={{ ga4MeasurementId }}>
+    {googleTagId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>}
+    {googleTagId && (
+        <script is:inline define:vars={{ ga4MeasurementId, googleAdsId }}>
             window.dataLayer = window.dataLayer || [];
             window.gtag = function gtag(){window.dataLayer.push(arguments);};
             window.gtag('js', new Date());
-            window.gtag('config', ga4MeasurementId);
+            if (ga4MeasurementId) window.gtag('config', ga4MeasurementId);
+            if (googleAdsId) window.gtag('config', googleAdsId);
         </script>
     )}
     <script defer src="https://unpkg.com/@phosphor-icons/web"></script>

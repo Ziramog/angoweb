@@ -1,16 +1,29 @@
 # ANGO — GA4 / Google Ads measurement
 
-## GA4 installation
+## Google tag installation
 
-The site loads GA4 directly through `gtag.js` from `src/layouts/Layout.astro`.
+The site loads Google tags directly through one `gtag.js` installation from `src/layouts/Layout.astro`.
 
-Measurement ID:
+GA4 Measurement ID:
 
 ```text
 G-JX8JKF9ELH
 ```
 
-The implementation also accepts `PUBLIC_GA4_MEASUREMENT_ID` at build time and falls back to the production ID above.
+Google Ads / AW ID:
+
+```text
+AW-18347194194
+```
+
+The implementation accepts `PUBLIC_GA4_MEASUREMENT_ID` and `PUBLIC_GOOGLE_ADS_ID` at build time and falls back to the production IDs above.
+
+No GTM container is installed in this repo. To avoid duplicate tag loading, the layout loads a single `gtag.js` script and calls both:
+
+```js
+gtag('config', 'G-JX8JKF9ELH');
+gtag('config', 'AW-18347194194');
+```
 
 ## Final Google Ads URLs
 
@@ -76,6 +89,8 @@ All events include:
 
 ## Google Ads conversion setup
 
+Current method: import existing GA4 events into Google Ads as conversions.
+
 Mark as primary conversions:
 
 ```text
@@ -95,6 +110,8 @@ quote_form_started
 ```
 
 Do not optimize the initial campaign for pageviews or scroll.
+
+Native Google Ads conversion tags are not configured because Google Ads conversion labels were not provided. Do not invent labels. If Antonio/ANGO creates native Ads conversion actions later, add the real labels before firing `send_to` events.
 
 ## Manual checks after deploy
 
