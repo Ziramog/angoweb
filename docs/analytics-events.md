@@ -13,7 +13,7 @@ G-JX8JKF9ELH
 Google Ads / AW ID:
 
 ```text
-AW-18347194194
+AW-18353350898
 ```
 
 The implementation accepts `PUBLIC_GA4_MEASUREMENT_ID` and `PUBLIC_GOOGLE_ADS_ID` at build time and falls back to the production IDs above.
@@ -22,7 +22,7 @@ No GTM container is installed in this repo. To avoid duplicate tag loading, the 
 
 ```js
 gtag('config', 'G-JX8JKF9ELH');
-gtag('config', 'AW-18347194194');
+gtag('config', 'AW-18353350898');
 ```
 
 ## Final Google Ads URLs
