@@ -111,7 +111,47 @@ quote_form_started
 
 Do not optimize the initial campaign for pageviews or scroll.
 
-Native Google Ads conversion tags are not configured because Google Ads conversion labels were not provided. Do not invent labels. If Antonio/ANGO creates native Ads conversion actions later, add the real labels before firing `send_to` events.
+## Native Google Ads conversion (lead form)
+
+The Ads conversion action "Envío de formulario para clientes potenciales" (source: Sitio web, manual event, account `685-746-1101`) fires natively from `angoTrackAdsConversion(opts)` in `src/scripts/analytics.js`. That helper is called by the two quote-form submits, right before the outbound navigation:
+
+- `src/components/Specs.astro` (home RG/PTO quote form, before `wa.me` / `mailto`)
+- `src/pages/repuestos-compatibles-urvig-micron.astro` (compatibility form, before `wa.me`)
+
+Label in use:
+
+```text
+AW-18353350898/hcnOCLy3ybEdEPLRx69E
+```
+
+The label is public data (it ships inside the HTML), so it is hardcoded as the fallback and can be overridden per build, exactly like the IDs in `Layout.astro`:
+
+```js
+const GOOGLE_ADS_CONVERSION_LABEL = import.meta.env.PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || 'hcnOCLy3ybEdEPLRx69E';
+```
+
+No env var is required for production: the default label is committed, so a plain `npm run build` + deploy already records conversions. Set `PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` only to point a build at a different conversion action. The helper is defensive (if the label were emptied it returns without calling `gtag`), and every valid submit sends:
+
+```js
+gtag('event', 'conversion', {
+  send_to: 'AW-18353350898/hcnOCLy3ybEdEPLRx69E',
+  value: 1,
+  currency: 'ARS',
+  transport_type: 'beacon'
+});
+```
+
+How to read or refresh the label in Google Ads:
+
+1. Google Ads > Objetivos > Conversiones > open the action "Envío de formulario para clientes potenciales".
+2. Open "Configuración de la etiqueta" (Tag setup) and choose "Instalar la etiqueta manualmente" (or "Usar la etiqueta de Google" and inspect the snippet).
+3. The snippet contains `send_to: 'AW-18353350898/hcnOCLy3ybEdEPLRx69E'`. Copy only the part after the slash as the label. The label is unique per conversion action: never reuse or invent one.
+
+Why `transport_type: 'beacon'`: both submits leave the page right after firing (mobile uses `window.open` to `wa.me`, desktop assigns `location.href` to a `mailto:`). A regular `image`/`xhr` hit can be cancelled by that navigation; `beacon` uses `navigator.sendBeacon`, which survives the unload, so the conversion is not lost. The helper also accepts an optional `event_callback` (plus `event_timeout`, default 800 ms) and forwards it to `gtag`.
+
+Do not add GTM or a second gtag.js for this: the existing `gtag('config', 'AW-18353350898')` in `Layout.astro` stays as is, and the conversion event rides on the same tag.
+
+
 
 ## Manual checks after deploy
 

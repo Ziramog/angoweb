@@ -122,6 +122,10 @@
                 equipment_use: uso
             });
 
+            // Native Google Ads conversion (AW-18353350898/hcnOCLy3ybEdEPLRx69E).
+            // Fires before the wa.me / mailto navigation; transport_type=beacon is set inside the helper.
+            window.angoTrackAdsConversion?.();
+
             if (isMobile) {
                 // WhatsApp
                 const telefono = "5493571699006";

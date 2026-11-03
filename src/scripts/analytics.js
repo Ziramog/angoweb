@@ -70,6 +70,49 @@ function sendAnalyticsEvent(eventName, eventParams = {}) {
 window.angoTrackEvent = sendAnalyticsEvent;
 window.angoInferProductLine = inferProductLine;
 
+// --- Google Ads native conversion -------------------------------------------
+// Conversion action: "Envío de formulario para clientes potenciales" (Sitio web, evento manual).
+// Google Ads account 685-746-1101, tag AW-18353350898.
+// Label obtained from the Google Ads UI (Objetivos > Conversiones > Configuración de la etiqueta).
+// It is public data (it ships inside the HTML), so it is the hardcoded default and can be
+// overridden per build with PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, same pattern as the IDs in Layout.astro.
+const GOOGLE_ADS_CONVERSION_ID = 'AW-18353350898'; // same tag loaded in Layout.astro
+const GOOGLE_ADS_CONVERSION_LABEL = 'hcnOCLy3ybEdEPLRx69E';
+
+function resolveAdsConversionLabel(override) {
+    const raw = normalizeValue(override)
+        || normalizeValue(import.meta.env.PUBLIC_GOOGLE_ADS_CONVERSION_LABEL)
+        || GOOGLE_ADS_CONVERSION_LABEL;
+    if (!raw) return undefined;
+    // Accept either a bare label ("AbC-D_efGh") or a full send_to ("AW-18353350898/AbC-D_efGh").
+    const label = String(raw).trim().split('/').pop();
+    return label || undefined;
+}
+
+function angoTrackAdsConversion(opts = {}) {
+    const label = resolveAdsConversionLabel(opts.label);
+    if (!label) return false; // defensive: never break the submit if the label is emptied
+    if (typeof window.gtag !== 'function') return false;
+
+    const conversionParams = {
+        send_to: `${GOOGLE_ADS_CONVERSION_ID}/${label}`,
+        value: Number.isFinite(opts.value) ? opts.value : 1,
+        currency: 'ARS',
+        // Beacon keeps the hit alive: the submit navigates to wa.me / mailto right after.
+        transport_type: 'beacon',
+    };
+
+    if (typeof opts.event_callback === 'function') {
+        conversionParams.event_callback = opts.event_callback;
+        conversionParams.event_timeout = Number.isFinite(opts.event_timeout) ? opts.event_timeout : 800;
+    }
+
+    window.gtag('event', 'conversion', conversionParams);
+    return true;
+}
+
+window.angoTrackAdsConversion = angoTrackAdsConversion;
+
 document.addEventListener('click', (event) => {
     const target = event.target instanceof Element ? event.target.closest('[data-event]') : null;
     if (!target) return;

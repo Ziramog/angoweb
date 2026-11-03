@@ -392,6 +392,10 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
             cta_location: 'compatibility_form_submit'
         });
 
+        // Native Google Ads conversion (AW-18353350898/hcnOCLy3ybEdEPLRx69E).
+        // Fires before the wa.me navigation; transport_type=beacon is set inside the helper.
+        window.angoTrackAdsConversion?.();
+
         window.open(`https://wa.me/5493571699006?text=${encodeURIComponent(messageLines.join('\n'))}`, '_blank', 'noopener,noreferrer');
     });
 
