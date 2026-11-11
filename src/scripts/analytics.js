@@ -71,13 +71,14 @@ window.angoTrackEvent = sendAnalyticsEvent;
 window.angoInferProductLine = inferProductLine;
 
 // --- Google Ads native conversion -------------------------------------------
-// Conversion action: "Envío de formulario para clientes potenciales" (Sitio web, evento manual).
+// Conversion action: "Contacto WhatsApp / Email / Teléfono" (categoría Contacto, evento manual,
+// acción principal). Every real contact CTA — wa.me, tel: and mailto: — reports this same action.
 // Google Ads account 685-746-1101, tag AW-18353350898.
 // Label obtained from the Google Ads UI (Objetivos > Conversiones > Configuración de la etiqueta).
 // It is public data (it ships inside the HTML), so it is the hardcoded default and can be
 // overridden per build with PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, same pattern as the IDs in Layout.astro.
 const GOOGLE_ADS_CONVERSION_ID = 'AW-18353350898'; // same tag loaded in Layout.astro
-const GOOGLE_ADS_CONVERSION_LABEL = 'hcnOCLy3ybEdEPLRx69E';
+const GOOGLE_ADS_CONVERSION_LABEL = 'yUOXCMTWybYdEPLRx69E';
 
 function resolveAdsConversionLabel(override) {
     const raw = normalizeValue(override)
@@ -113,6 +114,42 @@ function angoTrackAdsConversion(opts = {}) {
 
 window.angoTrackAdsConversion = angoTrackAdsConversion;
 
+// Contact CTAs that count as a real contact in Google Ads. Two ways in:
+//  1. the data-event is an explicit contact event (hero / final / sticky / floating CTAs), or
+//  2. the link itself is a contact transport (wa.me, tel:, mailto:). The part cards in the
+//     repuestos-micron catalogue are real wa.me handoffs tagged `part_consulted`, so keying on the
+//     event name alone would silently drop 13 of the 17 WhatsApp links on that page.
+// Pure intent events (quote_form_started, model_viewed, catalog_downloaded) never match: they have
+// no contact href, and counting them would inflate the conversion number.
+const ADS_CONTACT_EVENTS = new Set(['whatsapp_clicked', 'phone_clicked', 'email_clicked']);
+const ADS_CONTACT_HREF = /^(?:https?:\/\/(?:www\.)?wa\.me\/|tel:|mailto:)/i;
+
+function isContactClick(target) {
+    if (ADS_CONTACT_EVENTS.has(target.dataset.event)) return true;
+    if (!(target instanceof HTMLAnchorElement)) return false;
+    const href = (target.href || target.getAttribute('href') || '').trim();
+    return ADS_CONTACT_HREF.test(href);
+}
+
+// One conversion per click: the same event object can only be handled once, and a rapid double
+// click on the same element (finger bounce, nested [data-event] wrapper) is collapsed too.
+const ADS_CONVERSION_DEDUPE_MS = 1500;
+const adsConversionLastFired = new WeakMap();
+
+function trackContactConversion(event, target) {
+    if (!isContactClick(target)) return;
+    if (event.__angoAdsConversionTracked) return;
+    event.__angoAdsConversionTracked = true;
+
+    const now = Date.now();
+    const lastFired = adsConversionLastFired.get(target);
+    if (lastFired && now - lastFired < ADS_CONVERSION_DEDUPE_MS) return;
+    adsConversionLastFired.set(target, now);
+
+    // Must run before the browser follows the link; transport_type=beacon keeps the hit alive.
+    angoTrackAdsConversion();
+}
+
 document.addEventListener('click', (event) => {
     const target = event.target instanceof Element ? event.target.closest('[data-event]') : null;
     if (!target) return;
@@ -128,6 +165,8 @@ document.addEventListener('click', (event) => {
         link_url: target instanceof HTMLAnchorElement ? target.href : undefined,
         link_text: target.textContent?.trim().replace(/\s+/g, ' ').slice(0, 120),
     });
+
+    trackContactConversion(event, target);
 });
 
 document.addEventListener('ango:conversion-intent', (event) => {
