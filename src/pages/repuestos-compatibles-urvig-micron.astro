@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 const title = 'Repuestos compatibles para Urvig y Micron | ANGO Metalúrgica';
 const description = 'Repuestos compatibles nacionales para equipos Urvig y Micron. Enviá modelo, medidas o foto y recibí cotización para tomas de fuerza industriales.';
 const canonical = 'https://www.angometalurgica.com.ar/repuestos-compatibles-urvig-micron';
-const whatsappBase = 'https://wa.me/5493571699006';
+const whatsappBase = 'https://wa.me/5493513157202';
 
 const compatibleParts = [
     { urvigCode: 'TAE47A', micronCode: '104134428', description: 'Corona dentada', image: '/corona.png' },
@@ -399,7 +399,7 @@ const getPartWhatsAppUrl = (part: typeof compatibleParts[number]) => {
 
         // 'noopener' only: 'noreferrer' would drop the Referer on the wa.me handoff, so the
         // contact click would arrive without the angometalurgica.com.ar attribution.
-        window.open(`https://wa.me/5493571699006?text=${encodeURIComponent(messageLines.join('\n'))}`, '_blank', 'noopener');
+        window.open(`https://wa.me/5493513157202?text=${encodeURIComponent(messageLines.join('\n'))}`, '_blank', 'noopener');
     });
 
     const heroImages = [
