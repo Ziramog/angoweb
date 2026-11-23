@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 
 const title = 'Embragues industriales completos RG | ANGO Metalúrgica';
 const description = 'Embragues industriales completos de línea RG para motores estacionarios: carcasas SAE 6 a 00, 1 a 3 discos y hasta 12.000 Nm. Consultas técnicas desde Chile.';
-const canonical = 'https://www.angometalurgica.com.ar/embragues-industriales-rg';
+const canonical = 'https://www.angometalurgica.com.ar/embragues-industriales-rg/';
 const whatsappBase = 'https://wa.me/5493513157202';
 const phoneDisplay = '+54 9 351 315-7202';
 const phoneHref = 'tel:+5493513157202';
@@ -82,6 +82,7 @@ const productSchema = {
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
     <Navbar forceScrolled={true} />
 
     <main class="rg-page">
@@ -359,8 +360,6 @@ const productSchema = {
 
     <Footer />
 </Layout>
-
-<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 
 <style>
     :global(.wa-fab) { display: none !important; }
