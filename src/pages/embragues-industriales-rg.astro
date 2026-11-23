@@ -1,0 +1,1211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Embragues industriales completos RG | ANGO Metalúrgica';
+const description = 'Embragues industriales completos de línea RG para motores estacionarios: carcasas SAE 6 a 00, 1 a 3 discos y hasta 12.000 Nm. Consultas técnicas desde Chile.';
+const canonical = 'https://www.angometalurgica.com.ar/embragues-industriales-rg';
+const whatsappBase = 'https://wa.me/5493513157202';
+const phoneDisplay = '+54 9 351 315-7202';
+const phoneHref = 'tel:+5493513157202';
+const email = 'contacto@angometalurgica.com.ar';
+
+const whatsappMessage = [
+    'Hola ANGO, consulto desde Chile por un embrague industrial completo RG.',
+    '',
+    'Aplicación / equipo:',
+    'Motor y potencia (HP/CV):',
+    'RPM de trabajo:',
+    'Torque estimado (Nm):',
+    'Carcaza SAE:',
+    'Cantidad:',
+    'Ciudad / país:'
+].join('\n');
+
+const whatsappUrl = `${whatsappBase}?text=${encodeURIComponent(whatsappMessage)}`;
+
+const specs = [
+    { label: 'Carcazas', value: 'SAE N.º 6 – 00' },
+    { label: 'Discos de fricción', value: '1, 2 o 3' },
+    { label: 'Diámetro', value: 'Ø165 – 457 mm' },
+    { label: 'Torque', value: 'Hasta 12.000 Nm' }
+];
+
+const applications = [
+    { icon: 'ph-lightning', title: 'Grupos electrógenos', copy: 'Transmisión de potencia para generación con motor de combustión interna.' },
+    { icon: 'ph-drop', title: 'Bombas y saneamiento', copy: 'Bombas centrífugas, alternativas y equipos de bombeo industrial.' },
+    { icon: 'ph-wind', title: 'Compresores y ventiladores', copy: 'Accionamiento de compresores, sopladores y ventiladores de proceso.' },
+    { icon: 'ph-recycle', title: 'Trituradoras y reciclaje', copy: 'Equipos de reducción, molienda y plantas de reciclaje.' },
+    { icon: 'ph-factory', title: 'Maquinaria industrial', copy: 'Máquinas de proceso y equipos especiales con motor estacionario.' },
+    { icon: 'ph-gear-six', title: 'Equipos especiales', copy: 'Aplicaciones que requieren selección por torque, carga y frecuencia de acople.' }
+];
+
+const selectionData = [
+    { number: '01', title: 'Torque a transmitir', copy: 'El dato principal para dimensionar el conjunto. Si no lo tiene, indique potencia y RPM.' },
+    { number: '02', title: 'Equipo a accionar', copy: 'Bomba, compresor, generador, trituradora, ventilador u otra máquina.' },
+    { number: '03', title: 'Motor y potencia', copy: 'Marca, modelo, combustible, potencia en HP/CV y régimen de trabajo.' },
+    { number: '04', title: 'Tipo de carga', copy: 'Carga de arranque baja o alta y frecuencia de acoplamiento en servicio.' },
+    { number: '05', title: 'Accionamiento', copy: 'Manual o por accionador, según la instalación prevista.' },
+    { number: '06', title: 'Carcaza y cantidad', copy: 'Tamaño SAE del volante y cantidad de conjuntos requeridos.' }
+];
+
+const faqs = [
+    {
+        q: '¿Este embrague RG sirve para camiones, tractores o mixers?',
+        a: 'No. La línea RG de embragues industriales completos está destinada a motores de combustión interna en instalaciones industriales estacionarias. No se comercializa para camiones, tractores ni mixers.'
+    },
+    {
+        q: '¿Es un repuesto compatible Urvig o Micron?',
+        a: 'No. RG es la marca propia de ANGO para tomas de fuerza con embrague. Esta página describe conjuntos completos RG, no repuestos compatibles de otras marcas.'
+    },
+    {
+        q: '¿Qué datos necesito para pedir una cotización?',
+        a: 'Torque a transmitir, tipo de equipo, motor y potencia, RPM, tipo de carga, forma de accionamiento, tamaño de carcaza SAE y cantidad. Con esos datos podemos confirmar la configuración.'
+    },
+    {
+        q: '¿Atienden consultas desde Chile?',
+        a: 'Sí. Recibimos consultas técnicas de Chile por WhatsApp o teléfono. La cotización se emite desde Argentina y las condiciones comerciales y de entrega se confirman en cada caso; esta página no publica precios, stock ni plazos.'
+    }
+];
+
+const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Embrague industrial completo RG',
+    brand: { '@type': 'Brand', name: 'RG' },
+    manufacturer: { '@type': 'Organization', name: 'ANGO Metalúrgica' },
+    category: 'Embragues industriales',
+    description: 'Conjunto de toma de fuerza con embrague para motores de combustión interna en instalaciones industriales. Carcazas SAE 6 a 00, 1 a 3 discos y diámetros de 165 a 457 mm.',
+    url: canonical
+};
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+    <Navbar forceScrolled={true} />
+
+    <main class="rg-page">
+        <section class="rg-hero">
+            <div class="rg-grid" aria-hidden="true"></div>
+            <div class="container rg-hero-inner">
+                <div class="rg-hero-copy" data-reveal>
+                    <span class="section-kicker">Línea RG · Fabricación argentina</span>
+                    <h1>Embragues industriales completos RG</h1>
+                    <p class="rg-lead">Conjunto de toma de fuerza con embrague para motores de combustión interna en instalaciones industriales. Se configura según torque, RPM, tipo de carga y carcaza SAE.</p>
+
+                    <div class="rg-chile-pill">
+                        <i class="ph-bold ph-map-pin" aria-hidden="true"></i>
+                        <span><strong>Consultas desde Chile:</strong> atención técnica por WhatsApp o teléfono.</span>
+                    </div>
+
+                    <div class="rg-hero-actions">
+                        <a
+                            id="rg-cta-hero-whatsapp"
+                            class="btn btn-wa"
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <i class="ph-bold ph-whatsapp-logo" aria-hidden="true"></i>
+                            Consultar por WhatsApp
+                        </a>
+                        <a id="rg-cta-hero-phone" class="btn btn-outline" href={phoneHref}>
+                            <i class="ph-bold ph-phone" aria-hidden="true"></i>
+                            Llamar {phoneDisplay}
+                        </a>
+                    </div>
+
+                    <p class="rg-hero-note">Cotización sujeta a verificación técnica del motor y la aplicación. Sin formulario: la respuesta se coordina por WhatsApp o teléfono.</p>
+                </div>
+
+                <div class="rg-hero-visual" data-reveal style="--i: 1">
+                    <span class="rg-figure-label">FIG. 01 / CONJUNTO TOMA DE FUERZA + EMBRAGUE RG</span>
+                    <div class="rg-hero-image-wrap">
+                        <img
+                            src="/embrague-corte-final.png"
+                            alt="Corte transversal de un embrague industrial RG con carcaza, discos y mecanismo de accionamiento"
+                            class="rg-hero-image"
+                            width="1122"
+                            height="1402"
+                            decoding="async"
+                        >
+                    </div>
+                    <div class="rg-figure-specs" aria-label="Datos técnicos del conjunto RG">
+                        <span><small>SAE</small><strong>6 – 00</strong></span>
+                        <span><small>DISCOS</small><strong>1 – 3</strong></span>
+                        <span><small>Ø</small><strong>165 – 457 mm</strong></span>
+                        <span><small>TORQUE</small><strong>Hasta 12.000 Nm</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rg-band" aria-label="Especificaciones generales">
+            <div class="container rg-band-grid">
+                {specs.map((spec) => (
+                    <div>
+                        <span>{spec.label}</span>
+                        <strong>{spec.value}</strong>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section class="section rg-definition" id="que-es">
+            <div class="container rg-definition-grid">
+                <div data-reveal>
+                    <span class="section-kicker">Marca propia RG</span>
+                    <h2 class="section-title">Qué es un embrague completo RG</h2>
+                    <p class="rg-body">RG es la marca propia de ANGO para tomas de fuerza con embrague. No es un repuesto compatible de otra marca: es un conjunto configurado para el motor y la aplicación del equipo.</p>
+                    <p class="rg-body">Cada conjunto se selecciona por ingeniería: torque a transmitir, tipo de equipo, frecuencia de acoplamiento, tipo de carga al arranque y forma de accionamiento. La configuración final se confirma con la ficha técnica del motor.</p>
+                    <p class="rg-body">Los embragues van montados sobre rodillos cónicos, lo que permite absorber cargas laterales. Para cargas axiales de magnitud considerable, consulte a nuestro departamento de ingeniería.</p>
+                </div>
+
+                <div class="rg-config-card" data-reveal style="--i: 1">
+                    <div class="rg-config-head">
+                        <span>CONFIGURACIÓN DE LÍNEA</span>
+                        <strong>RG / PTO</strong>
+                    </div>
+                    <ul>
+                        <li><i class="ph-bold ph-check" aria-hidden="true"></i><span>Carcazas estándar <strong>SAE N.º 6 a N.º 00</strong></span></li>
+                        <li><i class="ph-bold ph-check" aria-hidden="true"></i><span><strong>1, 2 o 3 discos</strong> de embrague</span></li>
+                        <li><i class="ph-bold ph-check" aria-hidden="true"></i><span>Diámetros de <strong>Ø165 a 457 mm</strong> (6½" a 18")</span></li>
+                        <li><i class="ph-bold ph-check" aria-hidden="true"></i><span>Accionamiento <strong>manual o por accionador</strong></span></li>
+                        <li><i class="ph-bold ph-check" aria-hidden="true"></i><span>Motores <strong>diésel o gasolina</strong> en uso industrial</span></li>
+                    </ul>
+                    <p class="rg-config-note">Las capacidades y medidas se confirman según modelo y aplicación. No publicamos precios ni disponibilidad en esta página.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section rg-applications" id="aplicaciones">
+            <div class="container">
+                <div class="rg-section-heading" data-reveal>
+                    <span class="section-kicker">Aplicación industrial</span>
+                    <h2 class="section-title">Para motores estacionarios</h2>
+                    <p class="section-subtitle">Equipos de combustión interna diésel o gasolina utilizados en instalaciones industriales, con configuraciones de 1, 2 o 3 discos.</p>
+                </div>
+
+                <div class="rg-app-grid">
+                    {applications.map((app, index) => (
+                        <article class="rg-app-card" data-reveal style={`--i: ${index}`}>
+                            <i class={`ph-bold ${app.icon}`} aria-hidden="true"></i>
+                            <h3>{app.title}</h3>
+                            <p>{app.copy}</p>
+                        </article>
+                    ))}
+                </div>
+
+                <div class="rg-warning" data-reveal>
+                    <i class="ph-bold ph-warning" aria-hidden="true"></i>
+                    <div>
+                        <strong>Esta línea no aplica a camiones, tractores ni mixers.</strong>
+                        <p>Los embragues industriales completos RG son para motores estacionarios. Si su equipo es una unidad móvil de transporte o labor agrícola, esta configuración no corresponde.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rg-selection" id="cotizar">
+            <div class="rg-selection-grid" aria-hidden="true"></div>
+            <div class="container rg-selection-inner">
+                <div class="rg-selection-copy" data-reveal>
+                    <span class="section-kicker light">Selección técnica</span>
+                    <h2>Datos para cotizar</h2>
+                    <p>Para definir el embrague correcto necesitamos los datos de selección que figuran en nuestra ficha técnica. Si falta alguno, indíquelo y lo revisamos con ingeniería.</p>
+                    <a class="rg-selection-link" href="#documentacion">Ver ficha técnica RG <i class="ph-bold ph-arrow-down" aria-hidden="true"></i></a>
+                </div>
+
+                <div class="rg-data-grid" data-reveal style="--i: 1">
+                    {selectionData.map((item) => (
+                        <div class="rg-data-item">
+                            <span class="rg-data-number">{item.number}</span>
+                            <div>
+                                <strong>{item.title}</strong>
+                                <p>{item.copy}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="section rg-chile" id="chile">
+            <div class="container">
+                <div class="rg-chile-panel" data-reveal>
+                    <div class="rg-chile-copy">
+                        <span class="section-kicker light">Consultas desde Chile</span>
+                        <h2>¿Necesita cotizar desde Chile?</h2>
+                        <p>Atendemos consultas técnicas de empresas chilenas por WhatsApp o teléfono. Para responder necesitamos los datos del motor y de la aplicación. La cotización se emite desde Argentina y se confirma caso por caso.</p>
+
+                        <ul class="rg-chile-list">
+                            <li><i class="ph-bold ph-check" aria-hidden="true"></i>Motor, potencia y RPM</li>
+                            <li><i class="ph-bold ph-check" aria-hidden="true"></i>Torque y tipo de carga</li>
+                            <li><i class="ph-bold ph-check" aria-hidden="true"></i>Carcaza SAE y aplicación</li>
+                            <li><i class="ph-bold ph-check" aria-hidden="true"></i>Cantidad y ciudad de destino</li>
+                        </ul>
+
+                        <div class="rg-chile-actions">
+                            <a
+                                id="rg-cta-chile-whatsapp"
+                                class="btn btn-wa"
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i class="ph-bold ph-whatsapp-logo" aria-hidden="true"></i>
+                                Escribir por WhatsApp
+                            </a>
+                            <a id="rg-cta-chile-phone" class="btn btn-ghost" href={phoneHref}>
+                                <i class="ph-bold ph-phone" aria-hidden="true"></i>
+                                {phoneDisplay}
+                            </a>
+                        </div>
+
+                        <p class="rg-chile-note">No publicamos precios, stock ni plazos de entrega. Tampoco incluimos costos de flete o internación: esas condiciones se informan en la cotización.</p>
+                    </div>
+
+                    <div class="rg-chile-stamp" aria-hidden="true">
+                        <span>ORIGEN</span>
+                        <strong>AR</strong>
+                        <span>DESTINO DE CONSULTA</span>
+                        <strong>CL</strong>
+                        <small>RG / INDUSTRIA ARGENTINA</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section rg-docs" id="documentacion">
+            <div class="container">
+                <div class="rg-section-heading" data-reveal>
+                    <span class="section-kicker">Documentación técnica</span>
+                    <h2 class="section-title">Catálogo y ficha RG</h2>
+                    <p class="section-subtitle">Información de línea para preparar la consulta. La selección definitiva se confirma con nuestro equipo técnico.</p>
+                </div>
+
+                <div class="rg-docs-grid">
+                    <a class="rg-doc-card" href="/Catalogo_Tecnico_RG_ANGO.pdf" target="_blank" rel="noopener noreferrer" data-reveal>
+                        <span class="rg-doc-code">DOC. RG/01</span>
+                        <i class="ph-bold ph-file-pdf" aria-hidden="true"></i>
+                        <h3>Catálogo Técnico RG</h3>
+                        <p>Especificaciones, tabla de modelos, medidas y capacidades de torque para tomas de fuerza y embragues.</p>
+                        <span class="rg-doc-action">Abrir PDF <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a class="rg-doc-card" href="/FICHA-TECNICA-PTO-RG.pdf" target="_blank" rel="noopener noreferrer" data-reveal style="--i: 1">
+                        <span class="rg-doc-code">DOC. RG/02</span>
+                        <i class="ph-bold ph-file-text" aria-hidden="true"></i>
+                        <h3>Ficha técnica PTO RG</h3>
+                        <p>Características generales, datos necesarios para seleccionar el embrague y dimensiones de carcasas SAE.</p>
+                        <span class="rg-doc-action">Abrir PDF <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section rg-faq">
+            <div class="container rg-faq-grid">
+                <div data-reveal>
+                    <span class="section-kicker">Preguntas frecuentes</span>
+                    <h2 class="section-title">Antes de consultar</h2>
+                    <p class="section-subtitle">Respuestas directas sobre la línea RG de embragues industriales completos.</p>
+                </div>
+
+                <div class="rg-faq-list" data-reveal style="--i: 1">
+                    {faqs.map((faq) => (
+                        <details>
+                            <summary>{faq.q}</summary>
+                            <p>{faq.a}</p>
+                        </details>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="rg-final">
+            <div class="container rg-final-inner" data-reveal>
+                <div>
+                    <span class="section-kicker light">Cotización RG</span>
+                    <h2>Consulte su embrague industrial completo</h2>
+                    <p>Envíe aplicación, motor, potencia, RPM y carcaza SAE. Revisamos la configuración y respondemos por WhatsApp o teléfono.</p>
+                </div>
+                <div class="rg-final-actions">
+                    <a
+                        id="rg-cta-final-whatsapp"
+                        class="btn btn-wa"
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="ph-bold ph-whatsapp-logo" aria-hidden="true"></i>
+                        Consultar por WhatsApp
+                    </a>
+                    <a id="rg-cta-final-phone" class="btn btn-ghost" href={phoneHref}>
+                        <i class="ph-bold ph-phone" aria-hidden="true"></i>
+                        {phoneDisplay}
+                    </a>
+                    <a id="rg-cta-final-email" class="rg-final-email" href={`mailto:${email}`}>{email}</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="rg-disclaimer">
+            <div class="container">
+                <p><strong>Alcance de la línea RG:</strong> RG es marca propia de ANGO Metalúrgica. Los conjuntos se configuran según motor, aplicación, torque, RPM y carcaza SAE; las especificaciones finales se confirman con la ficha técnica. Esta página no publica precios, stock ni plazos de entrega. No aplica a camiones, tractores ni mixers.</p>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+<style>
+    :global(.wa-fab) { display: none !important; }
+
+    .rg-page {
+        background: var(--color-surface);
+        overflow: hidden;
+        padding-top: 76px;
+    }
+
+    .rg-hero {
+        background:
+            radial-gradient(circle at 78% 34%, rgba(0, 87, 184, 0.12), transparent 28%),
+            linear-gradient(135deg, #fff 0%, var(--color-surface-soft) 100%);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .rg-grid,
+    .rg-selection-grid {
+        background-image:
+            linear-gradient(rgba(6, 40, 70, 0.055) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(6, 40, 70, 0.055) 1px, transparent 1px);
+        background-size: 28px 28px;
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    .rg-hero-inner {
+        align-items: center;
+        display: grid;
+        gap: 34px;
+        padding-bottom: 64px;
+        padding-top: 52px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .rg-hero-copy h1 {
+        color: var(--color-dark);
+        font-family: var(--font-heading);
+        font-size: clamp(34px, 5.2vw, 64px);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.02;
+        margin-bottom: 20px;
+        max-width: 820px;
+        text-transform: uppercase;
+    }
+
+    .rg-hero-copy h1::after {
+        color: var(--color-yellow);
+        content: ".";
+    }
+
+    .rg-lead {
+        color: #334155;
+        font-size: clamp(16px, 1.8vw, 19px);
+        line-height: 1.65;
+        max-width: 680px;
+    }
+
+    .rg-chile-pill {
+        align-items: flex-start;
+        background: rgba(0, 87, 184, 0.08);
+        border: 1px solid rgba(0, 87, 184, 0.18);
+        display: flex;
+        font-size: 14px;
+        gap: 10px;
+        line-height: 1.5;
+        margin-top: 22px;
+        max-width: 620px;
+        padding: 12px 16px;
+    }
+
+    .rg-chile-pill i {
+        color: var(--color-primary);
+        flex: 0 0 auto;
+        font-size: 20px;
+        margin-top: 1px;
+    }
+
+    .rg-chile-pill strong { color: var(--color-dark); }
+
+    .rg-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+    }
+
+    .btn-wa {
+        background: var(--color-whatsapp);
+        border-color: var(--color-whatsapp);
+        color: #fff;
+        box-shadow: 0 14px 28px rgba(37, 211, 102, 0.22);
+    }
+
+    .btn-wa:hover {
+        background: var(--color-whatsapp-hover);
+        border-color: var(--color-whatsapp-hover);
+        color: #fff;
+    }
+
+    .btn-ghost {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.55);
+        color: #fff;
+    }
+
+    .btn-ghost:hover {
+        background: #fff;
+        border-color: #fff;
+        color: var(--color-dark);
+    }
+
+    .rg-hero-note {
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.55;
+        margin-top: 14px;
+        max-width: 620px;
+    }
+
+    .rg-hero-visual {
+        background: #fff;
+        border: 1px solid rgba(6, 40, 70, 0.24);
+        box-shadow: 0 24px 55px rgba(3, 26, 47, .1);
+        display: flex;
+        flex-direction: column;
+        min-height: 500px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .rg-hero-visual::before {
+        border-left: 16px solid var(--color-yellow);
+        border-top: 16px solid var(--color-yellow);
+        content: '';
+        height: 58px;
+        left: -1px;
+        position: absolute;
+        top: -1px;
+        width: 58px;
+        z-index: 3;
+    }
+
+    .rg-figure-label {
+        color: var(--color-ink-secondary);
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        left: 28px;
+        letter-spacing: .07em;
+        line-height: 1.4;
+        max-width: calc(100% - 56px);
+        position: absolute;
+        top: 24px;
+        z-index: 3;
+    }
+
+    .rg-hero-image-wrap {
+        align-items: center;
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: center;
+        min-height: 330px;
+        padding: 54px 34px 18px;
+    }
+
+    .rg-hero-image {
+        filter: drop-shadow(0 26px 24px rgba(3, 26, 47, 0.2));
+        height: 100%;
+        max-height: 440px;
+        object-fit: contain;
+        width: auto;
+    }
+
+    .rg-figure-specs {
+        border-top: 1px solid var(--color-border);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rg-figure-specs span {
+        border-right: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+        display: grid;
+        gap: 2px;
+        padding: 10px 14px;
+    }
+
+    .rg-figure-specs span:nth-child(2n) { border-right: 0; }
+    .rg-figure-specs span:nth-last-child(-n + 2) { border-bottom: 0; }
+
+    .rg-figure-specs small {
+        color: #64748b;
+        font-family: var(--font-mono);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .07em;
+    }
+
+    .rg-figure-specs strong {
+        color: var(--color-dark);
+        font-family: var(--font-heading);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .rg-band { background: var(--color-dark); }
+
+    .rg-band-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .rg-band-grid > div {
+        border-right: 1px solid rgba(255, 255, 255, .1);
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        display: grid;
+        gap: 4px;
+        padding: 20px 14px;
+    }
+
+    .rg-band-grid > div:nth-child(2n) { border-right: 0; }
+    .rg-band-grid > div:nth-last-child(-n + 2) { border-bottom: 0; }
+
+    .rg-band-grid span {
+        color: rgba(255, 255, 255, .52);
+        font-family: var(--font-mono);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .rg-band-grid strong {
+        color: var(--color-yellow);
+        font-family: var(--font-heading);
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+
+    .rg-body {
+        color: #475569;
+        font-size: 15px;
+        line-height: 1.75;
+        margin-top: 16px;
+        max-width: 660px;
+    }
+
+    .rg-definition { background: var(--color-surface); }
+
+    .rg-definition-grid {
+        align-items: start;
+        display: grid;
+        gap: 38px;
+    }
+
+    .rg-definition .section-title,
+    .rg-section-heading .section-title,
+    .rg-faq .section-title {
+        color: var(--color-dark);
+        margin-bottom: 18px;
+    }
+
+    .rg-config-card {
+        background: var(--color-surface-soft);
+        border: 1px solid var(--color-border);
+        border-top: 4px solid var(--color-yellow);
+        box-shadow: 0 18px 40px rgba(3, 26, 47, .07);
+    }
+
+    .rg-config-head {
+        align-items: center;
+        background: var(--color-dark);
+        color: rgba(255, 255, 255, .62);
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        justify-content: space-between;
+        letter-spacing: .08em;
+        padding: 13px 18px;
+    }
+
+    .rg-config-head strong { color: var(--color-yellow); }
+
+    .rg-config-card ul {
+        display: grid;
+        gap: 0;
+        list-style: none;
+        padding: 6px 18px;
+    }
+
+    .rg-config-card li {
+        align-items: flex-start;
+        border-bottom: 1px solid var(--color-border);
+        color: #334155;
+        display: flex;
+        font-size: 13px;
+        gap: 10px;
+        line-height: 1.5;
+        padding: 12px 0;
+    }
+
+    .rg-config-card li:last-child { border-bottom: 0; }
+
+    .rg-config-card li i {
+        color: var(--color-primary);
+        flex: 0 0 auto;
+        font-size: 16px;
+        margin-top: 1px;
+    }
+
+    .rg-config-card li strong { color: var(--color-dark); }
+
+    .rg-config-note {
+        background: #fff;
+        border-top: 1px solid var(--color-border);
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.55;
+        padding: 14px 18px;
+    }
+
+    .rg-applications { background: var(--color-surface-soft); }
+
+    .rg-section-heading {
+        margin-bottom: 38px;
+        max-width: 880px;
+    }
+
+    .rg-section-heading .section-subtitle {
+        color: #475569;
+        max-width: 760px;
+    }
+
+    .rg-app-grid {
+        display: grid;
+        gap: 14px;
+    }
+
+    .rg-app-card {
+        background: #fff;
+        border: 1px solid var(--color-border);
+        border-left: 3px solid var(--color-primary);
+        padding: 22px;
+        transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+
+    .rg-app-card:hover {
+        box-shadow: 0 16px 32px rgba(3, 26, 47, .09);
+        transform: translateY(-3px);
+    }
+
+    .rg-app-card i {
+        color: var(--color-primary);
+        font-size: 26px;
+    }
+
+    .rg-app-card h3 {
+        color: var(--color-dark);
+        font-family: var(--font-heading);
+        font-size: 15px;
+        font-weight: 900;
+        margin: 12px 0 7px;
+        text-transform: uppercase;
+    }
+
+    .rg-app-card p {
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    .rg-warning {
+        align-items: flex-start;
+        background: #fff8e6;
+        border: 1px solid rgba(199, 154, 45, .45);
+        border-left: 5px solid var(--color-yellow);
+        display: flex;
+        gap: 14px;
+        margin-top: 26px;
+        padding: 18px 20px;
+    }
+
+    .rg-warning i {
+        color: #a8790f;
+        flex: 0 0 auto;
+        font-size: 24px;
+    }
+
+    .rg-warning strong {
+        color: var(--color-dark);
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+    }
+
+    .rg-warning p {
+        color: #5b4a22;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .rg-selection {
+        background:
+            radial-gradient(circle at 12% 22%, rgba(0, 87, 184, .24), transparent 30%),
+            var(--color-dark);
+        color: #fff;
+        overflow: hidden;
+        padding: 76px 0;
+        position: relative;
+    }
+
+    .rg-selection-grid { opacity: .32; }
+
+    .rg-selection-inner {
+        display: grid;
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .rg-selection-copy h2 {
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: clamp(34px, 4.6vw, 58px);
+        font-weight: 900;
+        line-height: .98;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .rg-selection-copy h2::after { color: var(--color-yellow); content: "."; }
+
+    .rg-selection-copy p {
+        color: rgba(255, 255, 255, .7);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 560px;
+    }
+
+    .rg-selection-link {
+        align-items: center;
+        color: var(--color-yellow);
+        display: inline-flex;
+        font-size: 12px;
+        font-weight: 800;
+        gap: 8px;
+        margin-top: 22px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .rg-selection-link:hover { color: #fff; }
+
+    .rg-data-grid {
+        display: grid;
+        gap: 1px;
+    }
+
+    .rg-data-item {
+        align-items: flex-start;
+        background: rgba(255, 255, 255, .055);
+        border: 1px solid rgba(255, 255, 255, .09);
+        display: flex;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .rg-data-number {
+        color: var(--color-yellow);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .rg-data-item strong {
+        color: #fff;
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 3px;
+    }
+
+    .rg-data-item p {
+        color: rgba(255, 255, 255, .58);
+        font-size: 11px;
+        line-height: 1.55;
+    }
+
+    .rg-chile { background: var(--color-surface); }
+
+    .rg-chile-panel {
+        background:
+            radial-gradient(circle at 86% 18%, rgba(0, 87, 184, .3), transparent 34%),
+            linear-gradient(115deg, var(--color-dark) 0%, var(--color-navy) 100%);
+        border-top: 5px solid var(--color-yellow);
+        color: #fff;
+        display: grid;
+        gap: 34px;
+        overflow: hidden;
+        padding: clamp(26px, 4vw, 54px);
+        position: relative;
+    }
+
+    .rg-chile-panel::before {
+        border: 1px solid rgba(255, 255, 255, .07);
+        content: "";
+        inset: 14px;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    .rg-chile-copy { position: relative; z-index: 1; }
+
+    .rg-chile-copy h2 {
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: clamp(30px, 4vw, 48px);
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+    }
+
+    .rg-chile-copy h2::after { color: var(--color-yellow); content: "."; }
+
+    .rg-chile-copy > p {
+        color: rgba(255, 255, 255, .72);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+    }
+
+    .rg-chile-list {
+        display: grid;
+        gap: 8px;
+        list-style: none;
+        margin-top: 22px;
+    }
+
+    .rg-chile-list li {
+        align-items: center;
+        color: rgba(255, 255, 255, .86);
+        display: flex;
+        font-size: 12px;
+        gap: 9px;
+        text-transform: uppercase;
+    }
+
+    .rg-chile-list i { color: var(--color-yellow); font-size: 15px; }
+
+    .rg-chile-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 26px;
+    }
+
+    .rg-chile-note {
+        color: rgba(255, 255, 255, .46);
+        font-size: 10px;
+        line-height: 1.6;
+        margin-top: 16px;
+        max-width: 620px;
+    }
+
+    .rg-chile-stamp {
+        align-self: center;
+        border: 1px solid rgba(255, 255, 255, .18);
+        display: grid;
+        gap: 5px;
+        justify-items: center;
+        padding: 24px;
+        position: relative;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .rg-chile-stamp span {
+        color: #69a9ef;
+        font-family: var(--font-mono);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .1em;
+    }
+
+    .rg-chile-stamp strong {
+        color: var(--color-yellow);
+        font-family: var(--font-heading);
+        font-size: 52px;
+        font-weight: 900;
+        line-height: .9;
+    }
+
+    .rg-chile-stamp small {
+        color: rgba(255, 255, 255, .38);
+        font-family: var(--font-mono);
+        font-size: 7px;
+        letter-spacing: .08em;
+        margin-top: 8px;
+    }
+
+    .rg-docs { background: var(--color-surface-soft); }
+
+    .rg-docs-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .rg-doc-card {
+        background: #fff;
+        border: 1px solid var(--color-border);
+        border-top: 4px solid var(--color-primary);
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        min-height: 260px;
+        padding: 24px;
+        position: relative;
+        text-decoration: none;
+        transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+
+    .rg-doc-card:hover {
+        box-shadow: 0 18px 40px rgba(3, 26, 47, .1);
+        transform: translateY(-3px);
+    }
+
+    .rg-doc-code {
+        color: #64748b;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        position: absolute;
+        right: 18px;
+        top: 16px;
+    }
+
+    .rg-doc-card > i {
+        color: var(--color-primary);
+        font-size: 30px;
+    }
+
+    .rg-doc-card h3 {
+        color: var(--color-dark);
+        font-family: var(--font-heading);
+        font-size: 19px;
+        font-weight: 900;
+        margin: 14px 0 8px;
+        text-transform: uppercase;
+    }
+
+    .rg-doc-card p {
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+        flex: 1 1 auto;
+    }
+
+    .rg-doc-action {
+        align-items: center;
+        color: var(--color-primary);
+        display: inline-flex;
+        font-size: 11px;
+        font-weight: 900;
+        gap: 7px;
+        margin-top: 18px;
+        text-transform: uppercase;
+    }
+
+    .rg-faq { background: var(--color-surface); }
+
+    .rg-faq-grid {
+        display: grid;
+        gap: 34px;
+    }
+
+    .rg-faq-list { display: grid; gap: 0; }
+
+    .rg-faq-list details {
+        border-top: 1px solid var(--color-border);
+        padding: 16px 0;
+    }
+
+    .rg-faq-list details:last-child { border-bottom: 1px solid var(--color-border); }
+
+    .rg-faq-list summary {
+        color: var(--color-dark);
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 800;
+        list-style: none;
+        padding-right: 28px;
+        position: relative;
+    }
+
+    .rg-faq-list summary::-webkit-details-marker { display: none; }
+
+    .rg-faq-list summary::after {
+        color: var(--color-primary);
+        content: "+";
+        font-family: var(--font-mono);
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1;
+        position: absolute;
+        right: 0;
+        top: -2px;
+    }
+
+    .rg-faq-list details[open] summary::after { content: "–"; }
+
+    .rg-faq-list details p {
+        color: #475569;
+        font-size: 13px;
+        line-height: 1.7;
+        margin-top: 10px;
+        max-width: 720px;
+    }
+
+    .rg-final {
+        background:
+            radial-gradient(circle at 82% 20%, rgba(255, 255, 255, .1), transparent 26%),
+            var(--color-primary);
+        border-top: 5px solid var(--color-yellow);
+        color: #fff;
+        padding: 58px 0;
+    }
+
+    .rg-final-inner {
+        align-items: center;
+        display: grid;
+        gap: 28px;
+    }
+
+    .rg-final .section-kicker { color: rgba(255, 255, 255, .82); }
+    .rg-final .section-kicker::before { background: var(--color-yellow); }
+
+    .rg-final h2 {
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: clamp(26px, 3.6vw, 42px);
+        font-weight: 900;
+        line-height: 1.05;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .rg-final p {
+        color: rgba(255, 255, 255, .8);
+        font-size: 14px;
+        line-height: 1.65;
+        max-width: 620px;
+    }
+
+    .rg-final-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rg-final-email {
+        color: rgba(255, 255, 255, .82);
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .rg-disclaimer {
+        background: var(--color-surface-soft);
+        border-top: 1px solid var(--color-border);
+        padding: 26px 0;
+    }
+
+    .rg-disclaimer p {
+        color: #475569;
+        font-size: 11px;
+        line-height: 1.65;
+    }
+
+    .rg-disclaimer strong { color: var(--color-dark); }
+
+    @media (min-width: 620px) {
+        .rg-figure-specs { grid-template-columns: repeat(4, 1fr); }
+        .rg-figure-specs span { border-bottom: 0; }
+        .rg-figure-specs span:nth-child(2n) { border-right: 1px solid var(--color-border); }
+        .rg-figure-specs span:last-child { border-right: 0; }
+        .rg-band-grid { grid-template-columns: repeat(4, 1fr); }
+        .rg-band-grid > div { border-bottom: 0; }
+        .rg-band-grid > div:nth-child(2n) { border-right: 1px solid rgba(255, 255, 255, .1); }
+        .rg-band-grid > div:last-child { border-right: 0; }
+        .rg-app-grid { grid-template-columns: repeat(2, 1fr); }
+        .rg-data-grid { grid-template-columns: repeat(2, 1fr); }
+        .rg-docs-grid { grid-template-columns: repeat(2, 1fr); }
+        .rg-final-actions { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    }
+
+    @media (min-width: 900px) {
+        .rg-page { padding-top: 88px; }
+        .rg-hero-inner {
+            gap: 0 52px;
+            grid-template-columns: minmax(0, 1.02fr) minmax(420px, .98fr);
+            min-height: 620px;
+            padding-bottom: 72px;
+            padding-top: 64px;
+        }
+        .rg-definition-grid { grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr); gap: 56px; }
+        .rg-app-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .rg-selection-inner { grid-template-columns: .85fr 1.15fr; gap: 56px; }
+        .rg-chile-panel { grid-template-columns: minmax(0, 1.2fr) minmax(220px, .8fr); gap: 48px; }
+        .rg-faq-grid { grid-template-columns: .85fr 1.15fr; gap: 56px; }
+        .rg-final-inner { grid-template-columns: minmax(0, 1fr) auto; }
+    }
+
+    @media (max-width: 619px) {
+        .rg-hero-inner { padding-bottom: 38px; padding-top: 30px; }
+        .rg-hero-copy h1 { font-size: clamp(28px, 8.6vw, 38px); }
+        .rg-lead { font-size: 15px; line-height: 1.55; }
+        .rg-chile-pill { font-size: 12px; padding: 10px 12px; }
+        .rg-hero-actions { display: grid; gap: 8px; }
+        .rg-hero-actions .btn { font-size: 12px; min-height: 50px; padding: 10px 12px; width: 100%; }
+        .rg-hero-visual { min-height: 390px; }
+        .rg-hero-image-wrap { min-height: 260px; padding: 46px 18px 12px; }
+        .rg-hero-image { max-height: 300px; }
+        .rg-figure-label { left: 20px; top: 18px; font-size: 8px; max-width: calc(100% - 40px); }
+        .rg-band-grid strong { font-size: 12px; }
+        .rg-selection { padding: 58px 0; }
+        .rg-chile-actions { display: grid; }
+        .rg-chile-actions .btn { width: 100%; font-size: 12px; padding: 10px 12px; }
+        .rg-chile-stamp { display: none; }
+        .rg-final-actions .btn { width: 100%; }
+    }
+</style>
